@@ -1,5 +1,6 @@
 * text=auto !eol
 action/acceder_document.php -text
+action/ajouter_documents.php -text
 action/changer_mode_document.php -text
 action/copier_local.php -text
 action/documenter.php -text
@@ -16,7 +17,6 @@ exec/legender.php -text
 exec/tourner.php -text
 formulaires/configurer_documents.html -text
 formulaires/configurer_documents.php -text
-inc/ajouter_documents.php -text
 inc/documenter.php -text
 inc/documents.php -text
 inc/getdocument.php -text
