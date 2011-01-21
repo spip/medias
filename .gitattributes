@@ -14,6 +14,8 @@ exec/documents_colonne.php -text
 exec/documents_liste.php -text
 exec/legender.php -text
 exec/tourner.php -text
+formulaires/configurer_documents.html -text
+formulaires/configurer_documents.php -text
 inc/ajouter_documents.php -text
 inc/documenter.php -text
 inc/documents.php -text
