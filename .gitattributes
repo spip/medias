@@ -18,7 +18,6 @@ formulaires/editer_document.html -text
 formulaires/editer_document.php -text
 formulaires/illustrer_document.html -text
 formulaires/illustrer_document.php -text
-formulaires/inc-colonne_documents.html -text
 formulaires/inc-lister_archive_jointe.html -text
 formulaires/inc-upload_document.html -text
 formulaires/joindre_document.html -text
@@ -88,6 +87,7 @@ prive/squelettes/contenu/document_edit.html -text
 prive/squelettes/contenu/mediatheque.html -text
 prive/squelettes/inclure/ajouter-documents.html -text
 prive/squelettes/inclure/bouton-supprimer-orphelins.html -text
+prive/squelettes/inclure/colonne-documents.html -text
 prive/squelettes/inclure/document_infos.html -text
 prive/squelettes/inclure/mediatheque-galerie.html -text
 prive/squelettes/inclure/mediatheque-navigation.html -text
