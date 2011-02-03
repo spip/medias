@@ -60,6 +60,7 @@ inc/marquer_doublons_doc.php -text
 inc/renseigner_document.php -text
 inc/vignette.php -text
 javascript/jquery.MultiFile.js -text
+javascript/medias_edit.js -text
 lang/medias_ar.php -text
 lang/medias_de.php -text
 lang/medias_en.php -text
