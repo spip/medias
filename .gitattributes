@@ -59,6 +59,7 @@ inc/getdocument.php -text
 inc/joindre_document.php -text
 inc/marquer_doublons_doc.php -text
 inc/renseigner_document.php -text
+inc/verifier_document_mode_vignette.php -text
 inc/vignette.php -text
 javascript/jquery.MultiFile.js -text
 javascript/medias_edit.js -text
