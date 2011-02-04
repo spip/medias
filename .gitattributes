@@ -6,6 +6,7 @@ action/copier_local.php -text
 action/dissocier_document.php -text
 action/editer_document.php -text
 action/supprimer_document.php -text
+action/supprimer_tous_orphelins.php -text
 action/tourner.php -text
 action/verifier_documents_brises.php -text
 base/medias.php -text
