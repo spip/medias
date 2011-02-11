@@ -71,6 +71,10 @@ lang/medias_fr.php -text
 /medias_autoriser.php -text
 /medias_fonctions.php -text
 /medias_pipelines.php -text
+metadata/flv.php -text
+metadata/image.php -text
+metadata/svg.php -text
+metadata/swf.php -text
 modalbox/jquery.simplemodal-1.3.3.js -text
 modalbox/modal_closebox.png -text
 modalbox/modalbox.js -text
