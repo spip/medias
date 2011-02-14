@@ -86,10 +86,10 @@ modeles/document_case.html -text
 modeles/document_case_fonctions.php -text
 modeles/document_desc.html -text
 /plugin.xml -text
-prive/contenu/portfolio_document.html -text
-prive/editer/colonne_document.html -text
-prive/editer/document_popup.html -text
-prive/infos/document.html -text
+prive/objets/contenu/portfolio_document.html -text
+prive/objets/editer/colonne_document.html -text
+prive/objets/editer/document_popup.html -text
+prive/objets/infos/document.html -text
 prive/squelettes/contenu/document_edit.html -text
 prive/squelettes/contenu/mediatheque.html -text
 prive/squelettes/inclure/ajouter-documents.html -text
