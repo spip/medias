@@ -92,10 +92,12 @@ prive/objets/editer/document_popup.html -text
 prive/objets/infos/document.html -text
 prive/squelettes/contenu/document_edit.html -text
 prive/squelettes/contenu/mediatheque.html -text
+prive/squelettes/contenu/popin-choisir_document.html -text
 prive/squelettes/inclure/ajouter-documents.html -text
 prive/squelettes/inclure/bouton-supprimer-orphelins.html -text
 prive/squelettes/inclure/colonne-documents.html -text
 prive/squelettes/inclure/document_infos.html -text
+prive/squelettes/inclure/mediatheque-choisir.html -text
 prive/squelettes/inclure/mediatheque-galerie.html -text
 prive/squelettes/inclure/mediatheque-navigation.html -text
 prive/squelettes/inclure/portfolio-documents.html -text
