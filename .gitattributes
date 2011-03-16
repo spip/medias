@@ -75,11 +75,6 @@ metadata/flv.php -text
 metadata/image.php -text
 metadata/svg.php -text
 metadata/swf.php -text
-modalbox/jquery.simplemodal-1.3.3.js -text
-modalbox/modal_closebox.png -text
-modalbox/modalbox.js -text
-modalbox/modalbox_pipelines.php -text
-modalbox/style_prive_plugin_modalbox.html -text
 modeles/doc.html -text
 modeles/doc_legende.html -text
 modeles/document_case.html -text
