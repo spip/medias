@@ -9,6 +9,7 @@ action/supprimer_document.php -text
 action/supprimer_tous_orphelins.php -text
 action/tourner.php -text
 action/verifier_documents_brises.php -text
+action/verifier_documents_liens.php -text
 base/medias.php -text
 base/typedoc.php -text
 formulaires/changer_fichier_document.html -text
