@@ -111,6 +111,7 @@ prive/themes/spip/images/tourner-gauche-12.png -text
 prive/themes/spip/images/vu-16-10.png -text
 prive/themes/spip/images/vu-16.png -text
 prive/themes/spip/images/vu-32.png -text
+puce_statut/document.php -text
 squelettes/contenu/document.html -text
 squelettes/document.html -text
 squelettes/head/document.html -text
