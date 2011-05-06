@@ -36,6 +36,7 @@ inc/verifier_document_mode_vignette.php -text
 inc/vignette.php -text
 javascript/jquery.multifile.js -text
 javascript/medias_edit.js -text
+lang/medias.xml -text
 lang/medias_ar.php -text
 lang/medias_ast.php -text
 lang/medias_ay.php -text
