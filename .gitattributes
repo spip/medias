@@ -270,4 +270,5 @@ puce_statut/document.php -text
 squelettes/contenu/document.html -text
 squelettes/document.html -text
 squelettes/head/document.html -text
+urls/generer_url_document.php -text
 urls/generer_url_ecrire_document.php -text
