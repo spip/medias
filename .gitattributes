@@ -105,6 +105,7 @@ lang/medias_zh.php -text
 /medias_fonctions.php -text
 /medias_pipelines.php -text
 metadata/flv.php -text
+metadata/html.php -text
 metadata/image.php -text
 metadata/svg.php -text
 metadata/swf.php -text
