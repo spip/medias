@@ -101,6 +101,7 @@ lang/medias_tr.php -text
 lang/medias_vi.php -text
 lang/medias_wo.php -text
 lang/medias_zh.php -text
+/medias_administrations.php -text
 /medias_autoriser.php -text
 /medias_fonctions.php -text
 /medias_pipelines.php -text
@@ -124,7 +125,6 @@ modeles/text.html -text
 modeles/text_csv.html -text
 modeles/text_html.html -text
 modeles/video.html -text
-/plugin.xml -text
 prive/objets/contenu/portfolio_document.html -text
 prive/objets/editer/colonne_document.html -text
 prive/objets/editer/document_popup.html -text
