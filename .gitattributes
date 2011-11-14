@@ -139,6 +139,7 @@ prive/squelettes/inclure/document_infos.html -text
 prive/squelettes/inclure/mediatheque-choisir.html -text
 prive/squelettes/inclure/mediatheque-galerie.html -text
 prive/squelettes/inclure/mediatheque-navigation.html -text
+prive/squelettes/inclure/mediatheque-navigation_fonctions.php -text
 prive/squelettes/inclure/portfolio-documents.html -text
 prive/squelettes/navigation/document_edit.html -text
 prive/squelettes/top/documents.html -text
