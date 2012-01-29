@@ -107,6 +107,7 @@ lang/paquet-medias_sk.php -text
 /medias_administrations.php -text
 /medias_autoriser.php -text
 /medias_fonctions.php -text
+/medias_ieconfig.php -text
 /medias_pipelines.php -text
 metadata/flv.php -text
 metadata/html.php -text
