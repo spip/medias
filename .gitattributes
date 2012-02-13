@@ -102,6 +102,7 @@ lang/medias_vi.php -text
 lang/medias_wo.php -text
 lang/medias_zh.php -text
 lang/paquet-medias.xml -text
+lang/paquet-medias_ar.php -text
 lang/paquet-medias_en.php -text
 lang/paquet-medias_sk.php -text
 /medias_administrations.php -text
