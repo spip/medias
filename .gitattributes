@@ -139,6 +139,7 @@ prive/objets/contenu/portfolio_document.html -text
 prive/objets/editer/colonne_document.html -text
 prive/objets/editer/document_popup.html -text
 prive/objets/infos/document.html -text
+prive/objets/liste/documents.html -text
 prive/squelettes/contenu/document_edit.html -text
 prive/squelettes/contenu/documents.html -text
 prive/squelettes/contenu/popin-choisir_document.html -text
