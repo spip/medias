@@ -127,6 +127,7 @@ modeles/doc_legende.html -text
 modeles/document_case.html -text
 modeles/document_case_fonctions.php -text
 modeles/document_desc.html -text
+modeles/document_desc_fonctions.php -text
 modeles/emb.html -text
 modeles/emb_fonctions.php -text
 modeles/image.html -text
