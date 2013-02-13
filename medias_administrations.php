@@ -129,7 +129,12 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.2.1'] = array(
 		array('creer_base_types_doc'),
 	);
-
+	// reparer les clauses DEFAULT manquantes de maniere reccurente sur cette table
+	$maj['1.2.2'] = array(
+		array('sql_alter',"TABLE spip_documents CHANGE extension extension VARCHAR(10) DEFAULT '' NOT NULL"),
+		array('sql_alter',"TABLE spip_documents CHANGE credits credits varchar(255) DEFAULT '' NOT NULL"),
+		array('sql_alter',"TABLE spip_documents CHANGE statut statut varchar(10) DEFAULT '0' NOT NULL"),
+	);
 
 	include_spip('base/upgrade');
 	include_spip('base/medias');
