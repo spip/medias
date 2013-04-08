@@ -33,15 +33,8 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	$valeurs['_mode'] = $mode;
 	
 	$valeurs['url'] = 'http://';
-	$valeurs['fichier_upload'] = '';
-	
-	$valeurs['_options_upload_ftp'] = '';
-	$valeurs['_dir_upload_ftp'] = '';
-	
-	$valeurs['joindre_upload']=''; 
-	$valeurs['joindre_distant']=''; 
-	$valeurs['joindre_ftp']='';
-	$valeurs['joindre_mediatheque']='';
+	$valeurs['fichier_upload'] = $valeurs['_options_upload_ftp'] = $valeurs['_dir_upload_ftp'] = ''; 
+	$valeurs['joindre_upload'] = $valeurs['joindre_distant']	= $valeurs['joindre_ftp'] = $valeurs['joindre_mediatheque'] = '';
 
 	$valeurs['editable'] = ' ';
 	if (intval($id_document)){
@@ -50,12 +43,12 @@ function formulaires_joindre_document_charger_dist($id_document='new',$id_objet=
 	
 	$valeurs['proposer_media'] = is_string($proposer_media) ? (preg_match('/^(false|non|no)$/i', $proposer_media) ? false : true) : $proposer_media;
 	$valeurs['proposer_ftp'] = is_string($proposer_ftp) ? (preg_match('/^(false|non|no)$/i', $proposer_ftp) ? false : true) : $proposer_ftp;
-	
+
 	# regarder si un choix d'upload FTP est vraiment possible
 	if (
 	 $valeurs['proposer_ftp']
 	 AND test_espace_prive() # ??
-	 AND ($mode == 'document' OR $mode == 'choix') # si c'est pour un document
+	 AND ($mode != 'image') AND ($mode != 'vignette') # si c'est pour un document
 	 //AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
 	 AND $GLOBALS['flag_upload']
 	 ) {
@@ -250,9 +243,9 @@ function joindre_options_upload_ftp($dir, $mode = 'document') {
 	$texte_upload = array();
 
 	// en mode "charger une image", ne proposer que les inclus
-	$inclus = ($mode == 'document' OR $mode =='choix')
-		? ''
-		: " AND inclus='image'";
+	$inclus = ($mode == 'image' OR $mode =='vignette')
+		? " AND inclus='image'"
+		: '';
 
 	foreach ($fichiers as $f) {
 		$f = preg_replace(",^$dir,",'',$f);
