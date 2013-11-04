@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=fr_tu
+// extrait automatiquement de http://trad.spip.net/tradlang_module/medias?lang_cible=fr_fem
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_download_sur_le_web' => 'internet',
 	'bouton_enlever_document' => 'Détacher',
 	'bouton_enlever_supprimer_document' => 'Supprimer',
-	'bouton_enlever_supprimer_document_confirmation' => 'Es-tu sûr de vouloir supprimer le document ?',
+	'bouton_enlever_supprimer_document_confirmation' => 'Êtes-vous sûre de vouloir supprimer le document ?',
 	'bouton_modifier_document' => 'Modifier',
 	'bouton_parcourir' => 'Parcourir…',
 	'bouton_refresh_document' => 'Rafraîchir le document',
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
 	'bouton_supprimer' => 'Supprimer',
 	'bouton_supprimer_tous_orphelins' => 'Supprimer tous les orphelins',
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Es-tu sûr de vouloir supprimer @nb@ orphelins ?',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Êtes-vous sûre de vouloir supprimer @nb@ orphelins ?',
 	'bouton_upload' => 'Téléverser',
 
 	// D
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'documents_orphelins' => 'Inutilisés',
 	'documents_publies' => 'Publiés',
 	'documents_tous' => 'Tous',
-	'double_clic_inserer_doc' => 'Double-cliques pour insérer ce raccourci dans le texte',
+	'double_clic_inserer_doc' => 'Double-cliquez pour insérer ce raccourci dans le texte',
 
 	// E
 	'entree_dimensions' => 'Dimensions :',
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_dossier_tmp_manquant' => 'Un dossier temporaire est manquant pour télécharger les fichiers',
 	'erreur_ecriture_fichier' => 'Erreur lors de l’écriture du fichier sur le disque',
 	'erreur_format_fichier_image' => 'Le format de @nom@ ne convient pas pour une image',
-	'erreur_indiquez_un_fichier' => 'Indiques un fichier !',
+	'erreur_indiquez_un_fichier' => 'Indiquez un fichier !',
 	'erreur_insertion_document_base' => 'Impossible d’enregistrer le document @fichier@ en base de données',
 	'erreur_suppression_vignette' => 'Erreur lors de la suppression de la vignette',
 	'erreur_upload_type_interdit' => 'Le téléchargement des fichiers du type de @nom@ n’est pas autorisé',
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_referencer_doc_distant' => 'Référencer un document sur l’internet :',
 	'info_sans_vignette' => 'Sans vignette',
 	'info_statut_document' => 'Ce document est :',
-	'info_telecharger' => 'Télécharger depuis ton ordinateur :',
+	'info_telecharger' => 'Télécharger depuis votre ordinateur :',
 	'infos' => 'Infos techniques',
 	'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document',
 	'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site',
@@ -156,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_titre' => 'Titre',
 
 	// T
-	'texte_documents_joints' => 'Tu peux activer l’interface d’ajout de documents (fichiers bureautiques, images, multimédia, etc.) aux articles, rubriques et autres. Ces fichiers peuvent ensuite être référencés dans le texte, ou affichés séparément.',
+	'texte_documents_joints' => 'Vous pouvez activer l’interface d’ajout de documents (fichiers bureautiques, images, multimédia, etc.) aux articles, rubriques et autres. Ces fichiers peuvent ensuite être référencés dans le texte, ou affichés séparément.',
 	'texte_documents_joints_2' => 'Ce réglage n’empêche pas le téléversement d’images dans les articles ni l’insertion de document directement dans les textes des contenus.',
 	'titre_documents_joints' => 'Documents joints',
 	'titre_page_documents_edit' => 'Modifier le document : @titre@',
@@ -172,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_video' => '1 séquence',
 	'une_utilisation' => '1 utilisation',
 	'upload_fichier_zip' => 'Fichier ZIP',
-	'upload_fichier_zip_texte' => 'Le fichier que tu proposes d’installer est un fichier Zip.',
+	'upload_fichier_zip_texte' => 'Le fichier que vous proposez d’installer est un fichier Zip.',
 	'upload_fichier_zip_texte2' => 'Ce fichier peut être :',
 	'upload_info_mode_document' => 'Déposer dans le portfolio',
 	'upload_info_mode_image' => 'Retirer du portfolio',
