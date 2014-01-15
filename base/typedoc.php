@@ -300,6 +300,7 @@ $tables_mime = array(
 		'h'  => 'text/x-chdr',
 		'html' => 'text/html',
 		'jar' => 'application/java-archive',
+		'json' => 'application/json',
 		'kml' => 'application/vnd.google-earth.kml+xml',
 		'kmz' => 'application/vnd.google-earth.kmz',
 		'lyx' => 'application/x-lyx',
