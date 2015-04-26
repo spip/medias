@@ -87,6 +87,7 @@ lang/medias_oc_lms.php -text
 lang/medias_oc_lnc.php -text
 lang/medias_oc_ni.php -text
 lang/medias_oc_ni_la.php -text
+lang/medias_oc_ni_mis.php -text
 lang/medias_oc_prv.php -text
 lang/medias_oc_va.php -text
 lang/medias_pl.php -text
@@ -109,9 +110,11 @@ lang/paquet-medias_en.php -text
 lang/paquet-medias_es.php -text
 lang/paquet-medias_fa.php -text
 lang/paquet-medias_fr_fem.php -text
+lang/paquet-medias_fr_tu.php -text
 lang/paquet-medias_it.php -text
 lang/paquet-medias_lb.php -text
 lang/paquet-medias_nl.php -text
+lang/paquet-medias_oc_ni_mis.php -text
 lang/paquet-medias_pt.php -text
 lang/paquet-medias_pt_br.php -text
 lang/paquet-medias_ru.php -text
