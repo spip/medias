@@ -74,7 +74,7 @@ function autoriser_document_tailler_dist($faire,$quoi,$id,$qui,$options) {
  * Il faut aussi que les documents aient ete actives sur les objets concernes
  * ou que ce soit un article, sur lequel on peut toujours uploader des images
  *
- * http://doc.spip.org/@autoriser_joindredocument_dist
+ * http://code.spip.net/@autoriser_joindredocument_dist
  *
  * @return bool
  */
@@ -191,7 +191,7 @@ function autoriser_document_supprimer_dist($faire, $type, $id, $qui, $opt){
 // si le document est lie a un element publie
 // (TODO: a revoir car c'est dommage de sortir de l'API true/false)
 //
-// http://doc.spip.org/@autoriser_document_voir_dist
+// http://code.spip.net/@autoriser_document_voir_dist
 function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 
 	if (!isset($GLOBALS['meta']["creer_htaccess"])
