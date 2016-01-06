@@ -207,7 +207,9 @@ lib/mejs/controls.fw.png -text
 lib/mejs/controls.png -text
 lib/mejs/controls.svg -text
 lib/mejs/flashmediaelement-cdn.swf -text
+lib/mejs/flashmediaelement-debug.swf -text
 lib/mejs/flashmediaelement.swf -text
+lib/mejs/jumpforward.png -text
 lib/mejs/loading.gif -text
 lib/mejs/mediaelement-and-player.js -text
 lib/mejs/mediaelement-and-player.min.js -text
@@ -219,6 +221,7 @@ lib/mejs/mediaelementplayer.min.css -text
 lib/mejs/mediaelementplayer.min.js -text
 lib/mejs/mejs-skins.css -text
 lib/mejs/silverlightmediaelement.xap -text
+lib/mejs/skipback.png -text
 /medias_administrations.php -text
 /medias_autoriser.php -text
 /medias_fonctions.php -text
