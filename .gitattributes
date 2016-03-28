@@ -150,6 +150,7 @@ lib/getid3/module.audio.amr.php -text
 lib/getid3/module.audio.au.php -text
 lib/getid3/module.audio.avr.php -text
 lib/getid3/module.audio.bonk.php -text
+lib/getid3/module.audio.dsf.php -text
 lib/getid3/module.audio.dss.php -text
 lib/getid3/module.audio.dts.php -text
 lib/getid3/module.audio.flac.php -text
