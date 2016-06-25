@@ -94,6 +94,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 
 	include_spip('inc/modifier');
 	if (isset($file['distant']) AND $file['distant'] AND !in_array($mode,array('choix','auto','image','document'))) {
+		spip_log("document distant $source accepte sans verification, mode=$mode","medias"._LOG_INFO_IMPORTANTE);
 		include_spip('inc/distant');
 		$file['tmp_name'] = _DIR_RACINE . copie_locale($source);
 		$source = $file['tmp_name'];
@@ -104,6 +105,9 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	// via une requete HEAD pour savoir si la ressource existe (non 404), si le
 	// content-type est connu, et si possible recuperer la taille, voire plus.
 	if (isset($file['distant']) AND $file['distant']) {
+		if (!tester_url_absolue($source)){
+			return _T('medias:erreur_chemin_distant', array('nom' => $source));
+		}
 		include_spip('inc/distant');
 		if (is_array($a = renseigner_source_distante($source))) {
 

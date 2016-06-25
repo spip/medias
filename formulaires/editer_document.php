@@ -154,6 +154,7 @@ function formulaires_editer_document_traiter_dist($id_document='new', $id_parent
 		else {
 			// liberer le nom de l'ancien fichier pour permettre le remplacement par un fichier du meme nom
 			if ($ancien_fichier = sql_getfetsel('fichier','spip_documents','id_document='.intval($id_document))
+				AND !tester_url_absolue($ancien_fichier)
 				AND @file_exists($rename = get_spip_doc($ancien_fichier))){
 				@rename($rename,"$rename--.old");
 
