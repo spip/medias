@@ -122,8 +122,11 @@ function formulaires_joindre_document_verifier_dist($id_document='new',$id_objet
 					AND !_request('joindre_zip')
 					AND $contenu_zip = joindre_verifier_zip($files)){
 					list($fichiers,$erreurs,$tmp_zip) = $contenu_zip;
-					if ($fichiers)
-						$erreurs['lister_contenu_archive'] = recuperer_fond("formulaires/inc-lister_archive_jointe",array('chemin_zip'=>$tmp_zip,'liste_fichiers_zip'=>$fichiers,'erreurs_fichier_zip'=>$erreurs));
+					if ($fichiers){
+						// on passe le md5 du fichier uniquement, on le retrouvera dans zip_to_clean de la session
+						$token_zip = md5($tmp_zip);
+						$erreurs['lister_contenu_archive'] = recuperer_fond("formulaires/inc-lister_archive_jointe",array('chemin_zip'=>$token_zip,'liste_fichiers_zip'=>$fichiers,'erreurs_fichier_zip'=>$erreurs));
+					}
 					else
 						$erreurs['message_erreur'] = _T('medias:erreur_aucun_fichier'); 
 				}
