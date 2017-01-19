@@ -3,6 +3,7 @@ action/acceder_document.php -text
 action/ajouter_documents.php -text
 action/changer_mode_document.php -text
 action/copier_local.php -text
+action/desordonner_liens_documents.php -text
 action/dissocier_document.php -text
 action/editer_document.php -text
 action/ordonner_liens_documents.php -text
