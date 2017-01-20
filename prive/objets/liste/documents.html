@@ -22,8 +22,11 @@
 	<BOUCLE_liste_doc(DOCUMENTS){id_document?}{id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{document,#ID_DOCUMENT,#ID_RUBRIQUE})]</td>
-			<td class='titre principale'>[(#LOGO_ARTICLE|image_reduire{20,26})]<a href="[(#ID_DOCUMENT|generer_url_entite{document})]"
-																					title="<:info_numero_abbreviation|attribut_html:> #ID_DOCUMENT">[(#RANG). ][(#TITRE|sinon{[(#FICHIER|basename)]})]</a></td>
+			<td class='titre principale'>[(#LOGO_DOCUMENT|image_reduire{20,26})]
+				<a href="[(#ID_DOCUMENT|generer_url_entite{document})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DOCUMENT">
+					[(#RANG). ][(#TITRE|sinon{[(#FICHIER|basename)]})]
+				</a>
+			</td>
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_document}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,document,#ID_DOCUMENT}|?{
