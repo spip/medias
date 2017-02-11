@@ -36,6 +36,7 @@ inc/renseigner_document.php -text
 inc/verifier_document_mode_image.php -text
 inc/verifier_document_mode_vignette.php -text
 inc/vignette.php -text
+javascript/gestion_listes_documents.js.html -text
 javascript/jquery.multifile.js -text
 javascript/medias_edit.js -text
 javascript/mejs-init.js -text
