@@ -12,7 +12,7 @@
 	<!-- Gestion des medias dans SPIP -->
 
 	<auteur>Collectif SPIP</auteur>
-	<credit>C&#233;dric Morin, Tetue pour la m&#233;diath&#232;que</credit>
+	<credit>Cédric Morin, Tetue pour la médiathèque</credit>
 
 	<traduire module="medias" reference="fr" gestionnaire="salvatore" />
 
