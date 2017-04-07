@@ -208,6 +208,8 @@ lib/mejs/mediaelementplayer.css -text
 lib/mejs/mediaelementplayer.js -text
 lib/mejs/mediaelementplayer.min.css -text
 lib/mejs/mediaelementplayer.min.js -text
+lib/mejs/mejs-controls.png -text
+lib/mejs/mejs-controls.svg -text
 /medias_administrations.php -text
 /medias_autoriser.php -text
 /medias_fonctions.php -text
