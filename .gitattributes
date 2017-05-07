@@ -23,9 +23,12 @@ formulaires/editer_document.php -text
 formulaires/illustrer_document.html -text
 formulaires/illustrer_document.php -text
 formulaires/inc-lister_archive_jointe.html -text
-formulaires/inc-upload_document.html -text
 formulaires/joindre_document.html -text
 formulaires/joindre_document.php -text
+formulaires/methodes_upload/distant.html -text
+formulaires/methodes_upload/ftp.html -text
+formulaires/methodes_upload/mediatheque.html -text
+formulaires/methodes_upload/upload.html -text
 inc/choisir_mode_document.php -text
 inc/documenter_objet.php -text
 inc/documents.php -text
