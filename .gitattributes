@@ -23,6 +23,7 @@ formulaires/editer_document.php -text
 formulaires/illustrer_document.html -text
 formulaires/illustrer_document.php -text
 formulaires/inc-lister_archive_jointe.html -text
+formulaires/inc-upload_document.html -text
 formulaires/joindre_document.html -text
 formulaires/joindre_document.php -text
 formulaires/methodes_upload/distant.html -text
