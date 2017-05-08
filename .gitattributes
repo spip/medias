@@ -257,6 +257,7 @@ lib/mejs/renderers/vimeo.min.js -text
 /medias_fonctions.php -text
 /medias_ieconfig.php -text
 /medias_pipelines.php -text
+metadata/audio.php -text
 metadata/html.php -text
 metadata/image.php -text
 metadata/svg.php -text
