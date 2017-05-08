@@ -22,7 +22,7 @@ include_spip('inc/autoriser');
  * @param string $file
  * @return array
  */
-// http://code.spip.net/@traite_svg
+// https://code.spip.net/@traite_svg
 function metadata_svg_dist($file){
 	$meta = array();
 

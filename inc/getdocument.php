@@ -26,7 +26,7 @@ include_spip('inc/minipres');
 
 // Erreur appelee depuis public.php (la precedente ne fonctionne plus
 // depuis qu'on est sortis de spip_image.php, apparemment).
-// http://code.spip.net/@erreur_upload_trop_gros
+// https://code.spip.net/@erreur_upload_trop_gros
 function erreur_upload_trop_gros() {
 	include_spip('inc/filtres');
 	
