@@ -152,7 +152,10 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.2.6'] = array(
 		// ajout du champ titre pour json cf oubli dans https://zone.spip.org/trac/spip-zone/changeset/80059
 		array("sql_updateq","spip_types_documents",array('titre'=>'JSON'),"extension='json'"),
-		
+	);
+	$maj['1.2.7'] = array(
+	array('medias_maj_date_publication_documents'),
+	array('medias_check_statuts', true)
 	);
 	include_spip('base/upgrade');
 	include_spip('base/medias');
@@ -184,6 +187,12 @@ function medias_peuple_media_document($champ_media="media_defaut"){
 	}
 }
 
+/** 
+ * Maj des date de publication des documents cf ticket #3329, z104221
+ */
+function medias_maj_date_publication_documents() {
+	sql_update('spip_documents', array('statut' => '0'), 'date_publication > ' . sql_quote('2017-01-01 00:00:00'));
+}
 /*
 function medias_install($action,$prefix,$version_cible){
 	$version_base = $GLOBALS[$prefix."_base_version"];
