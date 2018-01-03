@@ -217,6 +217,7 @@ lib/mejs/lang/ja.js -text
 lib/mejs/lang/ko.js -text
 lib/mejs/lang/nl.js -text
 lib/mejs/lang/pl.js -text
+lib/mejs/lang/pt-br.js -text
 lib/mejs/lang/pt.js -text
 lib/mejs/lang/ro.js -text
 lib/mejs/lang/ru.js -text
@@ -240,6 +241,8 @@ lib/mejs/mediaelementplayer.css -text
 lib/mejs/mediaelementplayer.min.css -text
 lib/mejs/mejs-controls.png -text
 lib/mejs/mejs-controls.svg -text
+lib/mejs/package.js -text
+lib/mejs/package.json -text
 lib/mejs/renderers/dailymotion.js -text
 lib/mejs/renderers/dailymotion.min.js -text
 lib/mejs/renderers/facebook.js -text
