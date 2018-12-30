@@ -124,6 +124,7 @@ lang/paquet-medias_sk.php -text
 lang/paquet-medias_uk.php -text
 lib/getid3/extension.cache.dbm.php -text
 lib/getid3/extension.cache.mysql.php -text
+lib/getid3/extension.cache.mysqli.php -text
 lib/getid3/extension.cache.sqlite3.php -text
 lib/getid3/getid3.lib.php -text
 lib/getid3/getid3.php -text
