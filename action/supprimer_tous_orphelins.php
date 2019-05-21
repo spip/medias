@@ -47,7 +47,7 @@ function action_supprimer_tous_orphelins() {
 
 	//on isole les orphelins
 	$select = sql_get_select('DISTINCT id_document', 'spip_documents_liens as oooo');
-	$cond = "spip_documents.id_document NOT IN ($select)";
+	$cond = "spip_documents.id_document NOT IN ($select) AND spip_documents.mode != 'vignette'";
 	$where[] = $cond;
 
 	$ids_doc_orphelins = sql_select('id_document', 'spip_documents', $where);
