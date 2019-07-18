@@ -16,6 +16,8 @@
  * @package SPIP\Medias\Metadata
  **/
 
+use enshrined\svgSanitize\Sanitizer;
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -32,23 +34,27 @@ include_spip('inc/autoriser');
  * @return array Tableau (largeur, hauteur)
  */
 function metadata_svg_dist($file) {
-	$meta = array();
 
 	// Securite si pas autorise : virer les scripts et les references externes
 	// sauf si on est en mode javascript 'ok' (1), cf. inc_version
 	if ($GLOBALS['filtrer_javascript'] < 1
-		and !autoriser('televerser', 'script')
+		// qu'on soit admin ou non, on sanitize les SVGs car rien ne dit qu'un admin sait que ca contient du JS
+	  // and !autoriser('televerser', 'script')
 	) {
-		include_spip('inc/texte');
-		$texte = spip_file_get_contents($file);
-		$new = trim(safehtml($texte));
-		// petit bug safehtml
-		if (substr($new, 0, 2) == ']>') {
-			$new = ltrim(substr($new, 2));
-		}
-		if ($new != $texte) {
-			ecrire_fichier($file, $new);
-		}
+		spip_log("sanitization SVG $file", "medias");
+
+		include_spip('lib/svg-sanitizer/src/Sanitizer');
+		include_spip('lib/svg-sanitizer/src/data/AttributeInterface');
+		include_spip('lib/svg-sanitizer/src/data/AllowedAttributes');
+		include_spip('lib/svg-sanitizer/src/data/TagInterface');
+		include_spip('lib/svg-sanitizer/src/data/AllowedTags');
+
+		$sanitizer = new Sanitizer();
+		$svg = file_get_contents($file);
+
+		// Pass it to the sanitizer and get it back clean
+		$clean_svg = $sanitizer->sanitize($svg);
+		ecrire_fichier($file, $clean_svg);
 	}
 
 	$metadata = charger_fonction('image', 'metadata');

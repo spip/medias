@@ -256,6 +256,17 @@ lib/mejs/renderers/twitch.js -text
 lib/mejs/renderers/twitch.min.js -text
 lib/mejs/renderers/vimeo.js -text
 lib/mejs/renderers/vimeo.min.js -text
+lib/svg-sanitizer/LICENSE -text
+lib/svg-sanitizer/README.md -text
+lib/svg-sanitizer/composer.json -text
+lib/svg-sanitizer/composer.lock -text
+lib/svg-sanitizer/phpunit.xml.dist -text
+lib/svg-sanitizer/src/Sanitizer.php -text
+lib/svg-sanitizer/src/data/AllowedAttributes.php -text
+lib/svg-sanitizer/src/data/AllowedTags.php -text
+lib/svg-sanitizer/src/data/AttributeInterface.php -text
+lib/svg-sanitizer/src/data/TagInterface.php -text
+lib/svg-sanitizer/src/svg-scanner.php -text
 /medias_administrations.php -text
 /medias_autoriser.php -text
 /medias_fonctions.php -text
