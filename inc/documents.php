@@ -129,11 +129,11 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
 		} else {
 			$f = charger_fonction('vignette', 'inc');
 			$img = $f($e, false);
-			$size = @getimagesize($img);
+			$size = @spip_getimagesize($img);
 			$img = "<img src='$img' " . $size[3] . ' />';
 		}
 	} else {
-		$size = @getimagesize($img);
+		$size = @spip_getimagesize($img);
 		$img = "<img src='$img' " . $size[3] . ' />';
 	}
 	// on appelle image_reduire independamment de la presence ou non
@@ -180,8 +180,7 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
  */
 function image_du_document($document, $connect = null) {
 	if ($e = $document['extension']
-		and isset($GLOBALS['meta']['formats_graphiques'])
-		and (strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
+		and in_array($e, formats_image_acceptables())
 		and (!test_espace_prive() or $GLOBALS['meta']['creer_preview'] == 'oui')
 		and $document['fichier']
 	) {

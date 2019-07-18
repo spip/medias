@@ -517,7 +517,7 @@ function verifier_taille_document_acceptable(&$infos) {
 				if (@file_exists($img) and $img !== $infos['fichier']) {
 					spip_unlink($infos['fichier']);
 					@rename($img, $infos['fichier']);
-					$size = @getimagesize($infos['fichier']);
+					$size = @spip_getimagesize($infos['fichier']);
 					$infos['largeur'] = $size[0];
 					$infos['hauteur'] = $size[1];
 					$infos['taille'] = @filesize($infos['fichier']);

@@ -24,6 +24,7 @@ $tables_images = array(
 
 	// Autres images (peuvent utiliser le tag <img>)
 	'bmp' => 'BMP',
+	'svg' => 'SVG',
 );
 
 // Multimedia (peuvent utiliser le tag <embed>)

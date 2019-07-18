@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function metadata_image_dist($fichier) {
 	$meta = array();
 
-	if ($size_image = @getimagesize($fichier)) {
+	if ($size_image = @spip_getimagesize($fichier)) {
 		$meta['largeur'] = intval($size_image[0]);
 		$meta['hauteur'] = intval($size_image[1]);
 		$meta['type_image'] = decoder_type_image($size_image[2]);
@@ -36,21 +36,25 @@ function metadata_image_dist($fichier) {
 // https://code.spip.net/@decoder_type_image
 function decoder_type_image($type, $strict = false) {
 	switch ($type) {
-		case 1:
+		case IMAGETYPE_GIF:
 			return 'gif';
-		case 2:
+		case IMAGETYPE_JPEG:
 			return 'jpg';
-		case 3:
+		case IMAGETYPE_PNG:
 			return 'png';
-		case 4:
+		case IMAGETYPE_SWF:
 			return $strict ? '' : 'swf';
-		case 5:
+		case IMAGETYPE_PSD:
 			return 'psd';
-		case 6:
+		case IMAGETYPE_BMP:
 			return 'bmp';
-		case 7:
-		case 8:
+		case IMAGETYPE_TIFF_II:
+		case IMAGETYPE_TIFF_MM:
 			return 'tif';
+		case IMAGETYPE_WEBP:
+			return 'webp';
+		case IMAGETYPE_SVG:
+			return $strict ? '' : 'svg';
 		default:
 			return '';
 	}

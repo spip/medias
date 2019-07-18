@@ -63,7 +63,7 @@ function inc_vignette_dist($ext, $size = true, $loop = true) {
 	}
 
 	$largeur = $hauteur = 0;
-	if ($v and $size = @getimagesize($v)) {
+	if ($v and $size = @spip_getimagesize($v)) {
 		$largeur = $size[0];
 		$hauteur = $size[1];
 	}

@@ -92,7 +92,7 @@ function action_tourner_post($id_document, $angle) {
 		deplacer_fichier_upload($res, $dest);
 	} else {
 		$dest = $src;
-		$size_image = @getimagesize($dest);
+		$size_image = @spip_getimagesize($dest);
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
 	}
