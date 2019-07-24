@@ -41,7 +41,7 @@ function metadata_svg_dist($file) {
 		// qu'on soit admin ou non, on sanitize les SVGs car rien ne dit qu'un admin sait que ca contient du JS
 	  // and !autoriser('televerser', 'script')
 	) {
-		spip_log("sanitization SVG $file", "medias");
+		spip_log("sanitization SVG $file", "svg");
 
 		include_spip('lib/svg-sanitizer/src/Sanitizer');
 		include_spip('lib/svg-sanitizer/src/data/AttributeInterface');
@@ -50,11 +50,22 @@ function metadata_svg_dist($file) {
 		include_spip('lib/svg-sanitizer/src/data/AllowedTags');
 
 		$sanitizer = new Sanitizer();
+		$sanitizer->setXMLOptions(0); // garder les balises vide en ecriture raccourcie
+
 		$svg = file_get_contents($file);
 
 		// Pass it to the sanitizer and get it back clean
 		$clean_svg = $sanitizer->sanitize($svg);
 		ecrire_fichier($file, $clean_svg);
+
+		// loger les sanitization
+		$trace = "";
+		foreach ($sanitizer->getXmlIssues() as $issue) {
+			$trace .= $issue['message'] . " L".$issue['line']."\n";
+		}
+		if ($trace) {
+			spip_log($trace, "svg" . _LOG_DEBUG);
+		}
 	}
 
 	$metadata = charger_fonction('image', 'metadata');
