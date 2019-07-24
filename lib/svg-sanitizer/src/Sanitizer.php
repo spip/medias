@@ -273,7 +273,7 @@ class Sanitizer
             $currentElement = $elements->item($i);
 
             // If the tag isn't in the whitelist, remove it and continue with next iteration
-            if (!in_array(strtolower($currentElement->tagName), $this->allowedTags)) {
+            if (!in_array(strtolower($currentElement->localName), $this->allowedTags)) {
                 $currentElement->parentNode->removeChild($currentElement);
                 $this->xmlIssues[] = array(
                     'message' => 'Suspicious tag \'' . $currentElement->tagName . '\'',
@@ -288,7 +288,7 @@ class Sanitizer
 
             $this->cleanHrefs($currentElement);
 
-            if (strtolower($currentElement->tagName) === 'use') {
+            if (strtolower($currentElement->localName) === 'use') {
                 if ($this->isUseTagDirty($currentElement)) {
                     $currentElement->parentNode->removeChild($currentElement);
                     $this->xmlIssues[] = array(
@@ -311,13 +311,14 @@ class Sanitizer
         for ($x = $element->attributes->length - 1; $x >= 0; $x--) {
             // get attribute name
             $attrName = $element->attributes->item($x)->name;
+            $nodeName = $element->attributes->item($x)->nodeName;
 
             // Remove attribute if not in whitelist
             if (!in_array(strtolower($attrName), $this->allowedAttrs) && !$this->isAriaAttribute(strtolower($attrName)) && !$this->isDataAttribute(strtolower($attrName))) {
 
-                $element->removeAttribute($attrName);
+                $element->removeAttribute($nodeName);
                 $this->xmlIssues[] = array(
-                    'message' => 'Suspicious attribute \'' . $attrName . '\'',
+                    'message' => 'Suspicious attribute \'' . $nodeName . '\'',
                     'line' => $element->getLineNo(),
 		);
             }
@@ -326,9 +327,9 @@ class Sanitizer
             if($this->removeRemoteReferences) {
                 // Remove attribute if it has a remote reference
                 if (isset($element->attributes->item($x)->value) && $this->hasRemoteReference($element->attributes->item($x)->value)) {
-                    $element->removeAttribute($attrName);
+                    $element->removeAttribute($nodeName);
                     $this->xmlIssues[] = array(
-                        'message' => 'Suspicious attribute \'' . $attrName . '\'',
+                        'message' => 'Suspicious attribute \'' . $nodeName . '\'',
                         'line' => $element->getLineNo(),
 		    );
                 }

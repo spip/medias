@@ -46,6 +46,7 @@ class AllowedAttributes implements AttributeInterface
             'disabled',
             'download',
             'enctype',
+            'encoding',
             'face',
             'for',
             'headers',
@@ -269,6 +270,7 @@ class AllowedAttributes implements AttributeInterface
             'values',
             'viewbox',
             'visibility',
+            'version',
             'vert-adv-y',
             'vert-origin-x',
             'vert-origin-y',
@@ -349,6 +351,11 @@ class AllowedAttributes implements AttributeInterface
             'xlink:title',
             'xml:space',
             'xmlns:xlink',
+
+            // RDF
+            'about',
+            'resource',
+
         );
     }
 }
