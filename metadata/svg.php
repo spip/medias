@@ -35,39 +35,47 @@ include_spip('inc/autoriser');
  */
 function metadata_svg_dist($file) {
 
-	// Securite si pas autorise : virer les scripts et les references externes
-	// sauf si on est en mode javascript 'ok' (1), cf. inc_version
-	if ($GLOBALS['filtrer_javascript'] < 1
-		// qu'on soit admin ou non, on sanitize les SVGs car rien ne dit qu'un admin sait que ca contient du JS
-	  // and !autoriser('televerser', 'script')
-	) {
-		spip_log("sanitization SVG $file", "svg");
+	include_spip('inc/svg');
+	if ($svg = svg_charger($file)) {
 
-		include_spip('lib/svg-sanitizer/src/Sanitizer');
-		include_spip('lib/svg-sanitizer/src/data/AttributeInterface');
-		include_spip('lib/svg-sanitizer/src/data/AllowedAttributes');
-		include_spip('lib/svg-sanitizer/src/data/TagInterface');
-		include_spip('lib/svg-sanitizer/src/data/AllowedTags');
+		// forcer une viewBox et width+height en px
+		$svg = svg_force_viewBox_px($svg, true);
 
-		$sanitizer = new Sanitizer();
-		$sanitizer->setXMLOptions(0); // garder les balises vide en ecriture raccourcie
+		// Securite si pas autorise : virer les scripts et les references externes
+		// sauf si on est en mode javascript 'ok' (1), cf. inc_version
+		if ($GLOBALS['filtrer_javascript'] < 1
+			// qu'on soit admin ou non, on sanitize les SVGs car rien ne dit qu'un admin sait que ca contient du JS
+		  // and !autoriser('televerser', 'script')
+		) {
+			spip_log("sanitization SVG $file", "svg");
 
-		$svg = file_get_contents($file);
+			include_spip('lib/svg-sanitizer/src/Sanitizer');
+			include_spip('lib/svg-sanitizer/src/data/AttributeInterface');
+			include_spip('lib/svg-sanitizer/src/data/AllowedAttributes');
+			include_spip('lib/svg-sanitizer/src/data/TagInterface');
+			include_spip('lib/svg-sanitizer/src/data/AllowedTags');
 
-		// Pass it to the sanitizer and get it back clean
-		$clean_svg = $sanitizer->sanitize($svg);
-		ecrire_fichier($file, $clean_svg);
+			$sanitizer = new Sanitizer();
+			$sanitizer->setXMLOptions(0); // garder les balises vide en ecriture raccourcie
 
-		// loger les sanitization
-		$trace = "";
-		foreach ($sanitizer->getXmlIssues() as $issue) {
-			$trace .= $issue['message'] . " L".$issue['line']."\n";
+			// Pass it to the sanitizer and get it back clean
+			$svg = $sanitizer->sanitize($svg);
+
+			// loger les sanitization
+			$trace = "";
+			foreach ($sanitizer->getXmlIssues() as $issue) {
+				$trace .= $issue['message'] . " L".$issue['line']."\n";
+			}
+			if ($trace) {
+				spip_log($trace, "svg" . _LOG_DEBUG);
+			}
 		}
-		if ($trace) {
-			spip_log($trace, "svg" . _LOG_DEBUG);
-		}
+
+		ecrire_fichier($file, $svg);
+		$metadata = charger_fonction('image', 'metadata');
+		return $metadata($file);
 	}
 
-	$metadata = charger_fonction('image', 'metadata');
-	return $metadata($file);
+	// pas de svg valide
+	return array();
 }
