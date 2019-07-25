@@ -185,7 +185,8 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		// Exemple : si extension .jpg mais le contenu est un png
 		if (!empty($infos['type_image']) and $infos['type_image'] !== $champs['extension']) {
 			spip_log('Image `' . $file['name'] . '` mauvaise extension. Correcte : ' . $infos['type_image'], 'medias' . _LOG_INFO);
-			$new = copier_document($infos['type_image'], $file['name'] . '.' . $infos['type_image'], $champs['fichier']);
+			$subdir = determiner_sous_dossier_document($infos['type_image'], $file['name'] . '.' . $infos['type_image'], $mode);
+			$new = copier_document($infos['type_image'], $file['name'] . '.' . $infos['type_image'], $champs['fichier'], $subdir);
 			if ($new) {
 				supprimer_fichier($champs['fichier']);
 				$champs['fichier'] = $new;
@@ -290,6 +291,23 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	return $id_document;
 }
 
+/**
+ * Sous-repertoire dans lequel on stocke le document
+ * en regle general $ext/ sauf pour les logo
+ * @param $ext
+ * @param $fichier
+ * @param $mode
+ * @return mixed
+ */
+function determiner_sous_dossier_document($ext, $fichier, $mode) {
+
+	// si mode un logoxx on met dans logo/
+	if (strncmp($mode, 'logo', 4) === 0) {
+		return "logo";
+	}
+
+	return $ext;
+}
 
 /**
  * Corrige l'extension du fichier dans quelques cas particuliers
@@ -407,8 +425,9 @@ function fixer_fichier_upload($file, $mode = '') {
 	 * On vérifie que le fichier existe et qu'il contient quelque chose
 	 */
 	if (is_array($row = verifier_upload_autorise($file['name'], $mode))) {
+		$subdir = determiner_sous_dossier_document($row['extension'], $file['name'], $mode);
 		if (!isset($row['autozip'])) {
-			$row['fichier'] = copier_document($row['extension'], $file['name'], $file['tmp_name']);
+			$row['fichier'] = copier_document($row['extension'], $file['name'], $file['tmp_name'], $subdir);
 			/**
 			 * On vérifie que le fichier a une taille
 			 * si non, on le supprime et on affiche une erreur
@@ -460,7 +479,7 @@ function fixer_fichier_upload($file, $mode = '') {
 				return false;
 			}
 
-			$row['fichier'] = copier_document($row['extension'], $file['name'], $source);
+			$row['fichier'] = copier_document($row['extension'], $file['name'], $source, $subdir);
 			spip_unlink($source);
 			/**
 			 * On vérifie que le fichier a une taille
