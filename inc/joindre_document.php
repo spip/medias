@@ -212,7 +212,7 @@ function joindre_upload_error($error) {
 			}
 			break;
 	}
-	spip_log("erreur upload $error");
+	spip_log("erreur upload $error", 'medias');
 	return $msg;
 }
 
