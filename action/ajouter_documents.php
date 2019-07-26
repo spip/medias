@@ -232,7 +232,8 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	}
 
 	// lier le parent si necessaire
-	if ($id_objet = intval($id_objet) and $objet) {
+	// attention au cas particulier du site 0 utilisé pour le logo du site
+	if ($objet and (($id_objet = intval($id_objet)) or $objet=='site')) {
 		$champs['parents'][] = "$objet|$id_objet";
 	}
 
