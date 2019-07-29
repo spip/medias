@@ -291,6 +291,7 @@ modeles/file_emb_text.html -text
 modeles/file_emb_text_csv.html -text
 modeles/file_emb_text_html.html -text
 modeles/image.html -text
+modeles/logo.html -text
 modeles/video.html -text
 prive/objets/contenu/portfolio_document.html -text
 prive/objets/editer/colonne_document.html -text
