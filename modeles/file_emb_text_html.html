@@ -1,0 +1,12 @@
+<BOUCLE_texthtml (DOCUMENTS types_documents) {id_document=#ID} {tout}
+	>[<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_text_html[ spip_documents_(#ENV{align})]'
+><object data="(#URL_DOCUMENT)" width="100%" height="400"><a href="#URL_DOCUMENT">#FICHIER</a></object>
+[(#TITRE|trim|sinon{#DESCRIPTIF|trim}|sinon{#CREDITS|trim}|oui)
+  <figcaption class='spip_doc_legende'>
+    [<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|ptobr)</strong></div>]
+    [<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+    [<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
+  </figcaption>
+]
+</figure>
+]</BOUCLE_texthtml>

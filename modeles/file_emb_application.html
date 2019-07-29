@@ -1,4 +1,4 @@
-<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>[
+<BOUCLE_application(DOCUMENTS types_documents) {id_document=#ENV{id,#ENV{id_document}}} {inclus=embed} {mode?} {tout}>[
 (#REM) on trouvera plusieurs variable de hauteur/largeur
 - les balises #HAUTEUR et #LARGEUR
 - #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
@@ -10,10 +10,8 @@
  (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
-][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|non)
-<div class='spip_document_#ID_DOCUMENT spip_document_application spip_documents[ spip_documents_(#ENV{align})]'[
-style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|non)[width:(#GET{largeur}|max{120})px]']>
-]})
+][(#ENV{controls,''}|non)
+<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_application[ spip_documents_(#ENV{align})]'>
 ][(#EXTENSION|=={swf}|oui)
 <object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
  codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 
@@ -31,17 +29,21 @@ style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,c
 </object>
 #SET{done,1}
 ][(#GET{done,0}|non)
-[(#INCLUS|=={embed}|oui)
 <object width='#GET{largeur}' height='#GET{hauteur}'>
 <param name='movie' value='#URL_DOCUMENT' />
 <param name='src' value='#URL_DOCUMENT' />
 [(#ENV*|env_to_params)]
 <embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
-
-][(#INCLUS|=={image}|oui)
-[(#INCLURE{fond=modeles/img}{id_document}{align=#ENV{align}}{embed=oui}{lien=#ENV{lien}}{lien_class=#ENV{lien_class}})]
+][(#ENV{controls,''}|non)
+	[(#TITRE|trim|sinon{#DESCRIPTIF|trim}|sinon{#CREDITS|trim}|oui)
+	  <figcaption class='spip_doc_legende'>
+	    [<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|ptobr)</strong></div>]
+	    [<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+	    [<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
+	  </figcaption>
+	]
+</figure>
 ]
-][(#INCLUS|=={embed}|oui)[(#ENV{controls,''}|non)
-[<div class='#EDIT{titre} spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]</div>
-]]
-</BOUCLE_tous>
+</BOUCLE_application>
+<INCLURE{fond=modeles/file,env} />
+<//B_application>

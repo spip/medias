@@ -18,13 +18,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return mixed
  */
 function trouver_modele_emb($extension, $mime_type) {
-	if ($extension and trouve_modele($fond = 'emb_' . $extension)) {
+	if ($extension and trouve_modele($fond = 'file_emb_' . $extension)) {
 		return $fond;
 	}
-	$fond = preg_replace(',\W,', '_', $mime_type);
+	$fond = 'file_emb_' . preg_replace(',\W,', '_', $mime_type);
 	if (trouve_modele($fond)) {
 		return $fond;
 	} else {
-		return preg_replace(',\W.*$,', '', $mime_type);
+		return 'file_emb_' . preg_replace(',\W.*$,', '', $mime_type);
 	}
 }

@@ -213,7 +213,8 @@ function medias_declarer_tables_objets_sql($tables) {
 			'fichier',
 			'distant'
 		),
-		'modeles' => array('document', 'doc', 'img', 'emb', 'image', 'video', 'text', 'audio', 'application'),
+		'modeles' => array('document', 'doc', 'img', 'emb', 'image', 'video', 'audio', 'file'),
+		'modeles_styliser' => 'medias_modeles_styliser',
 	);
 
 	// jointures sur les forum pour tous les objets

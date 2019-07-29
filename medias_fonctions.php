@@ -54,6 +54,35 @@ if (isset($_SERVER['REQUEST_METHOD'])
 }
 
 /**
+ * Styliser le modele media : reroute les <img> <doc> <emb> vers <image>, <audio>, <video>, <file> selon le media du document
+ * si le document n'est pas trouve c'est <file> qui s'applique
+ * @param $modele
+ * @param $id
+ * @return string
+ */
+function medias_modeles_styliser($modele, $id) {
+	switch($modele) {
+		case 'img':
+		case 'doc':
+		case 'emb':
+			$m = 'file';
+			if ($doc = sql_fetsel('id_document,media', 'spip_documents', 'id_document='.intval($id))) {
+				$m = $doc['media']; // image, audio, video, file
+			}
+			if (trouve_modele("{$m}_{$modele}")) {
+				// on peut decliner file_emb qui sera utilisable soit par <docXX|emb> soit par <embXX>
+				// permet d'embed explicitement des fichiers exotiques qui sinon seraient de simples liens a telecharger
+				// tels que text/csv, text/html, text
+				$m = "{$m}_{$modele}";
+			}
+			$modele = $m;
+			break;
+	}
+	return $modele;
+}
+
+
+/**
  * Retourne la taille en octet d'une valeur de configuration php
  *
  * @param string $var

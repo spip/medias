@@ -1,4 +1,4 @@
-<BOUCLE_tous(DOCUMENTS types_documents) {id_document=#ID} {tout}>[
+<BOUCLE_video(DOCUMENTS types_documents) {media=video} {id_document=#ENV{id,#ENV{id_document}}} {inclus=embed} {tout}>[
 (#REM) on trouvera plusieurs variable de hauteur/largeur
 - les balises #HAUTEUR et #LARGEUR
 - #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
@@ -8,9 +8,8 @@
 #SET{largeur,#ENV{largeur, #LARGEUR|?{#LARGEUR,480}}|max{120}}
 #SET{hauteur,#ENV{hauteur, #HAUTEUR|?{#HAUTEUR,300}}|max{75}}
 #SET{duree,#ENV{duree,#DUREE}}[(#SET{duree,[(#GET{duree}|intval|?{[(#GET{duree}|intval)],''})]})]
-<div class='spip_document_#ID_DOCUMENT spip_document_video spip_documents[ spip_documents_(#ENV{align})]'
-	style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};][width:(#GET{largeur})px]'>
-<div class="video-intrinsic-wrapper" style='height:0;width:100%;padding-bottom:[(#GET{hauteur}|div{#GET{largeur}}|mult{100}|round{2})]%;position:relative;'>
+<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_video[ spip_documents_(#ENV{align})]'[ style='width:(#GET{largeur})px;']>
+<div class="video-intrinsic-wrapper" style='height:0;width:#GET{largeur}px;max-width:100%;padding-bottom:[(#GET{hauteur}|div{#GET{largeur}}|mult{100}|round{2})]%;position:relative;'>
 	<div class="video-wrapper" style="position: absolute;top:0;left:0;width:100%;height:100%;">
 		<video class="mejs mejs-#ID_DOCUMENT[ mejs-(#ENV{skin})]"
 				data-id="[(#VAL{mejs-#ID_DOCUMENT}|concat{#ENV{skin}}|md5)]"
@@ -39,10 +38,16 @@
 		</video>
 	</div>
 </div>
-[<div class='#EDIT{titre} spip_doc_titre'><strong>(#TITRE)</strong></div>]
-[<div class='#EDIT{descriptif} spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
-[<script>/*<!\[CDATA\[*/var mejspath='[(#CHEMIN{lib/mejs/mediaelement-and-player.min.js}|timestamp)]',mejscss='[(#CHEMIN{lib/mejs/mediaelementplayer.min.css}|timestamp)]';
+[(#TITRE|trim|sinon{#DESCRIPTIF|trim}|sinon{#CREDITS|trim}|oui)
+  <figcaption class='spip_doc_legende'>
+    [<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE|propre|ptobr)</strong></div>]
+    [<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+    [<div class='spip_doc_credits  #EDIT{credits}'>(#CREDITS|propre|PtoBR)</div>]
+  </figcaption>
+][<script>/*<!\[CDATA\[*/var mejspath='[(#CHEMIN{lib/mejs/mediaelement-and-player.min.js}|timestamp)]',mejscss='[(#CHEMIN{lib/mejs/mediaelementplayer.min.css}|timestamp)]';
 (#INCLURE{javascript/mejs-init.min.js})/*\]\]>*/</script>]
 [(#ENV{skin}|oui)[<style>(#INCLURE{#CHEMIN{css/mejs-skin-#ENV{skin}.css}|url_absolue_css})</style>]]
-</div>
-</BOUCLE_tous>
+</figure>
+</BOUCLE_video>
+<INCLURE{fond=modeles/file,env} />
+<//B_video>
