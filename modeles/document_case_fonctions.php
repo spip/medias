@@ -16,6 +16,16 @@ if (!defined('_BOUTON_MODE_IMAGE')) {
 	define('_BOUTON_MODE_IMAGE', true);
 }
 
+function affiche_bouton_mode_image_portfolio($inclus) {
+	if (!defined('_LEGACY_MODE_IMAGE_DOCUMENT') or _LEGACY_MODE_IMAGE_DOCUMENT === false) {
+		return '';
+	}
+	if ($inclus === 'image' and _BOUTON_MODE_IMAGE) {
+		return ' ';
+	}
+	return '';
+}
+
 include_spip('inc/documents'); // pour la fonction affiche_raccourci_doc
 function medias_raccourcis_doc(
 	$id_document,
@@ -31,28 +41,41 @@ function medias_raccourcis_doc(
 	$raccourci = '';
 	$doc = 'doc';
 
-	if ($mode == 'image' and (strlen($descriptif . $titre) == 0)) {
-		$doc = 'img';
+	if (!defined('_LEGACY_MODE_IMAGE_DOCUMENT') or _LEGACY_MODE_IMAGE_DOCUMENT === false){
+		// Affichage du raccourci <doc...> correspondant
+		$raccourci =
+			affiche_raccourci_doc($doc, $id_document, 'left')
+			. affiche_raccourci_doc($doc, $id_document, 'center')
+			. affiche_raccourci_doc($doc, $id_document, 'right');
+	}
+	else {
+		// DEPRECATED
+		// on le garde juste pour la version SPIP 3.3, activable par la constante _LEGACY_MODE_IMAGE_DOCUMENT
+		if ($mode == 'image' and (strlen($descriptif . $titre) == 0)) {
+			$doc = 'img';
+		}
+
+		// Affichage du raccourci <doc...> correspondant
+		$raccourci =
+			affiche_raccourci_doc($doc, $id_document, 'left')
+			. affiche_raccourci_doc($doc, $id_document, 'center')
+			. affiche_raccourci_doc($doc, $id_document, 'right');
+
+		if ($mode == 'document'
+			and ($inclus == 'embed' or $inclus == 'image')
+			and (($largeur > 0 and $hauteur > 0)
+				or in_array($media, array('video', 'audio')))
+		) {
+			$raccourci =
+				'<span>' . _T('medias:info_inclusion_vignette') . '</span>'
+				. $raccourci
+				. '<span>' . _T('medias:info_inclusion_directe') . '</span>'
+				. affiche_raccourci_doc('emb', $id_document, 'left')
+				. affiche_raccourci_doc('emb', $id_document, 'center')
+				. affiche_raccourci_doc('emb', $id_document, 'right');
+		}
 	}
 
-	// Affichage du raccourci <doc...> correspondant
-	$raccourci =
-		affiche_raccourci_doc($doc, $id_document, 'left')
-		. affiche_raccourci_doc($doc, $id_document, 'center')
-		. affiche_raccourci_doc($doc, $id_document, 'right');
-	if ($mode == 'document'
-		and ($inclus == 'embed' or $inclus == 'image')
-		and (($largeur > 0 and $hauteur > 0)
-			or in_array($media, array('video', 'audio')))
-	) {
-		$raccourci =
-			'<span>' . _T('medias:info_inclusion_vignette') . '</span>'
-			. $raccourci
-			. '<span>' . _T('medias:info_inclusion_directe') . '</span>'
-			. affiche_raccourci_doc('emb', $id_document, 'left')
-			. affiche_raccourci_doc('emb', $id_document, 'center')
-			. affiche_raccourci_doc('emb', $id_document, 'right');
-	}
 
 	return "<div class='raccourcis'>" . $raccourci . '</div>';
 }
