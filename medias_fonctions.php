@@ -61,6 +61,9 @@ if (isset($_SERVER['REQUEST_METHOD'])
  * @return string
  */
 function medias_modeles_styliser($modele, $id) {
+	if (defined('_LEGACY_ACTIVE_IMG_DOC_EMB') and _LEGACY_ACTIVE_IMG_DOC_EMB) {
+		return $modele;
+	}
 	switch($modele) {
 		case 'img':
 		case 'doc':
