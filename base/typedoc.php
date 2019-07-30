@@ -74,7 +74,6 @@ $tables_sequences = array(
 	'ram' => 'RealAudio',
 	'rm' => 'RealAudio',
 	'spx' => 'Ogg Speex',
-	'svg' => 'Scalable Vector Graphics',
 	'svgz' => 'Compressed Scalable Vector Graphic',
 	'swf' => 'Flash',
 	'tif' => 'TIFF',
