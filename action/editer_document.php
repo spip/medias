@@ -281,7 +281,7 @@ function medias_revision_document_parents($id_document, $parents = null, $ajout 
 	foreach ($parents as $p) {
 		$p = explode('|', $p);
 		if (preg_match('/^[a-z0-9_]+$/i', $objet = $p[0])
-			and (($p[1] = intval($p[1])) or $objet == 'site')
+			and (($p[1] = intval($p[1])) or in_array($objet, ['site', 'rubrique']))
 		) { // securite
 			$objets_parents[$p[0]][] = $p[1];
 		}
