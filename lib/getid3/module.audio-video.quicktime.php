@@ -38,7 +38,7 @@ class getid3_quicktime extends getid3_handler
 
 		$offset      = 0;
 		$atomcounter = 0;
-		$atom_data_read_buffer_size = max($this->getid3->option_fread_buffer_size * 1024, ($info['php_memory_limit'] ? round($info['php_memory_limit'] / 4) : 1024)); // set read buffer to 25% of PHP memory limit (if one is specified), otherwise use option_fread_buffer_size [default: 32MB]
+		$atom_data_read_buffer_size = $info['php_memory_limit'] ? round($info['php_memory_limit'] / 4) : $this->getid3->option_fread_buffer_size * 1024; // set read buffer to 25% of PHP memory limit (if one is specified), otherwise use option_fread_buffer_size [default: 32MB]
 		while ($offset < $info['avdataend']) {
 			if (!getid3_lib::intValueSupported($offset)) {
 				$this->error('Unable to parse atom at offset '.$offset.' because beyond '.round(PHP_INT_MAX / 1073741824).'GB limit of PHP filesystem functions');
@@ -568,8 +568,8 @@ class getid3_quicktime extends getid3_handler
 							}
 						}
 					}
-						$this->CopyToAppropriateCommentsSection($atomname, $atom_structure['data'], $atom_structure['name']);
-						break;
+					$this->CopyToAppropriateCommentsSection($atomname, $atom_structure['data'], $atom_structure['name']);
+					break;
 
 
 				case 'play': // auto-PLAY atom
@@ -2654,7 +2654,7 @@ class getid3_quicktime extends getid3_handler
 			$handyatomtranslatorarray["\xA9".'src'] = 'source_credit';
 			$handyatomtranslatorarray["\xA9".'swr'] = 'software';
 			$handyatomtranslatorarray["\xA9".'too'] = 'encoding_tool';       // iTunes 4.0
-			$handyatomtranslatorarray["\xA9".'trk'] = 'track';
+			$handyatomtranslatorarray["\xA9".'trk'] = 'track_number';
 			$handyatomtranslatorarray["\xA9".'url'] = 'url';
 			$handyatomtranslatorarray["\xA9".'wrn'] = 'warning';
 			$handyatomtranslatorarray["\xA9".'wrt'] = 'composer';
@@ -2752,38 +2752,35 @@ class getid3_quicktime extends getid3_handler
 	 *
 	 * @return string
 	 */
-    public function LociString($lstring, &$count) {
-            // Loci strings are UTF-8 or UTF-16 and null (x00/x0000) terminated. UTF-16 has a BOM
-            // Also need to return the number of bytes the string occupied so additional fields can be extracted
-            $len = strlen($lstring);
-            if ($len == 0) {
-                $count = 0;
-                return '';
-            }
-            if ($lstring[0] == "\x00") {
-                $count = 1;
-                return '';
-            }
-            //check for BOM
-            if ($len > 2 && (($lstring[0] == "\xFE" && $lstring[1] == "\xFF") || ($lstring[0] == "\xFF" && $lstring[1] == "\xFE"))) {
-                //UTF-16
-                if (preg_match('/(.*)\x00/', $lstring, $lmatches)){
-                     $count = strlen($lmatches[1]) * 2 + 2; //account for 2 byte characters and trailing \x0000
-                    return getid3_lib::iconv_fallback_utf16_utf8($lmatches[1]);
-                } else {
-                    return '';
-                }
-            } else {
-                //UTF-8
-                if (preg_match('/(.*)\x00/', $lstring, $lmatches)){
-                    $count = strlen($lmatches[1]) + 1; //account for trailing \x00
-                    return $lmatches[1];
-                }else {
-                    return '';
-                }
-
-            }
-        }
+	public function LociString($lstring, &$count) {
+		// Loci strings are UTF-8 or UTF-16 and null (x00/x0000) terminated. UTF-16 has a BOM
+		// Also need to return the number of bytes the string occupied so additional fields can be extracted
+		$len = strlen($lstring);
+		if ($len == 0) {
+			$count = 0;
+			return '';
+		}
+		if ($lstring[0] == "\x00") {
+			$count = 1;
+			return '';
+		}
+		// check for BOM
+		if (($len > 2) && ((($lstring[0] == "\xFE") && ($lstring[1] == "\xFF")) || (($lstring[0] == "\xFF") && ($lstring[1] == "\xFE")))) {
+			// UTF-16
+			if (preg_match('/(.*)\x00/', $lstring, $lmatches)) {
+				$count = strlen($lmatches[1]) * 2 + 2; //account for 2 byte characters and trailing \x0000
+				return getid3_lib::iconv_fallback_utf16_utf8($lmatches[1]);
+			} else {
+				return '';
+			}
+		}
+		// UTF-8
+		if (preg_match('/(.*)\x00/', $lstring, $lmatches)) {
+			$count = strlen($lmatches[1]) + 1; //account for trailing \x00
+			return $lmatches[1];
+		}
+		return '';
+	}
 
 	/**
 	 * @param string $nullterminatedstring
