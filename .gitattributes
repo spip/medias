@@ -142,6 +142,7 @@ lib/getid3/module.archive.gzip.php -text
 lib/getid3/module.archive.rar.php -text
 lib/getid3/module.archive.szip.php -text
 lib/getid3/module.archive.tar.php -text
+lib/getid3/module.archive.xz.php -text
 lib/getid3/module.archive.zip.php -text
 lib/getid3/module.audio-video.asf.php -text
 lib/getid3/module.audio-video.bink.php -text
