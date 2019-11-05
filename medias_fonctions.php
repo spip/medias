@@ -44,7 +44,7 @@ if (isset($GLOBALS['visiteur_session']['zip_to_clean'])
 if (isset($_SERVER['REQUEST_METHOD'])
 	and $_SERVER['REQUEST_METHOD'] == 'POST'
 	and empty($_POST)
-    and isset($_SERVER['CONTENT_TYPE'])
+	and isset($_SERVER['CONTENT_TYPE'])
 	and strlen($_SERVER['CONTENT_TYPE']) > 0
 	and strncmp($_SERVER['CONTENT_TYPE'], 'multipart/form-data', 19) == 0
 	and $_SERVER['CONTENT_LENGTH'] > medias_inigetoctets('post_max_size')
