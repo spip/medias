@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_attacher_document' => 'ربط
 ',
 	'bouton_copier_local' => 'نسخ في الموقع',
-	'bouton_download_depuis' => 'منذ:',
+	'bouton_download_depuis' => 'من:',
 	'bouton_download_local' => 'جهازي',
 	'bouton_download_par_ftp' => 'جهاز الخدمة',
 	'bouton_download_par_mediatheque' => 'مكتبة المستندات',
