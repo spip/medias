@@ -195,8 +195,8 @@ function document_instituer($id_document, $champs = array()) {
 
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		$res = sql_select(
-			'id_objet,objet',
-			'spip_documents_liens',
+			'id_objet,objet, mode',
+			'spip_documents_liens join spip_documents using(id_document)',
 			"objet!='document' AND id_document=" . intval($id_document)
 		);
 		// On aura 19 jours 3h14 et 7 secondes pour corriger en 2038 (limitation de la représentation POSIX du temps sur les 32 bits)
@@ -204,10 +204,14 @@ function document_instituer($id_document, $champs = array()) {
 		include_spip('base/objets');
 		while ($row = sql_fetch($res)) {
 			if (
-				// cas particulier des rubriques qui sont publiees des qu'elles contiennent un document !
-				$row['objet'] == 'rubrique'
-				// ou si objet publie selon sa declaration
-				or objet_test_si_publie($row['objet'], $row['id_objet'])
+				// si ce n'est pas un logo
+				!in_array($row['mode'], array('logoon','logooff'))
+				and (
+					// cas particulier des rubriques qui sont publiees des qu'elles contiennent un document !
+					$row['objet'] == 'rubrique'
+					// ou si objet publie selon sa declaration
+					or objet_test_si_publie($row['objet'], $row['id_objet'])
+				)
 			) {
 				$statut = 'publie';
 				$date_publication = 0;
