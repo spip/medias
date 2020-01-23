@@ -180,7 +180,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_documents_joints' => '記事、セックションなどへ、アイテムの追加インターフェイスを有効にできます。こ
 れらのファイルはテキストで参照することも、別々に表示することもできます。',
 	'texte_documents_joints_2' => 'この設定は、記事へ画像などを挿入することに阻まれません',
-	'titre_documents_joints' => '付加ドキュメント',
+	'titre_documents_joints' => '添付書類',
 	'titre_page_documents_edit' => '@titre@ドキュメントの編集',
 	'tous_les_medias' => 'すべてのメディア',
 	'tout_dossier_upload' => '@upload@フォルダー全体',
