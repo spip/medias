@@ -202,6 +202,11 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 			}
 		}
 
+		// voir si le document a besoin d'un nettoyage et le cas echeant relire ses infos apres
+		if (sanitizer_document($champs['fichier'], $champs['extension'])) {
+			$infos = renseigner_taille_dimension_image($champs['fichier'], $champs['extension']);
+		}
+
 		$champs = array_merge($champs, $infos);
 
 		// Si mode == 'choix', fixer le mode image/document

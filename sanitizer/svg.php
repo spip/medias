@@ -24,16 +24,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('inc/autoriser');
 
 /**
- * Déterminer les dimensions d'un svg, et enlever ses scripts si nécessaire
+ * Nettoyer et normaliser un svg, et enlever ses scripts si nécessaire
  *
- * On utilise safehtml qui n'est pas apropriée pour ça en attendant mieux
  * cf http://www.slideshare.net/x00mario/the-image-that-called-me
  * http://heideri.ch/svgpurifier/SVGPurifier/index.php
  *
  * @param string $file
  * @return array Tableau (largeur, hauteur)
  */
-function metadata_svg_dist($file) {
+function sanitizer_svg_dist($file) {
 
 	include_spip('inc/svg');
 	if ($svg = svg_charger($file)) {
@@ -55,27 +54,32 @@ function metadata_svg_dist($file) {
 			include_spip('lib/svg-sanitizer/src/data/TagInterface');
 			include_spip('lib/svg-sanitizer/src/data/AllowedTags');
 
-			$sanitizer = new Sanitizer();
-			$sanitizer->setXMLOptions(0); // garder les balises vide en ecriture raccourcie
+			// sanitization can need multiples call
+			$maxiter = 10;
+			do {
+				$size = strlen($svg);
+				$sanitizer = new Sanitizer();
+				$sanitizer->setXMLOptions(0); // garder les balises vide en ecriture raccourcie
 
-			// Pass it to the sanitizer and get it back clean
-			$svg = $sanitizer->sanitize($svg);
+				// Pass it to the sanitizer and get it back clean
+				$svg = $sanitizer->sanitize($svg);
 
-			// loger les sanitization
-			$trace = "";
-			foreach ($sanitizer->getXmlIssues() as $issue) {
-				$trace .= $issue['message'] . " L".$issue['line']."\n";
-			}
-			if ($trace) {
-				spip_log($trace, "svg" . _LOG_DEBUG);
-			}
+				// loger les sanitization
+				$trace = "";
+				foreach ($sanitizer->getXmlIssues() as $issue) {
+					$trace .= $issue['message'] . " L".$issue['line']."\n";
+				}
+				if ($trace) {
+					spip_log($trace, "svg" . _LOG_DEBUG);
+				}
+			} while (strlen($svg) !== $size and $maxiter-->0);
 		}
 
 		ecrire_fichier($file, $svg);
-		$metadata = charger_fonction('image', 'metadata');
-		return $metadata($file);
+		clearstatcache();
+		return true;
 	}
 
 	// pas de svg valide
-	return array();
+	return false;
 }

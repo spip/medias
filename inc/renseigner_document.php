@@ -159,3 +159,22 @@ function renseigner_taille_dimension_image($fichier, $ext, $distant = false) {
 
 	return $infos;
 }
+
+/**
+ * @param string $fichier
+ * @param string $ext
+ * @return bool
+ */
+function sanitizer_document($fichier, $ext) {
+	// verifier que le fichier existe, sinon on ne peut rien faire
+	if (
+		!$fichier
+		or !@file_exists($fichier)) {
+		return false;
+	}
+	if ($sanitizer = charger_fonction($ext, 'sanitizer', true)){
+		return $sanitizer($fichier);
+	}
+
+	return false;
+}
