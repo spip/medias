@@ -25,10 +25,17 @@ function formulaires_illustrer_document_charger_dist($id_document) {
 	$valeurs['_hidden'] = "<input name='id_document' value='$id_document' type='hidden' />";
 	$valeurs['mode'] = 'vignette'; // pour les id dans le dom
 	$vignette = sql_fetsel('fichier,largeur,hauteur,id_document', 'spip_documents', 'id_document=' . $valeurs['id_vignette']);
-	$valeurs['vignette'] = get_spip_doc($vignette['fichier']);
-	$valeurs['hauteur'] = $vignette['hauteur'];
-	$valeurs['largeur'] = $vignette['largeur'];
-	$valeurs['id_vignette'] = $vignette['id_document'];
+	if ($vignette) {
+		$valeurs['vignette'] = get_spip_doc($vignette['fichier']);
+		$valeurs['hauteur'] = $vignette['hauteur'];
+		$valeurs['largeur'] = $vignette['largeur'];
+		$valeurs['id_vignette'] = $vignette['id_document'];
+	} else {
+		$valeurs['vignette'] = null;
+		$valeurs['hauteur'] = null;
+		$valeurs['largeur'] = null;
+		$valeurs['id_vignette'] = null;
+	}
 	$valeurs['_pipeline'] = array('editer_contenu_objet', array('type' => 'illustrer_document', 'id' => $id_document));
 
 	return $valeurs;
