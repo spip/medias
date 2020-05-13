@@ -381,3 +381,36 @@ function duree_en_secondes($duree, $precis = false) {
 	}
 	return $out;
 }
+
+
+/**
+ * Trouver le fond pour embarquer un document
+ * - avec une extension
+ * - avec un mime_type donne
+ *
+ * => modeles/{modele_base}_emb_html.html si il existe
+ * => modeles/{modele_base}_text_html.html si il existe,
+ * => modeles/{modele_base}_text.html si il existe,
+ * => modeles/{modele_base}.html sinon
+ *
+ * @param  $extension
+ * @param  $mime_type
+ * @return mixed
+ */
+function medias_trouver_modele_emb($extension, $mime_type, $modele_base='file') {
+	if ($extension and trouve_modele($fond = $modele_base . '_emb_' . $extension)) {
+		return $fond;
+	}
+
+	$fond = $modele_base . '_emb_' . preg_replace(',\W,', '_', $mime_type);
+	if (trouve_modele($fond)) {
+		return $fond;
+	}
+
+	$fond = $modele_base . '_emb_' . preg_replace(',\W.*$,', '', $mime_type);
+	if (trouve_modele($fond)) {
+		return $fond;
+	}
+
+	return $modele_base;
+}
