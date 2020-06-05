@@ -57,7 +57,7 @@
 <div class='nettoyeur'></div>
 #FORMULAIRE_RECHERCHE_ECRIRE{#GET{self},ajax}
 
-<INCLURE{fond=#ENV{galerie,prive/squelettes/inclure/mediatheque-galerie},ajax=documents,env} />
+<INCLURE{fond=#ENV{galerie,''}|spip_sanitize_from_request{galerie,vide}|sinon{prive/squelettes/inclure/mediatheque-galerie},ajax=documents,env} />
 
 <div class='nettoyeur'></div>
 [(#GET{editable})

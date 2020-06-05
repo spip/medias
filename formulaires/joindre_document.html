@@ -19,5 +19,5 @@
 	</div></form>
 </div>]
 [(#ENV{_galerie,''}|oui)
-		[(#INCLURE{fond=#ENV{_galerie}, env, ajax})]
+		[(#INCLURE{fond=#ENV{_galerie}|spip_sanitize_from_request{_galerie,vide}, env, ajax})]
 ]
