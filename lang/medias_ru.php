@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Постранично по:',
 	'label_parents' => 'Документ используется в:',
 	'label_refdoc_joindre' => 'Номер документа',
-	'lien_tout_enlever' => 'Удалить все',
+	'lien_tout_enlever' => 'Удалить все', # MODIF
 	'logo' => 'Лого',
 
 	// M

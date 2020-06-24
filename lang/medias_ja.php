@@ -149,7 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_refdoc_joindre' => 'ドキュメント番号',
 	'lien_tout_desordonner' => 'ソートをリセット',
 	'lien_tout_desordonner_verif' => 'ドキュメントのソートは、リセットしてもよろしいですか',
-	'lien_tout_enlever' => 'すべて削除',
+	'lien_tout_enlever' => 'すべて削除', # MODIF
 	'logo' => 'ロゴ',
 
 	// M

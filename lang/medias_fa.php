@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'شماره صفحه‌گذاري با: ',
 	'label_parents' => 'اين سند پيوند خورده به ',
 	'label_refdoc_joindre' => 'شماره‌ي سند',
-	'lien_tout_enlever' => 'حذف همه',
+	'lien_tout_enlever' => 'حذف همه', # MODIF
 	'logo' => 'لوگو',
 
 	// M

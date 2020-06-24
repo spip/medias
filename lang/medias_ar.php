@@ -150,7 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_refdoc_joindre' => 'مستند رقم',
 	'lien_tout_desordonner' => 'إعادة تأصيل الترتيب',
 	'lien_tout_desordonner_verif' => 'سيتم إعادة تأصيل ترتيب هذه اللائحة. هل تؤكدون ذلك؟',
-	'lien_tout_enlever' => 'إزالة الكل',
+	'lien_tout_enlever' => 'إزالة الكل', # MODIF
 	'logo' => 'رمز',
 
 	// M

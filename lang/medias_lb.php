@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Pro Säit:',
 	'label_parents' => 'Dëst Dokument ass verlinkt mat',
 	'label_refdoc_joindre' => 'Dokument Nummer',
-	'lien_tout_enlever' => 'Alles ewech huelen',
+	'lien_tout_enlever' => 'Alles ewech huelen', # MODIF
 	'logo' => 'Logo',
 
 	// M

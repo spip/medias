@@ -128,7 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_fichier' => 'Restr',
 	'label_fichier_vignette' => 'Skeudennig',
 	'label_refdoc_joindre' => 'Teul niverenn',
-	'lien_tout_enlever' => 'Lemel an holl',
+	'lien_tout_enlever' => 'Lemel an holl', # MODIF
 	'logo' => 'Logo',
 
 	// M

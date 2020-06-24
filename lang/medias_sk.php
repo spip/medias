@@ -147,7 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_refdoc_joindre' => 'Dokument číslo',
 	'lien_tout_desordonner' => 'Obnoviť poradie',
 	'lien_tout_desordonner_verif' => 'Poradie určené pre tento zoznam dokumentov sa zmení. Určite to chcete urobiť?',
-	'lien_tout_enlever' => 'Odstrániť všetko',
+	'lien_tout_enlever' => 'Odstrániť všetko', # MODIF
 	'logo' => 'Logo',
 
 	// M

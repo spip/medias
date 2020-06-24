@@ -145,7 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_parents' => 'Документ використовується в:',
 	'label_refdoc_joindre' => 'Номер документа',
 	'lien_tout_desordonner_verif' => 'Порядок, встановлений для цього списку документів, буде скинуто. Ви впевнені?',
-	'lien_tout_enlever' => 'Видалити усе',
+	'lien_tout_enlever' => 'Видалити усе', # MODIF
 	'logo' => 'Лого',
 
 	// M

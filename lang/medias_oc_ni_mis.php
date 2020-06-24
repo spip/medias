@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Paginà per :',
 	'label_parents' => 'Aqueu doucumen es estacat da',
 	'label_refdoc_joindre' => 'Doucumen numerò',
-	'lien_tout_enlever' => 'Levà tout',
+	'lien_tout_enlever' => 'Levà tout', # MODIF
 	'logo' => 'Logou',
 
 	// M
