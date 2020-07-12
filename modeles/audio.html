@@ -11,7 +11,7 @@
   <div class="audio-wrapper"[ style='width:(#GET{largeur})px;max-width:100%;']>
   	<audio class="mejs mejs-#ID_DOCUMENT [ mejs-(#ENV{skin})]"
   	       data-id="[(#VAL{mejs-#ID_DOCUMENT}|concat{#ENV{skin}}|md5)]"
-  	       src="#FICHIER"
+  	       src="#URL_DOCUMENT"
   	       type="#MIME_TYPE"
   	       preload="none"
   	       data-mejsoptions='{"alwaysShowControls": true[,"loop":(#ENV{loop}|?{true,false})],"audioWidth":"100%"[,"audioHeight":"(#ENV{hauteur})"][,"startVolume":"(#ENV{volume})"][,"duration":(#GET{duree})]}'

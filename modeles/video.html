@@ -21,7 +21,7 @@
 				preload="none"[
 				autoplay="autoplay"(#ENV{autoplay}|oui)]
 			>
-			<source type="[(#EXTENSION|in_array{#LISTE{mp4,webm,ogv}}|?{[(#MIME_TYPE|replace{application/,video/})],#MIME_TYPE})]" src="#FICHIER" />
+			<source type="[(#EXTENSION|in_array{#LISTE{mp4,webm,ogv}}|?{[(#MIME_TYPE|replace{application/,video/})],#MIME_TYPE})]" src="#URL_DOCUMENT" />
 			[(#REM)
 
 				Flash fallback for non-HTML5 browsers without JavaScript
