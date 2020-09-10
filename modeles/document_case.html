@@ -14,7 +14,7 @@
 			[(#CHEMIN_IMAGE{#MODE|=={image}|?{image-24.png,doc-24.png}}|balise_img{'',cadre-icone})]
 		</h3>
 		<div class="infos">
-			[(#EXTENSION|match{gif|png|jpg}|oui) #SET{id,#ID_VIGNETTE|?{#ID_VIGNETTE,#ID_DOCUMENT}}
+			[(#EXTENSION|match{gif|png|jpg|svg}|oui) #SET{id,#ID_VIGNETTE|?{#ID_VIGNETTE,#ID_DOCUMENT}}
 			<div class="tourner">
 				[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-gauche-12.png}|balise_img{<:medias:image_tourner_gauche:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',-90'},#SELF},ajax})]
 				[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-droite-12.png}|balise_img{<:medias:image_tourner_droite:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',90'},#SELF},ajax})]

@@ -83,7 +83,12 @@ function action_tourner_post($id_document, $angle) {
 		include_spip('inc/filtres');
 		include_spip('public/parametrer'); // charger les fichiers fonctions #bugfix spip 2.1.0
 		$res = filtrer('image_rotation', $src, $var_rot);
-		$res = filtrer('image_format', $res, $row['extension']);
+		$src = extraire_attribut($res, 'src');
+		$src = supprimer_timestamp($src);
+		$src = explode('.', $src);
+		if (end($src) !== $row['extension']) {
+			$res = filtrer('image_format', $res, $row['extension']);
+		}
 
 		list($hauteur, $largeur) = taille_image($res);
 		$res = extraire_attribut($res, 'src');

@@ -61,7 +61,7 @@ function formulaires_editer_document_charger_dist(
 	);
 	$valeurs['type_document'] = $row['type_document'];
 	$valeurs['_inclus'] = $row['inclus'];
-	if (in_array($valeurs['extension'], array('jpg', 'gif', 'png'))) {
+	if (in_array($valeurs['extension'], array('jpg', 'gif', 'png', 'svg'))) {
 		$valeurs['apercu'] = get_spip_doc($valeurs['fichier']);
 	}
 
