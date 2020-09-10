@@ -26,6 +26,7 @@
 
 .formulaire_editer_document .editer_apercu .tourner {display:block;float:#GET{right};}
 .formulaire_editer_document .editer_apercu .tourner input.image {padding:5px;border:1px solid #eee;}
+.formulaire_editer_document .editer_apercu .tourner button.image {padding:5px;border:1px solid #eee;background: none;}
 
 .formulaire_joindre_document {margin-top: 0}
 .formulaire_joindre_document .sourceup {}
@@ -47,9 +48,9 @@
 .formulaire_joindre_document .editer_fichier input.file {display:block;}
 .formulaire_joindre_document .editer_refdoc_joindre input.text {width:50%;}
 
-.onglets_simple .medias .image a,.onglets_simple .medias .image strong {padding-left:27px;background: url(#CHEMIN_IMAGE{media-image-16.png}) no-repeat 5px center;}
-.onglets_simple .medias .audio a,.onglets_simple .medias .audio strong {padding-left:27px;background: url(#CHEMIN_IMAGE{media-audio-16.png}) no-repeat 5px center;}
-.onglets_simple .medias .video a,.onglets_simple .medias .video strong {padding-left:27px;background: url(#CHEMIN_IMAGE{media-video-16.png}) no-repeat 5px center;}
+.onglets_simple .medias .image a,.onglets_simple .medias .image strong {padding-left:27px;background: url(#CHEMIN_IMAGE{media-image-16.png}) no-repeat 5px center;background-size:16px;}
+.onglets_simple .medias .audio a,.onglets_simple .medias .audio strong {padding-left:27px;background: url(#CHEMIN_IMAGE{media-audio-16.png}) no-repeat 5px center;background-size:16px;}
+.onglets_simple .medias .video a,.onglets_simple .medias .video strong {padding-left:27px;background: url(#CHEMIN_IMAGE{media-video-16.png}) no-repeat 5px center;background-size:16px;}
 
 .onglets_simple.second ul.distant li.first,.onglets_simple.second ul.brises li.first,.onglets_simple.second ul.sanstitre li.first {margin-#GET{left}:30px;}
 
@@ -85,9 +86,9 @@ a.bouton_fermer {display:block;text-align:#GET{right};}
 
 .galerie table .supprimer {display:block;font-size:0.8em;margin-top:1em;}
 
-.galerie.media-image h2 { background: url(#CHEMIN_IMAGE{media-image-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;}
-.galerie.media-audio h2 { background: url(#CHEMIN_IMAGE{media-audio-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;}
-.galerie.media-video h2 { background: url(#CHEMIN_IMAGE{media-video-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;}
+.galerie.media-image h2 { background: url(#CHEMIN_IMAGE{media-image-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;background-size:32px;}
+.galerie.media-audio h2 { background: url(#CHEMIN_IMAGE{media-audio-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;background-size:32px;}
+.galerie.media-video h2 { background: url(#CHEMIN_IMAGE{media-video-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;background-size:32px;}
 
 .galerie table td.exif { background-repeat: no-repeat; background-position: top right; }
 
@@ -224,12 +225,15 @@ h3 .affichages {
 }
 .affichages .icone.grand {
 	background-image: url([(#CHEMIN_IMAGE{documents-liste-16.png})]);
+	background-size:16px;
 }
 .affichages .icone.liste {
 	background-image: url([(#CHEMIN_IMAGE{documents-liste-courte-16.png})]);
+	background-size:16px;
 }
 .affichages .icone.cases {
 	background-image: url([(#CHEMIN_IMAGE{documents-cases-16.png})]);
+	background-size:16px;
 }
 .affichages .icone.on {
 	background-color:rgba(255, 255, 255, 0.9);
