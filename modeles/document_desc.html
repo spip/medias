@@ -33,9 +33,9 @@ Distribue sous licence GPL
 					][(#MEDIA|in_array{#LISTE{audio,video}}|et{#DUREE|intval}|oui)
 					 - [(#DUREE|duree_en_secondes)]
 					]
-					<a class="lien_details"
+					<a class="lien_details bouton link"
 						onClick="$(this).parent().next('.detaillees').toggle(); return true;"
-						title="<:medias:details_document_afficher_masquer|attribut_html:>"><:medias:details_document:></a>
+						title="<:medias:details_document_afficher_masquer|attribut_html:>"><span class="icone-image">+</span> <:medias:details_document:></a>
 				</div>
 				<div class="detaillees">
 					[(#SET{data,[(#VAL{
@@ -90,7 +90,7 @@ Distribue sous licence GPL
 				[(#AUTORISER{modifier,document,#ID_DOCUMENT}|oui)
 					<div class="deplacer-modifier">
 						<span class="deplacer-document" data-rang="#RANG_LIEN"><img src='#CHEMIN_IMAGE{deplacer-16.png}' width='16' height='16' alt='<:medias:ordonner_ce_document|attribut_html:>' title='<:medias:ordonner_ce_document|attribut_html:>' /></span>
-						<a href="#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}" target="_blank" class="editbox" tabindex="0" role="button"><:medias:bouton_modifier_document:></a>
+						<a href="#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}" target="_blank" class="editbox bouton link" tabindex="0" role="button"><:medias:bouton_modifier_document:></a>
 					</div>
 				]
 				[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,document_desc,objet,#OBJET,id_objet,#ID_OBJET},data,''}})]
