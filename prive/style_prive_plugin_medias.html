@@ -24,9 +24,9 @@
 
 .formulaire_editer_document .taille_modifiee {display:block;color: red;}
 
-.formulaire_editer_document .editer_apercu .tourner {display:block;float:#GET{right};}
-.formulaire_editer_document .editer_apercu .tourner input.image {padding:5px;border:1px solid #eee;}
-.formulaire_editer_document .editer_apercu .tourner button.image {padding:5px;border:1px solid #eee;background: none;}
+.formulaire_editer_document .editer_apercu .tourner {float:#GET{right};}
+.formulaire_editer_document .editer_apercu .tourner input.image {}
+.formulaire_editer_document .editer_apercu .tourner button.image {}
 
 .box_mediabox .formulaire_editer_document .invisible-first-save-button {#GET{right}:0.5em !important;#GET{left}:auto !important;top:-3em !important;}
 .box_mediabox .formulaire_editer_document .boutons {position: sticky;bottom: -1rem;z-index: 100;}
@@ -136,9 +136,9 @@ p.actions {clear:both;}
 	display: inline-flex;
 	margin: 0;
 }
-.lte7 #documents_joints .item div.mode button,.lte7 #documents_joints .item .actions button {font-size: 11px;}
-#documents_joints .item .tourner {display:block;float:#GET{right};}
-#documents_joints .item .tourner button {padding:1px;border:1px solid #eee;display:block;}
+#documents_joints .item .tourner {
+	float: #GET{right};
+}
 #documents_joints .item .tourner button img {margin:0px;}
 
 #documents_joints .item .actions > *,
@@ -180,7 +180,7 @@ p.actions {clear:both;}
 .portfolios .item .titrem .fichier {font-weight:normal;font-size:0.9em; font-style:italic; display:block; }
 .portfolios .item .titrem .titre {display:block;}
 .portfolios .item .descriptif { color:#444; margin-bottom:.6925em; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; }
-.portfolios .item .infos { margin-top: auto; }
+.portfolios .item .infos { }
 .portfolios .item .infos .permanentes {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -206,7 +206,13 @@ p.actions {clear:both;}
 .portfolios .item table.compact tr:nth-child(2n) th { background:none; }
 .portfolios .item .infos .credits .vide {  font-style:italic; opacity:.5; }
 .portfolios .item div.mode {display:inline-block; clear:#GET{right};}
-.portfolios .item .actions { clear:both; overflow:visible; margin-top:.6925em; padding-#GET{right}: .6925em; margin-bottom:-3px; }
+.portfolios .item .actions {
+	clear:both;
+	overflow:visible;
+	margin-top: auto;
+	padding-top: 0.6925em;
+	margin-bottom: -3px;
+}
 .portfolios .item div.mode,
 .portfolios .item .actions,
 .portfolios .item div.mode button,
@@ -235,7 +241,7 @@ p.actions {clear:both;}
 .portfolios .item .titre > .sanstitre,
 .portfolios .item .titre > .sanstitre + .fichier {opacity:0.4;}
 
-.portfolios .actions-liste { clear:both; margin-top:.6925em; display:block; }
+.portfolios .actions-liste { clear:both; margin-top:.6925em; }
 .portfolios .actions-liste > * {display:inline; }
 .portfolios .tout_dissocier span {display:block; text-align:#GET{right};}
 

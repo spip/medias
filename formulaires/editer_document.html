@@ -27,10 +27,10 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				]
 				(#ENV{fichier})
-				<p class='actions'>
-				[(#ENV{distant}|=={oui}|et{#TAILLE|<{#CONST{_COPIE_LOCALE_MAX_SIZE}}}|oui)<input type='submit' class='btn submit' name='copier_local' value='<:medias:bouton_copier_local|attribut_html:>' />]
+				<p class='actions right'>
+				[(#ENV{distant}|=={oui}|et{#TAILLE|<{#CONST{_COPIE_LOCALE_MAX_SIZE}}}|oui)<input type='submit' class='btn submit mini' name='copier_local' value='<:medias:bouton_copier_local|attribut_html:>' />]
 				[(#PIPELINE{editer_document_actions,#ARRAY{args,#ARRAY{id_document,#ENV{id_document,nouveau}},data,''}})]
-				&#91;<a href='#' onclick='jQuery("#changer_fichier_document").toggle("fast");return false;'><:bouton_changer:></a>&#93;
+				<a class="bouton mini" href='#' onclick='jQuery("#changer_fichier_document").toggle("fast");return false;'><:bouton_changer:></a>
 				</p>
 				#SET{upload,#INCLURE{fond=formulaires/inc-upload_document, env, joindre_upload=oui, multi=non}}
 				<div id='changer_fichier_document' class="[(#GET{upload}|match{erreur}|non)none-js]">
@@ -40,10 +40,10 @@
 			<div class="editer editer_apercu">
 				<label><:medias:label_apercu:></label>
 				[(#ENV{apercu}|oui)
-				<div class="tourner">
-					<button class="image" type="submit" name="tournerL90" value="x">[(#CHEMIN_IMAGE{tourner-gauche-12.png}|balise_img{'',<:medias:image_tourner_gauche:>})]</button>
-					<button class="image" type="submit" name="tournerR90" value="x">[(#CHEMIN_IMAGE{tourner-droite-12.png}|balise_img{'',<:medias:image_tourner_droite:>})]</button>
-					<button class="image" type="submit" name="tourner180" value="x">[(#CHEMIN_IMAGE{tourner-180-12.png}|balise_img{'',<:medias:image_tourner_180:>})]</button>
+				<div class="tourner groupe-boutons">
+					<button class="bouton image" type="submit" name="tournerL90" value="x">[(#CHEMIN_IMAGE{tourner-gauche-12.png}|balise_img{'',<:medias:image_tourner_gauche:>})]</button>
+					<button class="bouton image" type="submit" name="tournerR90" value="x">[(#CHEMIN_IMAGE{tourner-droite-12.png}|balise_img{'',<:medias:image_tourner_droite:>})]</button>
+					<button class="bouton image" type="submit" name="tourner180" value="x">[(#CHEMIN_IMAGE{tourner-180-12.png}|balise_img{'',<:medias:image_tourner_180:>})]</button>
 				</div>
 				[<a href='#ENV{apercu}'>(#ENV{apercu}|image_reduire{320,200})</a>]
 				]

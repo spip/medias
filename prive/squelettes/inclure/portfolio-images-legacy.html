@@ -10,7 +10,7 @@
 </div>
 [<p class="pagination">(#PAGINATION{prive})</p>]
 [(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET})
-	<div class="actions-liste">
+	<div class="actions-liste groupe-boutons">
 	[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/image,#SELF|ancre_url{illustrations}},'ajax noscroll tout_dissocier',<:medias:lien_tout_enlever_verif:>})]
 	[(#BOUTON_ACTION{<:medias:lien_tout_desordonner:>,#URL_ACTION_AUTEUR{desordonner_liens_documents,#ID_OBJET-#OBJET-I/image,#SELF|ancre_url{illustrations}},'ajax tout_desordonner',<:medias:lien_tout_desordonner_verif:>})]
 	</div>
@@ -31,7 +31,7 @@
 </div>
 [<p class="pagination">(#PAGINATION{prive})</p>]
 [(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET})
-	<div class="actions-liste">
+	<div class="actions-liste groupe-boutons">
 		[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/document,#SELF|ancre_url{portfolio}},'ajax noscroll tout_dissocier',<:medias:lien_tout_enlever_verif:>})]
 		[(#BOUTON_ACTION{<:medias:lien_tout_desordonner:>,#URL_ACTION_AUTEUR{desordonner_liens_documents,#ID_OBJET-#OBJET-I/document,#SELF|ancre_url{illustrations}},'ajax tout_desordonner',<:medias:lien_tout_desordonner_verif:>})]
 	</div>
