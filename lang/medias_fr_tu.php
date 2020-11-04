@@ -149,7 +149,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_refdoc_joindre' => 'Document numéro',
 	'lien_tout_desordonner' => 'Réinitialiser l’ordre',
 	'lien_tout_desordonner_verif' => 'L’ordre définit pour cette liste de documents sera réinitialisé. Es-tu sûr ?',
-	'lien_tout_enlever' => 'Tout enlever', # MODIF
+	'lien_tout_enlever' => 'Tout détacher',
+	'lien_tout_enlever_verif' => 'Veux-tu détacher tous les documents ?',
 	'logo' => 'Logo',
 
 	// M
