@@ -21,6 +21,7 @@ $tables_images = array(
 	'jpg' => 'JPEG',
 	'png' => 'PNG',
 	'gif' => 'GIF',
+	'webp' => 'WEBP',
 
 	// Autres images (peuvent utiliser le tag <img>)
 	'bmp' => 'BMP',
@@ -216,6 +217,7 @@ $tables_mime = array(
 	'jpg' => 'image/jpeg',
 	'png' => 'image/png',
 	'gif' => 'image/gif',
+	'webp' => 'image/webp',
 
 	// Autres images (peuvent utiliser le tag <img>)
 	'bmp' => 'image/x-ms-bmp', // pas enregistre par IANA, variante: image/bmp
