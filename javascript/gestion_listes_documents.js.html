@@ -15,7 +15,7 @@
 
 /* Choix du mode affichage des documents (grand, en case, en liste courte) */
 function choix_affichages_documents() {
-	$('.portfolios h3:not(:has(.affichages))').each(function () {
+	$('.portfolios__titre:not(:has(.affichages))').each(function () {
 		var titre = $(this);
 		var liste = titre.next('.liste_items.documents');
 		var identifiant = liste.data('cookie-affichage');
