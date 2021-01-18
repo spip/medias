@@ -11,7 +11,7 @@
 <div id="portfolios#ENV{id_unique}" class="portfolios">
 [(#REM) D'abord les images illustration]
 <B_illustrations>
-<h3><span class="image_loading"></span><:medias:info_illustrations:></h3>
+<h3 class="portfolios__titre"><span class="image_loading"></span><:medias:info_illustrations:></h3>
 <div class="liste_items documents ordonner_rang_lien" id="illustrations#ENV{id_unique}"  data-cookie-affichage="illustrations" data-lien="[(#OBJET|concat{'/',#ID_OBJET}|attribut_html)]">
 [<p class="pagination">(#PAGINATION{prive})</p>]
 <div class="sortable">
