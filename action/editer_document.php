@@ -232,30 +232,66 @@ function document_instituer($id_document, $champs = array()) {
 			return false;
 		}
 	}
-	if ($statut !== $statut_ancien
-		or $date_publication != $date_publication_ancienne
-	) {
-		sql_updateq(
-			'spip_documents',
-			array('statut' => $statut, 'date_publication' => $date_publication),
-			'id_document=' . intval($id_document)
+
+	$champs = array();
+	if ($statut !== $statut_ancien) {
+		$champs['statut'] = $statut;
+	}
+	if ($date_publication != $date_publication_ancienne) {
+		$champs['date_publication'] = $date_publication;
+	}
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_documents',
+				'id_objet' => $id_document,
+				'action' => 'instituer',
+				'statut_ancien' => $statut_ancien,
+				'date_ancienne' => $date_publication_ancienne,
+			),
+			'data' => $champs
+		)
+	);
+
+	if (!count($champs)) {
+		return false;
+	}
+
+	sql_updateq('spip_documents', $champs, 'id_document=' . intval($id_document));
+	if ($statut !== $statut_ancien) {
+		$publier_rubriques = sql_allfetsel(
+			'id_objet',
+			'spip_documents_liens',
+			"objet='rubrique' AND id_document=" . intval($id_document)
 		);
-		if ($statut !== $statut_ancien) {
-			$publier_rubriques = sql_allfetsel(
-				'id_objet',
-				'spip_documents_liens',
-				"objet='rubrique' AND id_document=" . intval($id_document)
-			);
-			if (count($publier_rubriques)) {
-				include_spip('inc/rubriques');
-				foreach ($publier_rubriques as $r) {
-					calculer_rubriques_if($r['id_objet'], array('statut' => $statut), $statut_ancien, false);
-				}
+		if (count($publier_rubriques)) {
+			include_spip('inc/rubriques');
+			foreach ($publier_rubriques as $r) {
+				calculer_rubriques_if($r['id_objet'], array('statut' => $statut), $statut_ancien, false);
 			}
 		}
-		return true;
 	}
-	return false;
+
+	// Invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='document/$id_document'");
+
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_documents',
+				'id_objet' => $id_document,
+				'action' => 'instituer',
+				'statut_ancien' => $statut_ancien,
+				'date_ancienne' => $date_publication_ancienne,
+			),
+			'data' => $champs
+		)
+	);
+
+	return true;
 }
 
 
