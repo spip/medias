@@ -38,6 +38,10 @@ function formulaires_illustrer_document_charger_dist($id_document) {
 	}
 	$valeurs['_pipeline'] = array('editer_contenu_objet', array('type' => 'illustrer_document', 'id' => $id_document));
 
+	if (intval($id_document) and !autoriser('modifier', 'document', intval($id_document))) {
+		$valeurs['editable'] = '';
+	}
+
 	return $valeurs;
 }
 
