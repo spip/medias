@@ -31,6 +31,12 @@ function formulaires_editer_document_charger_dist(
 	$valeurs = formulaires_editer_objet_charger('document', $id_document, $id_parent, $lier_trad, $retour, $config_fonc,
 		$row, $hidden);
 
+	if (test_formulaire_inclus_par_modele()) {
+		if (intval($id_document) and !autoriser('modifier', 'document', intval($id_document))) {
+			$valeurs['editable'] = '';
+		}
+	}
+
 	// relier les parents
 	$valeurs['parents'] = array();
 	$valeurs['_hidden'] = "";
