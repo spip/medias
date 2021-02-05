@@ -216,10 +216,14 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		}
 		$champs['mode'] = $mode;
 
-		if (($test = verifier_taille_document_acceptable($champs)) !== true) {
-			spip_unlink($champs['fichier']);
+		// ne pas tester les tailles max de logos et documents définies dans les defines _MAX_SIZE, _MAX_WIDTH & _MAX_HEIGHT
+		// lors de la migration des logos en base cf logo_migrer_en_base()
+		if (!isset($GLOBALS['logo_migrer_en_base'])) {
+			if (($test = verifier_taille_document_acceptable($champs)) !== true) {
+				spip_unlink($champs['fichier']);
 
-			return $test; // erreur sur les dimensions du fichier
+				return $test; // erreur sur les dimensions du fichier
+			}
 		}
 
 		unset($champs['type_image']);
