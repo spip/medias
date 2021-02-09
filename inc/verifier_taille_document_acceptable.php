@@ -50,20 +50,23 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 			return $res;
 		}
 
-		if (defined('_IMG_MAX_SIZE') and _IMG_MAX_SIZE > 0 and $infos['taille'] > _IMG_MAX_SIZE * 1024) {
-			return _T(
-				'medias:info_image_max_poids',
-				array(
-					'maxi' => taille_en_octets(_IMG_MAX_SIZE * 1024),
-					'actuel' => taille_en_octets($infos['taille'])
-				)
-			);
+		$max_size = (defined('_IMG_MAX_SIZE') and _IMG_MAX_SIZE) ? _IMG_MAX_SIZE : null;
+		$res = verifier_poids_image($infos, $max_size);
+		if ($res !== true) {
+			return $res;
 		}
 	}
 
 	return true;
 }
 
+/**
+ * Verifier largeur maxi et hauteur maxi d'une image
+ * @param array $infos
+ * @param null|int $max_width
+ * @param null|int $max_height
+ * @return bool|string
+ */
 function verifier_largeur_hauteur_image($infos, $max_width = null, $max_height = null) {
 
 	if (($max_width and $infos['largeur'] > $max_width)
@@ -111,6 +114,26 @@ function verifier_largeur_hauteur_image($infos, $max_width = null, $max_height =
 				)
 			);
 		}
+	}
+
+	return true;
+}
+
+/**
+ * verifier le poids maxi d'une image
+ * @param array $infos
+ * @param null|int $max_size
+ * @return bool|string
+ */
+function verifier_poids_image($infos, $max_size = null) {
+	if ($max_size and $infos['taille'] > $max_size * 1024) {
+		return _T(
+			'medias:info_image_max_poids',
+			array(
+				'maxi' => taille_en_octets($max_size * 1024),
+				'actuel' => taille_en_octets($infos['taille'])
+			)
+		);
 	}
 
 	return true;
