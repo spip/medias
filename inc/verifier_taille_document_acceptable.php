@@ -42,15 +42,27 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 		}
 	} // si c'est une image
 	else {
-		$max_width = (defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH) ? _IMG_MAX_WIDTH : null;
-		$max_height = (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT) ? _IMG_MAX_HEIGHT : null;
+		if ($is_logo) {
+			$max_width = (defined('_LOGO_MAX_WIDTH') and _LOGO_MAX_WIDTH) ? _LOGO_MAX_WIDTH : null;
+			$max_height = (defined('_LOGO_MAX_HEIGHT') and _LOGO_MAX_HEIGHT) ? _LOGO_MAX_HEIGHT : null;
+		}
+		else {
+			$max_width = (defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH) ? _IMG_MAX_WIDTH : null;
+			$max_height = (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT) ? _IMG_MAX_HEIGHT : null;
+		}
 
 		$res = verifier_largeur_hauteur_image($infos, $max_width, $max_height);
 		if ($res !== true) {
 			return $res;
 		}
 
-		$max_size = (defined('_IMG_MAX_SIZE') and _IMG_MAX_SIZE) ? _IMG_MAX_SIZE : null;
+		if ($is_logo){
+			$max_size = (defined('_IMG_MAX_SIZE') and _IMG_MAX_SIZE) ? _IMG_MAX_SIZE : null;
+		}
+		else {
+			$max_size = (defined('_LOGO_MAX_SIZE') and _LOGO_MAX_SIZE) ? _LOGO_MAX_SIZE : null;
+		}
+
 		$res = verifier_poids_image($infos, $max_size);
 		if ($res !== true) {
 			return $res;
