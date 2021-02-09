@@ -41,13 +41,17 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 		if ($is_logo) {
 			$max_width = (defined('_LOGO_MAX_WIDTH') and _LOGO_MAX_WIDTH) ? _LOGO_MAX_WIDTH : null;
 			$max_height = (defined('_LOGO_MAX_HEIGHT') and _LOGO_MAX_HEIGHT) ? _LOGO_MAX_HEIGHT : null;
+			$min_width = (defined('_LOGO_MIN_WIDTH') and _LOGO_MIN_WIDTH) ? _LOGO_MIN_WIDTH : null;
+			$min_height = (defined('_LOGO_MIN_HEIGHT') and _LOGO_MIN_HEIGHT) ? _LOGO_MIN_HEIGHT : null;
 		}
 		else {
 			$max_width = (defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH) ? _IMG_MAX_WIDTH : null;
 			$max_height = (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT) ? _IMG_MAX_HEIGHT : null;
+			$min_width = (defined('_IMG_MIN_WIDTH') and _IMG_MIN_WIDTH) ? _IMG_MIN_WIDTH : null;
+			$min_height = (defined('_IMG_MIN_HEIGHT') and _IMG_MIN_HEIGHT) ? _IMG_MIN_HEIGHT : null;
 		}
 
-		$res = medias_verifier_largeur_hauteur_image($infos, $max_width, $max_height);
+		$res = medias_verifier_largeur_hauteur_image($infos, $max_width, $max_height, $min_width, $min_height);
 		if ($res !== true) {
 			return $res;
 		}
@@ -70,12 +74,15 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 
 /**
  * Verifier largeur maxi et hauteur maxi d'une image
+ * + largeur mini et hauteur mini
  * @param array $infos
  * @param null|int $max_width
  * @param null|int $max_height
+ * @param null|int $min_width
+ * @param null|int $min_height
  * @return bool|string
  */
-function medias_verifier_largeur_hauteur_image($infos, $max_width = null, $max_height = null) {
+function medias_verifier_largeur_hauteur_image($infos, $max_width = null, $max_height = null, $min_width = null, $min_height = null) {
 
 	if (($max_width and $infos['largeur'] > $max_width)
 		or ($max_height and $infos['hauteur'] > $max_height)
@@ -123,6 +130,33 @@ function medias_verifier_largeur_hauteur_image($infos, $max_width = null, $max_h
 			);
 		}
 	}
+
+	if (($min_width and $infos['largeur'] < $min_width)
+		or ($min_height and $infos['hauteur'] < $min_height)
+	) {
+		return _T(
+			'medias:info_image_min_taille',
+			array(
+				'maxi' =>
+					_T(
+						'info_largeur_vignette',
+						array(
+							'largeur_vignette' => $min_width,
+							'hauteur_vignette' => $min_height
+						)
+					),
+				'actuel' =>
+					_T(
+						'info_largeur_vignette',
+						array(
+							'largeur_vignette' => $infos['largeur'],
+							'hauteur_vignette' => $infos['hauteur']
+						)
+					)
+			)
+		);
+	}
+
 
 	return true;
 }
