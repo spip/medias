@@ -42,54 +42,12 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 		}
 	} // si c'est une image
 	else {
-		if ((defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH and $infos['largeur'] > _IMG_MAX_WIDTH)
-			or (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT and $infos['hauteur'] > _IMG_MAX_HEIGHT)
-		) {
-			$max_width = (defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH) ? _IMG_MAX_WIDTH : '*';
-			$max_height = (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT) ? _IMG_MAX_HEIGHT : '*';
+		$max_width = (defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH) ? _IMG_MAX_WIDTH : null;
+		$max_height = (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT) ? _IMG_MAX_HEIGHT : null;
 
-			// pas la peine d'embeter le redacteur avec ca si on a active le calcul des miniatures
-			// on met directement a la taille maxi a la volee
-			if (isset($GLOBALS['meta']['creer_preview']) and $GLOBALS['meta']['creer_preview'] == 'oui') {
-				include_spip('inc/filtres');
-				$img = filtrer('image_reduire', $infos['fichier'], $max_width, $max_height);
-				$img = extraire_attribut($img, 'src');
-				$img = supprimer_timestamp($img);
-				if (@file_exists($img) and $img !== $infos['fichier']) {
-					spip_unlink($infos['fichier']);
-					@rename($img, $infos['fichier']);
-					list($h, $w) = taille_image($infos['fichier'], true);
-					$infos['largeur'] = $w;
-					$infos['hauteur'] = $h;
-					$infos['taille'] = @filesize($infos['fichier']);
-				}
-			}
-
-			if ((defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH and $infos['largeur'] > _IMG_MAX_WIDTH)
-				or (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT and $infos['hauteur'] > _IMG_MAX_HEIGHT)
-			) {
-				return _T(
-					'medias:info_image_max_taille',
-					array(
-						'maxi' =>
-							_T(
-								'info_largeur_vignette',
-								array(
-									'largeur_vignette' => $max_width,
-									'hauteur_vignette' => $max_height
-								)
-							),
-						'actuel' =>
-							_T(
-								'info_largeur_vignette',
-								array(
-									'largeur_vignette' => $infos['largeur'],
-									'hauteur_vignette' => $infos['hauteur']
-								)
-							)
-					)
-				);
-			}
+		$res = verifier_largeur_hauteur_image($infos, $max_width, $max_height);
+		if ($res !== true) {
+			return $res;
 		}
 
 		if (defined('_IMG_MAX_SIZE') and _IMG_MAX_SIZE > 0 and $infos['taille'] > _IMG_MAX_SIZE * 1024) {
@@ -98,6 +56,58 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 				array(
 					'maxi' => taille_en_octets(_IMG_MAX_SIZE * 1024),
 					'actuel' => taille_en_octets($infos['taille'])
+				)
+			);
+		}
+	}
+
+	return true;
+}
+
+function verifier_largeur_hauteur_image($infos, $max_width = null, $max_height = null) {
+
+	if (($max_width and $infos['largeur'] > $max_width)
+		or ($max_height and $infos['hauteur'] > $max_height)
+	) {
+		// pas la peine d'embeter le redacteur avec ca si on a active le calcul des miniatures
+		// on met directement a la taille maxi a la volee
+		if (isset($GLOBALS['meta']['creer_preview']) and $GLOBALS['meta']['creer_preview'] == 'oui') {
+			include_spip('inc/filtres');
+			$img = filtrer('image_reduire', $infos['fichier'], $max_width ? $max_width : '*', $max_height ? $max_height : '*');
+			$img = extraire_attribut($img, 'src');
+			$img = supprimer_timestamp($img);
+			if (@file_exists($img) and $img !== $infos['fichier']) {
+				spip_unlink($infos['fichier']);
+				@rename($img, $infos['fichier']);
+				list($h, $w) = taille_image($infos['fichier'], true);
+				$infos['largeur'] = $w;
+				$infos['hauteur'] = $h;
+				$infos['taille'] = @filesize($infos['fichier']);
+			}
+		}
+
+		if (($max_width and $infos['largeur'] > $max_width)
+			or ($max_height and $infos['hauteur'] > $max_height)
+		) {
+			return _T(
+				'medias:info_image_max_taille',
+				array(
+					'maxi' =>
+						_T(
+							'info_largeur_vignette',
+							array(
+								'largeur_vignette' => $max_width,
+								'hauteur_vignette' => $max_height
+							)
+						),
+					'actuel' =>
+						_T(
+							'info_largeur_vignette',
+							array(
+								'largeur_vignette' => $infos['largeur'],
+								'hauteur_vignette' => $infos['hauteur']
+							)
+						)
 				)
 			);
 		}
