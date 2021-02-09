@@ -210,7 +210,7 @@ function medias_upgrade($nom_meta_base_version, $version_cible) {
 		// ajout de webp
 		array('creer_base_types_doc'),
 	);
-
+	
 
 	// upgrade des logos
 	$maj['1.6.0'] = [];
@@ -219,6 +219,11 @@ function medias_upgrade($nom_meta_base_version, $version_cible) {
 		$maj['1.6.0'][] = ['medias_upgrade_logo_objet', objet_type($table)];
 	};
 
+
+	$maj['1.7.0'] = array(
+		// ajout de alt
+		array('maj_tables', 'spip_documents'),
+	);
 
 	include_spip('base/upgrade');
 	include_spip('base/medias');

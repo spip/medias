@@ -138,6 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_document_objets' => 'Activer le téléversement pour les contenus :',
+	'label_alt' => 'Alternative textuelle (alt)',
 	'label_apercu' => 'Aperçu',
 	'label_caracteristiques' => 'Caractéristiques',
 	'label_credits' => 'Crédits',

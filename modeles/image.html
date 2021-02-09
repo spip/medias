@@ -8,7 +8,7 @@
 [(#SET{image,[(#ENV{largeur}|ou{#ENV{hauteur}}|?{
 		[(#FICHIER|image_reduire{#ENV{largeur,10000},#ENV{hauteur,10000}})],
 		[<img src='(#URL_DOCUMENT)'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"]/>]})]})]
-[(#TITRE|oui)#SET{image,#GET{image}|inserer_attribut{alt,#TITRE}|inserer_attribut{title,#TITRE}}]
+[(#SET{image,#GET{image}|inserer_attribut{alt,#ENV{alt, #ALT}|sinon{#ENV{titre, #TITRE}}|sinon{''}}})]
 #SET{largeur,#GET{image}|largeur}
 <figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_image[ spip_documents_(#ENV{align}|sinon{center})][ (#ENV{class})] spip_lien_ok' [ style='width:(#GET{largeur})px;']>
 [<a href="(#ENV{lien})"[ class="(#ENV{lien_class}|concat{#GET{autolien}|?{' mediabox'}})"]>]

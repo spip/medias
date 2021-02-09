@@ -87,6 +87,13 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits})</span>
 				]<input type='text' class='text' name='credits' id='credits' value="#ENV**{credits,''}" />
 			</div>
+			[(#MEDIA|=={image}|oui)
+				<div class="editer editer_alt[ (#ENV**{erreurs}|table_valeur{alt}|oui)erreur]">
+					<label for="alt"><:medias:label_alt:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{alt})</span>
+					]<input type='text' class='text' name='alt' id='alt' value="#ENV**{alt,''}" />
+				</div>
+			]
 			[(#ENV{_editer_dimension})
 			<div class="editer editer_dimensions[ (#ENV**{erreurs}|table_valeur{dimensions}|oui)erreur]">
 				<label><:medias:entree_dimensions:></label>[
