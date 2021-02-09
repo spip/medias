@@ -31,14 +31,10 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 
 	// si ce n'est pas une image
 	if (!$infos['type_image']) {
-		if (defined('_DOC_MAX_SIZE') and _DOC_MAX_SIZE > 0 and $infos['taille'] > _DOC_MAX_SIZE * 1024) {
-			return _T(
-				'medias:info_doc_max_poids',
-				array(
-					'maxi' => taille_en_octets(_DOC_MAX_SIZE * 1024),
-					'actuel' => taille_en_octets($infos['taille'])
-				)
-			);
+		$max_size = (defined('_DOC_MAX_SIZE') and _DOC_MAX_SIZE) ? _DOC_MAX_SIZE : null;
+		$res = verifier_poids_fichier($infos, $max_size, false);
+		if ($res !== true) {
+			return $res;
 		}
 	} // si c'est une image
 	else {
@@ -63,7 +59,7 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 			$max_size = (defined('_LOGO_MAX_SIZE') and _LOGO_MAX_SIZE) ? _LOGO_MAX_SIZE : null;
 		}
 
-		$res = verifier_poids_image($infos, $max_size);
+		$res = verifier_poids_fichier($infos, $max_size, true);
 		if ($res !== true) {
 			return $res;
 		}
@@ -137,10 +133,10 @@ function verifier_largeur_hauteur_image($infos, $max_width = null, $max_height =
  * @param null|int $max_size
  * @return bool|string
  */
-function verifier_poids_image($infos, $max_size = null) {
+function verifier_poids_fichier($infos, $max_size = null, $is_image = false) {
 	if ($max_size and $infos['taille'] > $max_size * 1024) {
 		return _T(
-			'medias:info_image_max_poids',
+			$is_image ? 'medias:info_image_max_poids' : 'medias:info_doc_max_poids',
 			array(
 				'maxi' => taille_en_octets($max_size * 1024),
 				'actuel' => taille_en_octets($infos['taille'])
