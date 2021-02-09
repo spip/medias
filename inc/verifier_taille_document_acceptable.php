@@ -32,7 +32,7 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 	// si ce n'est pas une image
 	if (!$infos['type_image']) {
 		$max_size = (defined('_DOC_MAX_SIZE') and _DOC_MAX_SIZE) ? _DOC_MAX_SIZE : null;
-		$res = verifier_poids_fichier($infos, $max_size, false);
+		$res = medias_verifier_poids_fichier($infos, $max_size, false);
 		if ($res !== true) {
 			return $res;
 		}
@@ -47,7 +47,7 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 			$max_height = (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT) ? _IMG_MAX_HEIGHT : null;
 		}
 
-		$res = verifier_largeur_hauteur_image($infos, $max_width, $max_height);
+		$res = medias_verifier_largeur_hauteur_image($infos, $max_width, $max_height);
 		if ($res !== true) {
 			return $res;
 		}
@@ -59,7 +59,7 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 			$max_size = (defined('_LOGO_MAX_SIZE') and _LOGO_MAX_SIZE) ? _LOGO_MAX_SIZE : null;
 		}
 
-		$res = verifier_poids_fichier($infos, $max_size, true);
+		$res = medias_verifier_poids_fichier($infos, $max_size, true);
 		if ($res !== true) {
 			return $res;
 		}
@@ -75,7 +75,7 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
  * @param null|int $max_height
  * @return bool|string
  */
-function verifier_largeur_hauteur_image($infos, $max_width = null, $max_height = null) {
+function medias_verifier_largeur_hauteur_image($infos, $max_width = null, $max_height = null) {
 
 	if (($max_width and $infos['largeur'] > $max_width)
 		or ($max_height and $infos['hauteur'] > $max_height)
@@ -133,7 +133,7 @@ function verifier_largeur_hauteur_image($infos, $max_width = null, $max_height =
  * @param null|int $max_size
  * @return bool|string
  */
-function verifier_poids_fichier($infos, $max_size = null, $is_image = false) {
+function medias_verifier_poids_fichier($infos, $max_size = null, $is_image = false) {
 	if ($max_size and $infos['taille'] > $max_size * 1024) {
 		return _T(
 			$is_image ? 'medias:info_image_max_poids' : 'medias:info_doc_max_poids',
