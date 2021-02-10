@@ -130,7 +130,11 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 			$infos = renseigner_taille_dimension_image($champs['fichier'], $champs['extension'], true);
 			// on ignore erreur eventuelle sur $infos car on est distant, ca ne marche pas forcement
 			if (is_array($infos)) {
-				$champs = array_merge($champs, $infos);
+				foreach ($infos as $k => $v) {
+					if (!empty($v) or empty($champs[$k])) {
+						$champs[$k] = $v;
+					}
+				}
 			}
 
 			unset($champs['type_image']);
