@@ -42,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Erlec’hiañ ar skeudenn-mañ',
 	'bouton_remplacer_image_document' => 'Erlec’hiañ gant ur skeudenn pe un teul',
 	'bouton_supprimer' => 'Dilemel',
-	'bouton_supprimer_tous_orphelins' => 'Dilemel an holl emzivadoù',
-	'bouton_supprimer_tous_orphelins_confirmation' => 'C’hoant hoc’h eus da zilemel @nb@ emzivadoù ?',
+	'bouton_supprimer_tous_orphelins' => 'Dilemel an holl emzivadoù', # MODIF
+	'bouton_supprimer_tous_orphelins_confirmation' => 'C’hoant hoc’h eus da zilemel @nb@ emzivadoù ?', # MODIF
 	'bouton_upload' => 'Pellgargañ',
 
 	// D

@@ -39,8 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Bild ersetzen',
 	'bouton_remplacer_image_document' => 'Duerch e Bild oder Dokument ersetzen',
 	'bouton_supprimer' => 'Läschen',
-	'bouton_supprimer_tous_orphelins' => 'All d’Weesekanner läschen',
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Sollen déi @nb@ Weesekanner wierklech geläscht ginn?',
+	'bouton_supprimer_tous_orphelins' => 'All d’Weesekanner läschen', # MODIF
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Sollen déi @nb@ Weesekanner wierklech geläscht ginn?', # MODIF
 	'bouton_upload' => 'Eroplueden',
 
 	// D

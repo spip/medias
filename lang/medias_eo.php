@@ -42,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Anstataŭigi tiun bildon',
 	'bouton_remplacer_image_document' => 'Anstataŭigi per bildo aŭ dokumento',
 	'bouton_supprimer' => 'Forigi',
-	'bouton_supprimer_tous_orphelins' => 'Forigi ĉiujn orfaĵojn',
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Ĉu vi certas, ke vi volas forigi @nb@ orfaĵojn ?',
+	'bouton_supprimer_tous_orphelins' => 'Forigi ĉiujn orfaĵojn', # MODIF
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Ĉu vi certas, ke vi volas forigi @nb@ orfaĵojn ?', # MODIF
 	'bouton_upload' => 'Alŝuti',
 
 	// D

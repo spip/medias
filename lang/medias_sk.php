@@ -42,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Nahradiť tento obrázok',
 	'bouton_remplacer_image_document' => 'Nahradiť obrázkom alebo dokumentom',
 	'bouton_supprimer' => 'Odstrániť',
-	'bouton_supprimer_tous_orphelins' => 'Odstrániť všetky nepoužívané',
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Určite chcete odstrániť @nb@ osamotených objektov?',
+	'bouton_supprimer_tous_orphelins' => 'Odstrániť všetky nepoužívané', # MODIF
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Určite chcete odstrániť @nb@ osamotených objektov?', # MODIF
 	'bouton_upload' => 'Nahrať',
 
 	// D

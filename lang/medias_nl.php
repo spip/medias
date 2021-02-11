@@ -42,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Deze afbeelding vervangen',
 	'bouton_remplacer_image_document' => 'Een afbeelding of een document vervangen',
 	'bouton_supprimer' => 'Verwijderen',
-	'bouton_supprimer_tous_orphelins' => 'Alle weesbestanden verwijderen',
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Weet je zeker dat je @nb@ weesbestanden wilt verwijderen?',
+	'bouton_supprimer_tous_orphelins' => 'Alle weesbestanden verwijderen', # MODIF
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Weet je zeker dat je @nb@ weesbestanden wilt verwijderen?', # MODIF
 	'bouton_upload' => 'Uploaden',
 
 	// D

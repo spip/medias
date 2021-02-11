@@ -42,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => '画像を置き換える',
 	'bouton_remplacer_image_document' => '画像またはドキュメントを置き換える',
 	'bouton_supprimer' => '取り除く',
-	'bouton_supprimer_tous_orphelins' => '引き離されたドキュメントを削除する',
-	'bouton_supprimer_tous_orphelins_confirmation' => '引き離されたドキュメントを@nb@つ削除してよろしいですか？',
+	'bouton_supprimer_tous_orphelins' => '引き離されたドキュメントを削除する', # MODIF
+	'bouton_supprimer_tous_orphelins_confirmation' => '引き離されたドキュメントを@nb@つ削除してよろしいですか？', # MODIF
 	'bouton_upload' => 'アップロードする',
 
 	// D

@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image_document' => 'Remplacer par une image ou un document',
 	'bouton_supprimer' => 'Supprimer',
 	'bouton_supprimer_tous_orphelins' => 'Supprimer tous les documents inutilisés',
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Êtes-vous sûr de vouloir supprimer @nb@ documents inutilisés ?',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Êtes-vous sûr de vouloir supprimer @nb@ documents inutilisés ?',
 	'bouton_upload' => 'Téléverser',
 
 	// D
