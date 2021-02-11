@@ -128,7 +128,7 @@ function ordonner_listes_documents() {
 
 					item.animateLoading();
 
-					$.ajax({
+					$.post({
 						url: action,
 						data: params,
 						dataType: 'json',
