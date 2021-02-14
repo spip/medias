@@ -5,7 +5,7 @@
 	url="https://trad.spip.net"
 	source="https://git.spip.net/spip/medias.git"
 	reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/medias?lang_cible=ar" total="173" traduits="171" relire="0" modifs="2" nouveaux="0" pourcent="98.84">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/medias?lang_cible=ar" total="173" traduits="173" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="ast" url="https://trad.spip.net/tradlang_module/medias?lang_cible=ast" total="173" traduits="31" relire="0" modifs="3" nouveaux="139" pourcent="17.92">
@@ -32,7 +32,7 @@
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="el" url="https://trad.spip.net/tradlang_module/medias?lang_cible=el" total="173" traduits="14" relire="0" modifs="3" nouveaux="156" pourcent="8.09" />
-	<langue code="en" url="https://trad.spip.net/tradlang_module/medias?lang_cible=en" total="173" traduits="171" relire="0" modifs="2" nouveaux="0" pourcent="98.84">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/medias?lang_cible=en" total="173" traduits="173" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />

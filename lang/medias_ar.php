@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'تبديل هذه الصورة',
 	'bouton_remplacer_image_document' => 'استبدال بصورة إو مستند',
 	'bouton_supprimer' => 'حذف',
-	'bouton_supprimer_tous_orphelins' => 'حذف كل المستندات غير المستخدمة', # MODIF
-	'bouton_supprimer_tous_orphelins_confirmation' => 'هل تريد فعلاً حذف @nb@ مستند غير مربوط؟', # MODIF
+	'bouton_supprimer_tous_orphelins' => 'حذف كل المستندات غير المستخدمة',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'هل تريد فعلاً حذف @nb@ مستند غير مستخدم؟',
 	'bouton_upload' => 'تنزيل',
 
 	// D
