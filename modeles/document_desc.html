@@ -27,7 +27,7 @@ Distribue sous licence GPL
 
 			<div class="infos">
 				<div class="permanentes">
-					[(#DISTANT|=={oui}|oui)<img src='#CHEMIN_IMAGE{distant-16.png}' width='16' height='16' alt='<:medias:fichier_distant|attribut_html:>' title='<:medias:fichier_distant|attribut_html:>'/> ]<:info_numero_abbreviation:>#ID_DOCUMENT - #EXTENSION
+					[(#DISTANT|=={oui}|oui)[(#CHEMIN_IMAGE{distant-16.png}|balise_img{<:medias:fichier_distant:>}|inserer_attribut{title,<:medias:fichier_distant:>}) ]]<:info_numero_abbreviation:>#ID_DOCUMENT - #EXTENSION
 					[(#LARGEUR|ou{#HAUTEUR}|et{#MEDIA|=={image}})
 						[- (#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#LARGEUR,hauteur_vignette,#HAUTEUR}})]
 					][(#MEDIA|in_array{#LISTE{audio,video}}|et{#DUREE|intval}|oui)
