@@ -211,10 +211,30 @@ function medias_upgrade($nom_meta_base_version, $version_cible) {
 		array('creer_base_types_doc'),
 	);
 
+
+	// upgrade des logos
+	$maj['1.6.0'] = [];
+	$tables_objets_sql = lister_tables_objets_sql();
+	foreach(array_keys($tables_objets_sql) as $table) {
+		$maj['1.6.0'][] = ['medias_upgrade_logo_objet', objet_type($table)];
+	};
+
+
 	include_spip('base/upgrade');
 	include_spip('base/medias');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 
+}
+
+/**
+ * Upgrader les logos objet vers des documents
+ * @param $objet
+ */
+function medias_upgrade_logo_objet($objet) {
+	$GLOBALS['logo_migrer_en_base'] = true;
+	include_spip('ecrire/action/editer_logo');
+	logo_migrer_en_base($objet, _TIME_OUT);
+	unset($GLOBALS['logo_migrer_en_base']);
 }
 
 /**
