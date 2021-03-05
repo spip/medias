@@ -1,12 +1,12 @@
 <?php
 /***************************************************************************\
- *  SPIP, Système de publication pour l'internet                           *
+ *  SPIP, SystÃ¨me de publication pour l'internet                           *
  *                                                                         *
- *  Copyright © avec tendresse depuis 2001                                 *
- *  Arnaud Martin, Antoine Pitrou, Philippe Rivière, Emmanuel Saint-James  *
+ *  Copyright Â© avec tendresse depuis 2001                                 *
+ *  Arnaud Martin, Antoine Pitrou, Philippe RiviÃ¨re, Emmanuel Saint-James  *
  *                                                                         *
- *  Ce programme est un logiciel libre distribué sous licence GNU/GPL.     *
- *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *  Ce programme est un logiciel libre distribuÃ© sous licence GNU/GPL.     *
+ *  Pour plus de dÃ©tails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 /**
@@ -134,10 +134,17 @@ function medias_verifier_largeur_hauteur_image($infos, $max_width = null, $max_h
 	if (($min_width and $infos['largeur'] < $min_width)
 		or ($min_height and $infos['hauteur'] < $min_height)
 	) {
+		if ($min_width and $max_width and $min_width>$max_width){
+			spip_log('Constantes invalides dÃ©tectÃ©es, modifiez votre fichier de configuration (_IMG_MIN_WIDTH > _IMG_MAX_WIDTH)', 'medias' . _LOG_INFO_IMPORTANTE);
+		}
+		if ($min_height and $max_height and $min_height>$max_height){
+			spip_log('Constantes invalides dÃ©tectÃ©es, modifiez votre fichier de configuration (_IMG_MIN_HEIGHT > _IMG_MAX_HEIGHT)', 'medias' . _LOG_INFO_IMPORTANTE);
+		}
+
 		return _T(
 			'medias:info_image_min_taille',
 			array(
-				'maxi' =>
+				'mini' =>
 					_T(
 						'info_largeur_vignette',
 						array(
