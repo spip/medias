@@ -239,20 +239,7 @@ class AllowedTags implements TagInterface
             'munderover',
 
             //text
-            '#text',
-
-            // metadata area
-            // RDF
-            'rdf',
-            // creativecommons
-            'permits',
-            'license',
-            'agent',
-            'work',
-            // Dublin core
-            'publisher',
-            'type',
-            'format',
+            '#text'
         );
     }
 }

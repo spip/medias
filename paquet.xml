@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias"
 	categorie="multimedia"
-	version="2.30.2"
+	version="2.31.0"
 	etat="stable"
 	compatibilite="[3.3.0-dev;3.3.*]"
 	logo="prive/themes/spip/images/portfolio-32.png"
@@ -15,6 +15,7 @@
 	<credit>Cédric Morin, Romy Duhem-Verdière pour la médiathèque</credit>
 	<credit lien="http://www.getid3.org/">getID3()</credit>
 	<credit lien="http://mediaelementjs.com/">MediaElement.js</credit>
+	<credit lien="https://github.com/darylldoyle/svg-sanitizer/releases">SVG Sanitizer v0.14.0</credit>
 
 	<traduire module="medias" reference="fr" gestionnaire="salvatore" />
 

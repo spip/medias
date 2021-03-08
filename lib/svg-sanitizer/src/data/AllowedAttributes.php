@@ -21,6 +21,7 @@ class AllowedAttributes implements AttributeInterface
     {
         return array(
             // HTML
+            'about',
             'accept',
             'action',
             'align',
@@ -109,6 +110,7 @@ class AllowedAttributes implements AttributeInterface
             'usemap',
             'valign',
             'value',
+            'version',
             'width',
             'xmlns',
 
@@ -270,7 +272,6 @@ class AllowedAttributes implements AttributeInterface
             'values',
             'viewbox',
             'visibility',
-            'version',
             'vert-adv-y',
             'vert-origin-x',
             'vert-origin-y',
@@ -351,11 +352,6 @@ class AllowedAttributes implements AttributeInterface
             'xlink:title',
             'xml:space',
             'xmlns:xlink',
-
-            // RDF
-            'about',
-            'resource',
-
         );
     }
 }
