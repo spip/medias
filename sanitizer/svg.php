@@ -48,11 +48,21 @@ function sanitizer_svg_dist($file) {
 		) {
 			spip_log("sanitization SVG $file", "svg");
 
-			include_spip('lib/svg-sanitizer/src/Sanitizer');
-			include_spip('lib/svg-sanitizer/src/data/AttributeInterface');
-			include_spip('lib/svg-sanitizer/src/data/AllowedAttributes');
-			include_spip('lib/svg-sanitizer/src/data/TagInterface');
-			include_spip('lib/svg-sanitizer/src/data/AllowedTags');
+			if (!class_exists('enshrined\svgSanitize\Sanitizer')) {
+				spl_autoload_register(function ($class) {
+					$prefix = 'enshrined\\svgSanitize\\';
+					$base_dir = _DIR_PLUGIN_MEDIAS . 'lib/svg-sanitizer/src/';
+					$len = strlen($prefix);
+					if (strncmp($prefix, $class, $len) !== 0) {
+						return;
+					}
+					$relative_class = substr($class, $len);
+					$file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+									if (file_exists($file)) {
+						require $file;
+					}
+				});
+			}
 
 			// sanitization can need multiples call
 			$maxiter = 10;
