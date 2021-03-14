@@ -118,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_illustrations' => 'الرسوم التوضيحية',
 	'info_image_max_poids' => 'يحب ان يكون حجم الصور أقل من @maxi@ (حجم هذا الملف يبلغ @actuel@).',
 	'info_image_max_taille' => 'يحب ان يكون حجم الصور أقل من @maxi@ (حجم هذا الملف يبلغ @actuel@).',
+	'info_image_min_taille' => 'يجب على الصور ان تكون @mini@ على الأقل (هذا الملف يبلغ @actuel@).',
 	'info_inclusion_directe' => 'ضم مباشر:',
 	'info_inclusion_vignette' => 'ضم المصغر:',
 	'info_installer_tous_documents' => 'تثبيت كل المستندات',
