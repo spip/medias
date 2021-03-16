@@ -414,3 +414,145 @@ function medias_trouver_modele_emb($extension, $mime_type, $modele_base='file') 
 
 	return $modele_base;
 }
+
+
+/**
+ * Liste les classes standards des modèles de documents SPIP.
+ *
+ * @note
+ *     le nomage au pluriel est historique.
+ *     préférer au singulier pour toute nouvelle classe.
+ * 
+ * @param int $id_document
+ * @param string $media
+ * @param array $env
+ * @param array $get
+ * @return string
+ */
+function filtre_medias_modele_document_standard_classes_dist($Pile, $id_document, $media) {
+	$env = $Pile[0];
+	$var = $Pile['vars'] ?? [];
+
+	$s  = 'spip_document_';
+	
+	$classes = [];
+	$classes[] = $s . $id_document;
+	$classes[] = 'spip_documents';
+	$classes[] = $s . $media;
+	if (!empty($env['align'])) {
+		$classes[] = 'spip_documents_' . $env['align'];
+	} elseif ($media === 'image') {
+		$classes[] = 'spip_documents_center';
+	}
+	if (!empty($var['legende'])) {
+		$classes[] = $s . '--legende';
+	}
+	if (!empty($env['class'])) {
+		$classes[] = $env['class'];
+	}
+	return implode(" ", $classes);
+}
+
+
+/**
+ * Liste les attributs data standards des modèles de documents SPIP.
+ *
+ * @param int $id_document
+ * @param string $media
+ * @param array $env
+ * @param array $get
+ * @return string
+ */
+function filtre_medias_modele_document_standard_attributs_dist($Pile, $id_document, $media) {
+	$env = $Pile[0];
+	$var = $Pile['vars'] ?? [];
+	$attrs = [];
+
+	if (!empty($var['legende'])) {
+		$len = spip_strlen(textebrut($var['legende']));
+		// des x. "x" = 32 caratères, "xx" => 64, "xxx" => 128, etc...
+		$lenx = medias_str_repeat_log($len, 2, "x", 4);
+		$attrs['data-legende-len'] = $len;
+		$attrs['data-legende-lenx'] = $lenx;
+	}
+
+	$res = "";
+	foreach($attrs as $attr => $value) {
+		$res .= "$attr=\"" . attribut_html($value) . "\""; 
+	};
+	return $res;
+}
+
+
+/**
+ * Retourne une chaine répétée d'autant de fois le logarithme
+ *
+ * @example medias_str_repeat_log(124, 2)
+ * 
+ *     Avec $base = 2 et $remove = 0
+ * 
+ *     0 => 
+ *     2 => x
+ *     4 => xx
+ *     8 => xxx
+ *     16 => xxxx
+ *     32 => xxxxx
+ *     64 => xxxxxx
+ * 
+ * @example medias_str_repeat_log(124, 2, "x", 4)
+ * 
+ *     Avec $base = 2 et $remove = 4
+ * 
+ *     0 => 
+ *     2 => 
+ *     4 => 
+ *     8 => 
+ *     16 => 
+ *     32 => x
+ *     64 => xx
+ * 
+ * @note 
+ *     L'inverse (nb caractères => valeur) est donc `pow($base, $nb_char)`
+ * 
+ *     En partant du nombre de "x" on retrouve la fourchette du nombre de départ.
+ *     Si $base = 2 et $remove = 4 :
+ * 
+ *    - "xxx" = 2 ^ (strlen("xxx") + 4) = 2 ^ (3 + 4) = 128
+ *    - "xxxxx" = 2 ^ (5 + 4) = 512
+ 
+ *     x = 32,
+ *     xx = 64
+ *     xxx = 128
+ *     xxxx = 256
+ *     xxxxx = 512 
+ *     ...
+ * 
+ *     Ce qui veut dire que "xxx" provient d'une valeur entre 128 et 255.
+ * 
+ * @note
+ *     C'est surtout utile pour une sélection en CSS (car CSS ne permet pas de sélecteur "lower than" ou "greater than") :
+ * 
+ *    ```spip
+ *    <div class='demo' attr-demo-pad='[(#TEXTE|textebrut|spip_strlen|medias_attr_pad_log)]'>...</div>`
+ *    ```
+ * 
+ *    ```css
+ *    .demo[attr-demo-pad^="xxxx"] {
+ *       // le contenu fait au moins 256 caractères
+ *    }
+ *    .demo:not([attr-demo-pad^="xxxx"]) {
+ *       // le contenu fait au moins 256 caractères
+ *    }
+ *    ```
+ * 
+ * @param float $num 
+ * @param float $log
+ * @param string $pad_string
+ * @param int $remove : Nombre de caractères à enlever.
+ * 
+ * @return string Des x
+ */
+function medias_str_repeat_log($num, $base = 2, $string = "x", $remove = 0) {
+	$pad = str_repeat($string, (int)log($num, $base));
+	return substr($pad, $remove);
+}

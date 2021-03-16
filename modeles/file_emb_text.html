@@ -1,7 +1,9 @@
 <BOUCLE_text (DOCUMENTS types_documents) {id_document=#ENV{id,#ENV{id_document}}} {tout}
 >[(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})][(#REM)
-][<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_text[ spip_documents_(#ENV{align})][ (#GET{legende}|?{spip_document--legende})]'
-><pre>(#FICHIER|contenu_document{#ENV{charset,auto}}|echapper_tags)</pre>
+][<figure 
+  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{text})]"[ 
+  (#ID_DOCUMENT|medias_modele_document_standard_attributs{text})
+]><pre>(#FICHIER|contenu_document{#ENV{charset,auto}}|echapper_tags)</pre>
 [(#GET{legende})
 ]</figure>
 ]</BOUCLE_text>

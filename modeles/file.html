@@ -25,7 +25,11 @@
 [(#SET{title,[(#TYPE_DOCUMENT) - [(#TAILLE|taille_en_octets)]]})]
 [(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})]
 [(#MEDIA|=={image}|oui) #SET{title,#TITRE|sinon{#GET{title}}]
-<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_file[ spip_documents_(#ENV{align})][ (#GET{legende}|?{spip_document--legende})][ (#ENV{class})] spip_lien_ok' [ style='width:(#GET{width}|max{120})px;']>
+<figure 
+  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{file}) ]spip_lien_ok"[ 
+  style='width:(#GET{width}|max{120})px;'][ 
+  (#ID_DOCUMENT|medias_modele_document_standard_attributs{file})
+]>
 [<a href="(#GET{url})"[
 	class="(#ENV{lien_class})"] title='[(#GET{title}|attribut_html)]'[
 	(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='' />[(#GET{url}|?{</a>})]

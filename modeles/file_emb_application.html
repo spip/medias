@@ -5,14 +5,17 @@
 - #GET{hauteur} et #GET{largeur} correspondent prioritairement a #ENV,
   puis #LARGEUR/HAUTEUR sauf si il y a un controleur
 ]
-[(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})]
 #SET{hauteur,#ENV{hauteur,#HAUTEUR}} #SET{largeur,#ENV{largeur,#LARGEUR}}
 [(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})][
  (#ENV{controls}=={PlayButton}|?{#SET{largeur,40},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})][
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
 ][(#ENV{controls,''}|non)
-<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_application[ spip_documents_(#ENV{align})][ (#GET{legende}|?{spip_document--legende})]'>
+[(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})]
+<figure 
+  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{application})]"[
+  (#ID_DOCUMENT|medias_modele_document_standard_attributs{application})
+]>
 ][(#EXTENSION|=={swf}|oui)
 <object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
  codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 

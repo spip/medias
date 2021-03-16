@@ -1,6 +1,9 @@
 <BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}
 >[(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})][(#REM)
-]<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_text[ spip_documents_(#ENV{align})][ (#GET{legende}|?{spip_document--legende})]'>
+]<figure 
+  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{text})]"[ 
+  (#ID_DOCUMENT|medias_modele_document_standard_attributs{text})
+]>
 [(#FICHIER|contenu_document{#ENV{charset,auto}}|appliquer_filtre{#MIME_TYPE})]
 [(#GET{legende}
 ]</figure>
