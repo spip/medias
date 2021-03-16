@@ -1,0 +1,11 @@
+[(#REM) 
+	Legende pour les documents 
+]<BOUCLE_legendaire (DOCUMENTS) {id_document=#ENV{id,#ENV{id_document}}} {tout}>
+[(#ENV*{titre,#TITRE}|trim|sinon{#ENV*{descriptif,#DESCRIPTIF}|trim}|sinon{#ENV*{credits,#CREDITS}|trim}|oui)
+<figcaption class='spip_doc_legende'>
+	[<div class='spip_doc_titre [(#ENV{titre}|non)#EDIT{titre}]'><strong>(#ENV*{titre,#TITRE}|propre|ptobr)</strong></div>]
+	[<div class='spip_doc_descriptif [(#ENV{descriptif}|non)#EDIT{descriptif}]'>(#ENV*{descriptif,#DESCRIPTIF}|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
+	[<div class='spip_doc_credits [(#ENV{credits}|non)#EDIT{credits}]'>(#ENV*{credits,#CREDITS}|propre|PtoBR)</div>]
+</figcaption>
+]
+</BOUCLE_legendaire>

@@ -23,18 +23,13 @@
 	#SET{fichier,#GET{fichier}|extraire_attribut{src}}
 ]
 [(#SET{title,[(#TYPE_DOCUMENT) - [(#TAILLE|taille_en_octets)]]})]
+[(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})]
 [(#MEDIA|=={image}|oui) #SET{title,#TITRE|sinon{#GET{title}}]
-<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_file[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok' [ style='width:(#GET{width}|max{120})px;']>
+<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_file[ spip_documents_(#ENV{align})][ (#GET{legende}|?{spip_document--legende})][ (#ENV{class})] spip_lien_ok' [ style='width:(#GET{width}|max{120})px;']>
 [<a href="(#GET{url})"[
 	class="(#ENV{lien_class})"] title='[(#GET{title}|attribut_html)]'[
 	(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='' />[(#GET{url}|?{</a>})]
-[(#ENV*{titre,#TITRE}|trim|sinon{#ENV*{descriptif,#DESCRIPTIF}|trim}|sinon{#ENV*{credits,#CREDITS}|trim}|oui)
-  <figcaption class='spip_doc_legende'>
-    [<div class='spip_doc_titre [(#ENV{titre}|non)#EDIT{titre}]'><strong>(#ENV*{titre,#TITRE}|propre|ptobr)</strong></div>]
-    [<div class='spip_doc_descriptif [(#ENV{descriptif}|non)#EDIT{descriptif}]'>(#ENV*{descriptif,#DESCRIPTIF}|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
-    [<div class='spip_doc_credits [(#ENV{credits}|non)#EDIT{credits}]'>(#ENV*{credits,#CREDITS}|propre|PtoBR)</div>]
-  </figcaption>
-]
+#GET{legende}
 </figure>
 </BOUCLE_file>
 #FILTRE{trim}

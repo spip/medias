@@ -4,9 +4,10 @@
   Filtrer en acceptant uniquement les extensions jouables par le player ?
 
 ]<BOUCLE_audio(DOCUMENTS types_documents) {media=audio} {id_document=#ENV{id,#ENV{id_document}}} {inclus=embed} {tout}>
+[(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})]
 #SET{largeur,#ENV{largeur, #LARGEUR|?{#LARGEUR,400}}|max{120}}
 #SET{duree,#ENV{duree,#DUREE}}[(#SET{duree,[(#GET{duree}|intval|?{[(#GET{duree}|intval)],''})]})]
-<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_audio[ spip_documents_(#ENV{align})]'[ style='width:(#GET{largeur})px;']>
+<figure class='spip_document_#ID_DOCUMENT spip_documents spip_document_audio[ spip_documents_(#ENV{align})][ (#GET{legende}|?{spip_document--legende})]'[ style='width:(#GET{largeur})px;']>
 	[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},0}|vider_attribut{class})]
   <div class="audio-wrapper"[ style='width:(#GET{largeur})px;max-width:100%;']>
   	<audio class="mejs mejs-#ID_DOCUMENT [ mejs-(#ENV{skin})]"
@@ -18,13 +19,7 @@
   	       controls="controls"
   				 [autoplay="autoplay"(#ENV{autoplay}|oui)]></audio>
   </div>
-[(#ENV*{titre,#TITRE}|trim|sinon{#ENV*{descriptif,#DESCRIPTIF}|trim}|sinon{#ENV*{credits,#CREDITS}|trim}|oui)
-  <figcaption class='spip_doc_legende'>
-    [<div class='spip_doc_titre [(#ENV{titre}|non)#EDIT{titre}]'><strong>(#ENV*{titre,#TITRE}|propre|ptobr)</strong></div>]
-    [<div class='spip_doc_descriptif [(#ENV{descriptif}|non)#EDIT{descriptif}]'>(#ENV*{descriptif,#DESCRIPTIF}|propre|PtoBR)[(#NOTES|PtoBR)]</div>]
-    [<div class='spip_doc_credits [(#ENV{credits}|non)#EDIT{credits}]'>(#ENV*{credits,#CREDITS}|propre|PtoBR)</div>]
-  </figcaption>
-]
+#GET{legende}
 [<script>/*<!\[CDATA\[*/var mejspath='[(#CHEMIN{lib/mejs/mediaelement-and-player.min.js}|timestamp)]',mejscss='[(#CHEMIN{lib/mejs/mediaelementplayer.min.css}|timestamp)]';
 (#INCLURE{javascript/mejs-init.min.js})/*\]\]>*/</script>]
 [(#ENV{skin}|oui)[<style>(#INCLURE{#CHEMIN{css/mejs-skin-#ENV{skin}.css}|sinon{#CHEMIN{lib/mejs/mejs-skins.css}}|url_absolue_css})</style>]]
