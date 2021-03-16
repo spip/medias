@@ -533,14 +533,14 @@ function filtre_medias_modele_document_standard_attributs_dist($Pile, $id_docume
  *     C'est surtout utile pour une sélection en CSS (car CSS ne permet pas de sélecteur "lower than" ou "greater than") :
  * 
  *    ```spip
- *    <div class='demo' attr-demo-pad='[(#TEXTE|textebrut|spip_strlen|medias_attr_pad_log)]'>...</div>`
+ *    <div class='demo' data-demo-lenx='[(#TEXTE|textebrut|spip_strlen|medias_str_repeat_log{2,x,4})]'>...</div>`
  *    ```
  * 
  *    ```css
- *    .demo[attr-demo-pad^="xxxx"] {
+ *    .demo[data-demo-lenx^="xxxx"] {
  *       // le contenu fait au moins 256 caractères
  *    }
- *    .demo:not([attr-demo-pad^="xxxx"]) {
+ *    .demo:not([data-demo-lenx^="xxxx"]) {
  *       // le contenu fait au moins 256 caractères
  *    }
  *    ```
