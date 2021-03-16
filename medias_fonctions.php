@@ -433,19 +433,17 @@ function filtre_medias_modele_document_standard_classes_dist($Pile, $id_document
 	$env = $Pile[0];
 	$var = $Pile['vars'] ?? [];
 
-	$s  = 'spip_document_';
-	
 	$classes = [];
-	$classes[] = $s . $id_document;
+	$classes[] = "spip_document_$id_document";
 	$classes[] = 'spip_documents';
-	$classes[] = $s . $media;
+	$classes[] = "spip_document_$media";
 	if (!empty($env['align'])) {
 		$classes[] = 'spip_documents_' . $env['align'];
 	} elseif ($media === 'image') {
 		$classes[] = 'spip_documents_center';
 	}
 	if (!empty($var['legende'])) {
-		$classes[] = $s . '--legende';
+		$classes[] = "spip_document--legende";
 	}
 	if (!empty($env['class'])) {
 		$classes[] = $env['class'];
@@ -464,7 +462,6 @@ function filtre_medias_modele_document_standard_classes_dist($Pile, $id_document
  * @return string
  */
 function filtre_medias_modele_document_standard_attributs_dist($Pile, $id_document, $media) {
-	$env = $Pile[0];
 	$var = $Pile['vars'] ?? [];
 	$attrs = [];
 
