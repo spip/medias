@@ -443,7 +443,7 @@ function filtre_medias_modele_document_standard_classes_dist($Pile, $id_document
 		$classes[] = 'spip_documents_center';
 	}
 	if (!empty($var['legende'])) {
-		$classes[] = "spip_document--legende";
+		$classes[] = "spip_document_avec_legende";
 	}
 	if (!empty($env['class'])) {
 		$classes[] = $env['class'];
