@@ -91,7 +91,8 @@
 				<div class="editer editer_alt[ (#ENV**{erreurs}|table_valeur{alt}|oui)erreur]">
 					<label for="alt"><:medias:label_alt:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{alt})</span>
-					]<input type='text' class='text' name='alt' id='alt' value="#ENV**{alt,''}" />
+					]<p class="explication"><:medias:info_alt:></p>
+					<input type='text' class='text' name='alt' id='alt' value="#ENV**{alt,''}" />
 				</div>
 			]
 			[(#ENV{_editer_dimension})
