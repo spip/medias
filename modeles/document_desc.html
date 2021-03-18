@@ -42,8 +42,13 @@ Distribue sous licence GPL
 					<table class="compact">
 						<tr class="credits">
 							<th><:medias:label_credits:></th>
-							<td class="[(#EDIT{credits})]">[(#CREDITS|sinon{<span class="vide">Crédits non renseignés</span>})]</td>
+							<td class="[(#EDIT{credits})]">[(#CREDITS|sinon{<span class="vide">...</span>})]</td>
 						</tr>
+						[(#MEDIA|=={image}|oui)
+						<tr class="alt">
+							<th><:medias:label_alt:></th>
+							<td class="[(#EDIT{alt})]">[(#ALT|sinon{<span class="vide">...</span>})]</td>
+						</tr>]
 						[(#LARGEUR|ou{#HAUTEUR}|oui)
 						<tr>
 							<th><:medias:info_dimensions_image:></th>
