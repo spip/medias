@@ -435,12 +435,15 @@ function filtre_medias_modele_document_standard_classes_dist($Pile, $id_document
 
 	$classes = [];
 	$classes[] = "spip_document_$id_document";
+	$classes[] = 'spip_document';
 	$classes[] = 'spip_documents';
 	$classes[] = "spip_document_$media";
 	if (!empty($env['align'])) {
 		$classes[] = 'spip_documents_' . $env['align'];
+		$classes[] = 'spip_document_' . $env['align'];
 	} elseif ($media === 'image') {
 		$classes[] = 'spip_documents_center';
+		$classes[] = 'spip_document_center';
 	}
 	if (!empty($var['legende'])) {
 		$classes[] = "spip_document_avec_legende";

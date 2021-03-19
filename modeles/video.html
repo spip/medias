@@ -9,11 +9,11 @@
 #SET{largeur,#ENV{largeur, #LARGEUR|?{#LARGEUR,480}}|max{120}}
 #SET{hauteur,#ENV{hauteur, #HAUTEUR|?{#HAUTEUR,300}}|max{75}}
 #SET{duree,#ENV{duree,#DUREE}}[(#SET{duree,[(#GET{duree}|intval|?{[(#GET{duree}|intval)],''})]})]
-<figure 
-  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{video})]"[ 
-  style='width:(#GET{largeur})px;'][ 
+<div
+  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{video})]"[
   (#ID_DOCUMENT|medias_modele_document_standard_attributs{video})
 ]>
+<figure class="spip_doc_inner">
 <div class="video-intrinsic-wrapper" style='height:0;width:#GET{largeur}px;max-width:100%;padding-bottom:[(#GET{hauteur}|div{#GET{largeur}}|mult{100}|round{2})]%;position:relative;'>
 	<div class="video-wrapper" style="position: absolute;top:0;left:0;width:100%;height:100%;">
 		<video class="mejs mejs-#ID_DOCUMENT[ mejs-(#ENV{skin})]"
@@ -48,6 +48,7 @@
 (#INCLURE{javascript/mejs-init.min.js})/*\]\]>*/</script>]
 [(#ENV{skin}|oui)[<style>(#INCLURE{#CHEMIN{css/mejs-skin-#ENV{skin}.css}|url_absolue_css})</style>]]
 </figure>
+</div>
 </BOUCLE_video>
 <INCLURE{fond=modeles/file,env} />
 <//B_video>

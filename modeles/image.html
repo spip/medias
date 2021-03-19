@@ -11,17 +11,18 @@
 [(#SET{image,#GET{image}|inserer_attribut{alt,#ENV{alt,#ALT}|sinon{''}}})]
 [(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})]
 #SET{largeur,#GET{image}|largeur}
-<figure 
-  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{image}) ]spip_lien_ok"[ 
-  style='width:(#GET{largeur})px;'][
+<div
+  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{image}) ]spip_lien_ok"[
   (#ID_DOCUMENT|medias_modele_document_standard_attributs{image})
 ]>
-[<a href="(#ENV{lien})"[ class="(#ENV{lien_class}|concat{#GET{autolien}|?{' mediabox'}})"]>]
-[(#ENV{lien}|non|et{#GET{autolien}})<a href="#URL_DOCUMENT" class="mediabox" type="#MIME_TYPE">]
+<figure class="spip_doc_inner">
+[<a href="(#ENV{lien})"[ class="(#ENV{lien_class}|concat{' spip_doc_lien',#GET{autolien}|?{' mediabox'}})"]>]
+[(#ENV{lien}|non|et{#GET{autolien}})<a href="#URL_DOCUMENT" class="spip_doc_lien mediabox" type="#MIME_TYPE">]
 		#GET{image}
 [(#ENV{lien}|ou{#GET{autolien}}|?{</a>})]
 #GET{legende}
 </figure>
+</div>
 </BOUCLE_image>
 <INCLURE{fond=modeles/file,env} />
 <//B_image>

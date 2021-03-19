@@ -25,15 +25,16 @@
 [(#SET{title,[(#TYPE_DOCUMENT) - [(#TAILLE|taille_en_octets)]]})]
 [(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})]
 [(#MEDIA|=={image}|oui) #SET{title,#TITRE|sinon{#GET{title}}]
-<figure 
-  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{file}) ]spip_lien_ok"[ 
-  style='width:(#GET{width}|max{120})px;'][ 
+<div
+  class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{file}) ]spip_lien_ok"[
   (#ID_DOCUMENT|medias_modele_document_standard_attributs{file})
 ]>
+<figure class="spip_doc_inner">
 [<a href="(#GET{url})"[
-	class="(#ENV{lien_class})"] title='[(#GET{title}|attribut_html)]'[
+	class="(#ENV{lien_class}|concat{' spip_doc_lien'})"] title='[(#GET{title}|attribut_html)]'[
 	(#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='' />[(#GET{url}|?{</a>})]
 #GET{legende}
 </figure>
+</div>
 </BOUCLE_file>
 #FILTRE{trim}

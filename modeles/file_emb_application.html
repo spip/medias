@@ -12,10 +12,11 @@
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
 ][(#ENV{controls,''}|non)
 [(#SET{legende,#INCLURE{fond=modeles/document_legende, env}|trim})]
-<figure 
+<div
   class="[(#ID_DOCUMENT|medias_modele_document_standard_classes{application})]"[
   (#ID_DOCUMENT|medias_modele_document_standard_attributs{application})
 ]>
+<figure class="spip_doc_inner">
 ][(#EXTENSION|=={swf}|oui)
 <object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' 
  codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=#ENV{version,'6,0,0,0'}' 
@@ -41,6 +42,7 @@
 ][(#ENV{controls,''}|non)
 	#GET{legende}
 </figure>
+</div>
 ]
 </BOUCLE_application>
 <INCLURE{fond=modeles/file,env} />
