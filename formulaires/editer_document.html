@@ -75,12 +75,14 @@
 			<div class="editer editer_date[ (#ENV**{erreurs}|table_valeur{saisie_date}|oui)erreur][ (#ENV**{erreurs}|table_valeur{saisie_heure}|oui)erreur]">
 				<label for="saisie_date" class='date'><:date:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{saisie_date})</span>
-				]<input type='text' class='text date' name='saisie_date' id='saisie_date' size="10" maxlength="10" value="[(#ENV{saisie_date})]" />
+				]<input type='text' class='text date' name='saisie_date' id='saisie_date' size="10" maxlength="10" value="[(#ENV{saisie_date})]" aria-describedby="format_date_doc_#ENV{id_document,nouveau}"/>
 				<span class='choix heure'>
 					<label for='saisie_heure' class='heure'><:medias:info_heure:></label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{saisie_heure})</span>]
-					<input type='text' class='text heure' name='saisie_heure' id='heure' size="5" maxlength="5" value="[(#ENV{saisie_heure})]" />
+					<input type='text' class='text heure' name='saisie_heure' id='saisie_heure' size="5" maxlength="5" value="[(#ENV{saisie_heure})]"  aria-describedby="format_heure_doc_#ENV{id_document,nouveau}"/>
 				</span>
+				<p hidden id="format_date_doc_#ENV{id_document,nouveau}"><:format_date_attendu:></p>
+				<p hidden id="format_heure_doc_#ENV{id_document,nouveau}"><:format_heure_attendu:></p>
 			</div>]
 			<div class="editer editer_credits[ (#ENV**{erreurs}|table_valeur{credits}|oui)erreur]">
 				<label for="credits"><:medias:label_credits:></label>[
