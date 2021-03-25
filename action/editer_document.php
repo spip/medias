@@ -233,7 +233,7 @@ function document_instituer($id_document, $champs = array()) {
 	}
 
 	sql_updateq('spip_documents', $champs, 'id_document=' . intval($id_document));
-	if ($statut !== $statut_ancien) {
+	if (!empty($champs['statut'])) {
 		$publier_rubriques = sql_allfetsel(
 			'id_objet',
 			'spip_documents_liens',
@@ -242,7 +242,7 @@ function document_instituer($id_document, $champs = array()) {
 		if (count($publier_rubriques)) {
 			include_spip('inc/rubriques');
 			foreach ($publier_rubriques as $r) {
-				calculer_rubriques_if($r['id_objet'], array('statut' => $statut), $statut_ancien, false);
+				calculer_rubriques_if($r['id_objet'], array('statut' => $champs['statut']), $statut_ancien, false);
 			}
 		}
 	}
