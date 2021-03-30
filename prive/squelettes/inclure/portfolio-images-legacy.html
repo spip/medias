@@ -2,13 +2,13 @@
 <B_illustrations>
 <h3 class="portfolios__titre"><span class="image_loading"></span><:medias:info_illustrations:></h3>
 <div class="liste_items documents ordonner_rang_lien" id="illustrations#ENV{id_unique}"  data-cookie-affichage="illustrations" data-lien="[(#OBJET|concat{'/',#ID_OBJET}|attribut_html)]">
-[<p class="pagination">(#PAGINATION{prive})</p>]
+[<nav class='pagination'>(#PAGINATION{prive})</nav>]
 <div class="sortable">
 <BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){media=image}{mode=image}{id_objet}{objet}{par rang_lien, num titre, date,id_document}{pagination 50}{statut?}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_illustrations>
 </div>
-[<p class="pagination">(#PAGINATION{prive})</p>]
+[<nav class='pagination'>(#PAGINATION{prive})</nav>]
 [(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET})
 	<div class="actions-liste groupe-boutons">
 	[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/image,#SELF|ancre_url{illustrations}},'ajax noscroll tout_dissocier',<:medias:lien_tout_enlever_verif:>})]
@@ -23,13 +23,13 @@
 <B_portfolio>
 <h3 class="portfolios__titre"><:medias:info_portfolio:></h3>
 <div class="liste_items documents ordonner_rang_lien" id="portfolio#ENV{id_unique}" data-cookie-affichage="portfolio" data-lien="[(#OBJET|concat{'/',#ID_OBJET}|attribut_html)]">
-[<p class="pagination">(#PAGINATION{prive})</p>]
+[<nav class='pagination'>(#PAGINATION{prive})</nav>]
 <div class="sortable">
 <BOUCLE_portfolio(DOCUMENTS documents_liens types_documents){media=image}{mode=document}{id_objet}{objet}{par rang_lien, num titre, date,id_document}{pagination 50}{statut?}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_portfolio>
 </div>
-[<p class="pagination">(#PAGINATION{prive})</p>]
+[<nav class='pagination'>(#PAGINATION{prive})</nav>]
 [(#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET})
 	<div class="actions-liste groupe-boutons">
 		[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-I/document,#SELF|ancre_url{portfolio}},'ajax noscroll tout_dissocier',<:medias:lien_tout_enlever_verif:>})]

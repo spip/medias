@@ -4,7 +4,7 @@
 	[(#SET{poids_total,0})]<BOUCLE_poids_total(DOCUMENTS){id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{recherche ?}{media?}{extension?}{distant?}{brise?}{statut==#ENV{statut,.*}}{orphelins?}{titre==(#ENV{sanstitre}|?{'^$','.*'})}{id_vignette==(#ENV{sansvignette}|?{'^0','.*'})}>[(#SET{poids_total,#GET{poids_total}|plus{#TAILLE}})]</BOUCLE_poids_total>
 	<B_galerie>
 	<h2>[(#GRAND_TOTAL|singulier_ou_pluriel{#VAL{medias:un_}|concat{#ENV{media,document}},#VAL{medias:des_}|concat{#ENV{media,document},s}})][ - (#GET{poids_total}|taille_en_octets)]</h2>
-	<div class='pagination tri'>
+	<nav class='pagination tri'>
 		[(#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}}) |]
 		[(#TRI{'<',#CHEMIN_IMAGE{tri-desc-16.png}|balise_img{<:par_tri_decroissant:>}}) |]
 		[(#TRI{id_document,<:medias:par_id:>}) |]
@@ -23,8 +23,8 @@
 		[(#GRAND_TOTAL|>{5000}|oui)
 			[<span class="sep">|</span> (#SELF|parametre_url{pagination,500}|lien_ou_expose{500,#ENV{pagination,10}|=={500},ajax})]
 		]
-	</div>
-	[<div class="pagination">(#PAGINATION{prive})</div>]
+	</nav>
+	[<nav class="pagination">(#PAGINATION{prive})</nav>]
 	<table>
 	<thead>
 		<th></th>
@@ -91,7 +91,7 @@
 	</tr>
 	</BOUCLE_galerie>
 	</table>
-	[<p class="pagination">(#PAGINATION{prive})</p>]
+	[<nav class='pagination'>(#PAGINATION{prive})</nav>]
 	#SET{nb_orphelins,#GRAND_TOTAL}
 	</B_galerie>
 	<h2>[(#VAL{medias:aucun_}|concat{#ENV{media,document}}|_T)]</h2>
