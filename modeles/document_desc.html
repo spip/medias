@@ -6,7 +6,7 @@ Distribue sous licence GPL
 
 ]
 <BOUCLE_docslies(DOCUMENTS documents_liens types_documents){id_document}{id_objet}{objet}{statut?}>
-<div class="item #MODE vu_#VU statut_#STATUT[(#DISTANT|=={oui}|oui)distant]" id="doc#ID_DOCUMENT" onclick="jQuery(this).toggleClass('hover');">
+<div class="item #MODE vu_#VU statut_#STATUT[(#DISTANT|=={oui}|oui)distant]" id="doc#ID_DOCUMENT" data-id="#ID_DOCUMENT" onclick="jQuery(this).toggleClass('hover');">
 	<div class="presentation">
 		[<div class='vignette'>(#LOGO_DOCUMENT{#URL_DOCUMENT,150,150})</div>]
 

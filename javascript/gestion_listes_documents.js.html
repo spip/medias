@@ -77,11 +77,12 @@ function choix_affichages_documents() {
 
 /* Gestion du tri des listes de documents et de leur enregistrement */
 function ordonner_listes_documents() {
-	if ($.fn.sortable) {
+
+	if (typeof Sortable === 'function') {
 		$(".liste_items.documents.ordonner_rang_lien[data-lien]").find('> .sortable').each(function () {
 			// détruire / recréer le sortable à chaque appel ajax
-			if ($(this).has('.ui-sortable').length) {
-				$(this).sortable('destroy');
+			if (Sortable.get(this)) {
+				Sortable.get(this).destroy();
 			}
 			// pas de tri possible s'il n'y a qu'un seul élément.
 			if ($(this).find('> .item').length < 2) {
@@ -91,42 +92,32 @@ function ordonner_listes_documents() {
 			} else {
 				$(this).find('.deplacer-document').show();
 			}
-			$(this).sortable({
-				/*axis: "y",*/ /* minidoc a un affichage en case */
-				handle: "",
-				placeholder: "ui-state-highlight deplacer-document-placeholder",
-				cancel: 'img.croix_centre_image',
-				start: function(event, ui) {
-					ui.item.addClass('document-en-mouvement');
+			new Sortable(this, {
+				/*direction: 'vertical',*/ /* minidoc a un affichage en case */
+				swapThreshold: .8,
+				ghostClass: "deplacer-document-placeholder",
+				onStart: function(event) {
+					$(event.item).addClass('document-en-mouvement');
 				},
-				stop: function(event, ui) {
-					ui.item.removeClass('document-en-mouvement');
+				onEnd: function(event) {
+					$(event.item).removeClass('document-en-mouvement');
 				},
-				update: function (event, ui) {
-					var items = $(this);
-					var item = ui.item;
-					var liste = items.sortable('toArray');
-					var ordre = [];
+				onUpdate: function (event) {
+					const ordre = this.toArray();
+					const $items = $(event.from);
+					const $item = $(event.item);
 
-					$.each(liste, function(i, id) {
-						if (id) {
-							ordre.push( id.substring(3) ); // doc123 => 123
-						}
-					});
-					
 					// l'objet lié est indiqué dans l'attribut data-lien sur la liste
-					var lien = items.parents(".liste_items.documents").data("lien").split("/");
-					var objet_lie = lien[0];
-					var id_objet_lie = lien[1];
-					var action = '[(#VAL{ordonner_liens_documents}|generer_url_action{"", 1})]';
-					var params = {
+					const [objet_lie, id_objet_lie] = $items.parents(".liste_items.documents").data("lien").split("/");
+					const action = '[(#VAL{ordonner_liens_documents}|generer_url_action{"", 1})]';
+					const params = {
 						objet_source: 'document',
 						objet_lie: objet_lie,
 						id_objet_lie: id_objet_lie,
 						ordre: ordre,
 					};
 
-					item.animateLoading();
+					$item.animateLoading();
 
 					$.post({
 						url: action,
@@ -135,25 +126,25 @@ function ordonner_listes_documents() {
 						cache: false,
 					}).done(function(data) {
 
-						var couleur_origine = item.css('background-color');
-						var couleur_erreur = $("<div class='remove'></div>").css('background-color');
-						var couleur_succes = $("<div class='append'></div>").css('background-color');
-						item.endLoading(true);
+						const couleur_origine = $item.css('background-color');
+						const couleur_erreur = $("<div class='remove'></div>").css('background-color');
+						const couleur_succes = $("<div class='append'></div>").css('background-color');
+						$item.endLoading(true);
 
 						if (data.errors.length) {
-							items.sortable('cancel');
-							item.css({backgroundColor: couleur_erreur}).animate({backgroundColor: couleur_origine}, 'normal', function(){
-								item.css({backgroundColor: ''});
+							$item.css({backgroundColor: couleur_erreur}).animate({backgroundColor: couleur_origine}, 'normal', () => {
+								$item.css({backgroundColor: ''});
 							});
 						} else {
-							item.css({backgroundColor: couleur_succes}).animate({backgroundColor: couleur_origine}, 'normal', function(){
-								item.css({backgroundColor: ''});
+							$item.css({backgroundColor: couleur_succes}).animate({backgroundColor: couleur_origine}, 'normal', () => {
+								$item.css({backgroundColor: ''});
 							});
-							items.parent().find('.tout_desordonner').show();
+							$items.parent().find('.tout_desordonner').show();
 						}
 					});
 				}
 			});
+
 			// bouton "désordonner"
 			if ($(this).parent().find('.deplacer-document[data-rang!=0]').length) {
 				$(this).parent().find('.tout_desordonner').show();
@@ -189,7 +180,11 @@ if (window.jQuery) {
 			onAjaxLoad(check_reload_page);
 			choix_affichages_documents();
 			onAjaxLoad(choix_affichages_documents);
-			ordonner_listes_documents();
+			if (typeof Sortable === "undefined") {
+				jQuery.getScript('[(#CHEMIN{prive/javascript/Sortable.js}|timestamp)]').done(ordonner_listes_documents);
+			} else {
+				ordonner_listes_documents();
+			}
 			onAjaxLoad(ordonner_listes_documents);
 		}
 	});
