@@ -105,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_tourner_180' => 'Rotate 180°',
 	'image_tourner_droite' => 'Rotate 90° right',
 	'image_tourner_gauche' => 'Rotate 90° left',
+	'info_alt' => 'Content description of the image when it is hidden, in addition to the title.',
 	'info_dimensions_image' => 'Dimensions',
 	'info_doc_max_poids' => 'Documents must necessarily be less than @maxi@ (this file is @actuel@).',
 	'info_document' => 'Document',
@@ -140,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_document_objets' => 'Enable the upload of documents for the contents:',
+	'label_alt' => 'Textual alternative (alt)',
 	'label_apercu' => 'Preview',
 	'label_caracteristiques' => 'Specifications',
 	'label_credits' => 'Credits',

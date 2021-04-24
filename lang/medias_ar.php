@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_tourner_180' => 'دوران 180°',
 	'image_tourner_droite' => 'دوران 90° يمين',
 	'image_tourner_gauche' => 'دوران 90° يسار',
+	'info_alt' => 'وصف محتوى الصورة عندما تكون مخفية، إضافة الر العن،ان.',
 	'info_dimensions_image' => 'الأبعاد',
 	'info_doc_max_poids' => 'يحب ان يكون حجم المستندات أقل من @maxi@ (حجم هذا الملف يبلغ @actuel@).',
 	'info_document' => 'المستند',
@@ -141,6 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_document_objets' => 'تفعيل التنزيل في المحتوى:',
+	'label_alt' => 'بديل نصي (alt)',
 	'label_apercu' => 'معاينة',
 	'label_caracteristiques' => 'المواصفات',
 	'label_credits' => 'الحقوق',
