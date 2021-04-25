@@ -36,7 +36,7 @@ function choix_affichages_documents() {
 				liste.addClass(classe);
 			}
 			if (identifiant) {
-				Cookies.set('affichage-' + identifiant, bouton);
+				Cookies.set('affichage-' + identifiant, bouton, {SameSite: 'Strict'});
 			}
 
 			liste.trigger('affichage.documents.change', {
