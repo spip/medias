@@ -109,7 +109,7 @@
 	<langue code="pt" url="https://trad.spip.net/tradlang_module/medias?lang_cible=pt" total="176" traduits="151" relire="0" modifs="3" nouveaux="22" pourcent="85.80">
 		<traducteur nom="Cláudia Anjos Lopes" lien="https://trad.spip.net/auteur/claudia_a_lopes" />
 	</langue>
-	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/medias?lang_cible=pt_br" total="176" traduits="169" relire="0" modifs="3" nouveaux="4" pourcent="96.02">
+	<langue code="pt_br" url="https://trad.spip.net/tradlang_module/medias?lang_cible=pt_br" total="176" traduits="176" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="placido" lien="https://trad.spip.net/auteur/placido" />
 		<traducteur nom="quijaua" lien="https://trad.spip.net/auteur/quijaua" />
 		<traducteur nom="Ricardo Porto" lien="https://trad.spip.net/auteur/ricardo-porto" />

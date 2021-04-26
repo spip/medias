@@ -42,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Substituir esta imagem',
 	'bouton_remplacer_image_document' => 'Substituir por imagem ou documento',
 	'bouton_supprimer' => 'Remover',
-	'bouton_supprimer_tous_orphelins' => 'Remover todas as não usadas', # MODIF
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Deseja realmente remover os @nb@ documentos que não estão em uso?', # MODIF
+	'bouton_supprimer_tous_orphelins' => 'Remover todos os documentos não usados',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Deseja realmente remover os @nb@ documentos que não estão em uso?',
 	'bouton_upload' => 'Download',
 
 	// D
@@ -105,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_tourner_180' => 'Rodar 180°',
 	'image_tourner_droite' => 'Rodar 90° à direita',
 	'image_tourner_gauche' => 'Rodar 90° à esquerda',
+	'info_alt' => 'Descrição do conteúdo da imagem quando ela não estiver visível, como complemento do título.',
 	'info_dimensions_image' => 'Dimensões',
 	'info_doc_max_poids' => 'Os documentos devem obrigatoriamente ter menos de @maxi@ (este documento tem @actuel@).',
 	'info_document' => 'Documento',
@@ -117,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_illustrations' => 'Ilustrações',
 	'info_image_max_poids' => 'As imagens devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
 	'info_image_max_taille' => 'As imagens devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
+	'info_image_min_taille' => 'As imagens devem ter pelo menos @mini@ (este arquivo tem @actuel@).',
 	'info_inclusion_directe' => 'Inclusão direta:',
 	'info_inclusion_vignette' => 'Inclusão da miniatura:',
 	'info_installer_tous_documents' => 'Instalar todos os documentos',
@@ -139,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_document_objets' => 'Permitir o carregamento de documentos para:',
+	'label_alt' => 'Alternativa textual (alt)',
 	'label_apercu' => 'Pré-visualização',
 	'label_caracteristiques' => 'Características',
 	'label_credits' => 'Créditos',
@@ -149,7 +152,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_refdoc_joindre' => 'Número do documento',
 	'lien_tout_desordonner' => 'Reinicializar a ordenação',
 	'lien_tout_desordonner_verif' => 'A ordenação desta listagem de documentos será reinicializada. Você confirma?',
-	'lien_tout_enlever' => 'Remover todos', # MODIF
+	'lien_tout_enlever' => 'Desvincular todos',
+	'lien_tout_enlever_verif' => 'Deseja realmente desvincular todos os documentos?',
 	'logo' => 'Logo',
 
 	// M
