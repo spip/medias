@@ -42,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Dieses Bild ersetzen',
 	'bouton_remplacer_image_document' => 'Durch ein Dokument oder Bild ersetzen',
 	'bouton_supprimer' => 'Löschen',
-	'bouton_supprimer_tous_orphelins' => 'Löschen alle dokument ungenutzt', # MODIF
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Wollen Sie wirklich bis @nb@ unbenutzte löschen ?', # MODIF
+	'bouton_supprimer_tous_orphelins' => 'Alle nicht verwendeten Dokumente löschen',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Sind Sie sicher, dass Sie @nb@ nicht verwendete Dokumente löschen wollen?',
 	'bouton_upload' => 'Hochladen',
 
 	// D
@@ -105,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_tourner_180' => 'Um 180° drehen',
 	'image_tourner_droite' => 'Um 90° nach rechts drehen',
 	'image_tourner_gauche' => 'Um 90° nach links drehen',
+	'info_alt' => 'Beschreibung des Inhalts des Bildes, wenn es nicht sichtbar ist, zusätzlich zum Titel.',
 	'info_dimensions_image' => 'Größe',
 	'info_doc_max_poids' => 'Die Dokumente dürfen höchstens @maxi@ groß sein (diese Datei hat @actuel@).',
 	'info_document' => 'Dokument',
@@ -117,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_illustrations' => 'Illustrationen',
 	'info_image_max_poids' => 'Die Bilder dürfen höchstens @maxi@ groß sein (diese Datei hat @actuel@).',
 	'info_image_max_taille' => 'Die Bilder dürfen höchstens @maxi@ groß sein (diese Datei hat @actuel@).',
+	'info_image_min_taille' => 'Bilder müssen mindestens @mini@ haben (diese Datei hat @actual@).',
 	'info_inclusion_directe' => 'Direkte Einbindung:',
 	'info_inclusion_vignette' => 'Einbindung des Icons:',
 	'info_installer_tous_documents' => 'Alle Dokumente installieren',
@@ -139,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_document_objets' => 'Hochladen von Dokumenten erlauben für:',
+	'label_alt' => 'Textalternative (alt)',
 	'label_apercu' => 'Vorschau',
 	'label_caracteristiques' => 'Eigenschaften',
 	'label_credits' => 'Beteiligte',
