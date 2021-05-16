@@ -234,24 +234,28 @@ function afficher_documents_colonne($id, $type = 'article', $script = null) {
  *    Identifiant du document
  * @param string $align
  *    Alignement du document : left,center,right
+ * @param bool $short
+ *    Réduire le texte affiché à la valeur de 'align'
  *
  * @return string
  *    Texte du raccourcis
  **/
-function affiche_raccourci_doc($doc, $id, $align = '') {
+function affiche_raccourci_doc($doc, $id, $align = '', $short = false) {
 
 	$pipe = '';
 	if ($align) {
 		$pipe = "|$align";
-	} else {
-		$align = 'center';
-	}
+	} 
 
-	$modele = "&lt;$doc$id$pipe&gt;";
-	$js = "console.log(document.activeElement); barre_inserer('$modele'); return false;";
+	$model = "&lt;$doc$id$pipe&gt;";
+	$text = $model;
+	if ($short) {
+		$text = $align ? $align : $model;
+	}
+	$js = "barre_inserer('$model'); return false;";
 	$title = attribut_html(_T('medias:inserer_raccourci'));
 	$classes = "btn btn_link btn_mini";
-	$styles = "text-align: $align;";
+	$styles = "text-align: " . ($align ?? 'center') . ";";
 	
-	return "\n<button class=\"$classes\" style=\"$styles\" onmousedown=\"$js\" title=\"$title\">$modele</button>\n";
+	return "\n<button class=\"$classes\" style=\"$styles\" onmousedown=\"$js\" title=\"$title\">$text</button>\n";
 }

@@ -44,10 +44,7 @@ function medias_raccourcis_doc(
 
 	if (!defined('_LEGACY_MODE_IMAGE_DOCUMENT') or _LEGACY_MODE_IMAGE_DOCUMENT === false){
 		// Affichage du raccourci <doc...> correspondant
-		$raccourci =
-			affiche_raccourci_doc($doc, $id_document, 'left')
-			. affiche_raccourci_doc($doc, $id_document, 'center')
-			. affiche_raccourci_doc($doc, $id_document, 'right');
+		$raccourci = medias_raccourcis_doc_groupe($doc, $id_document);
 	}
 	else {
 		// DEPRECATED
@@ -57,10 +54,7 @@ function medias_raccourcis_doc(
 		}
 
 		// Affichage du raccourci <doc...> correspondant
-		$raccourci =
-			affiche_raccourci_doc($doc, $id_document, 'left')
-			. affiche_raccourci_doc($doc, $id_document, 'center')
-			. affiche_raccourci_doc($doc, $id_document, 'right');
+		$raccourci = medias_raccourcis_doc_groupe($doc, $id_document);
 
 		if ($mode == 'document'
 			and ($inclus == 'embed' or $inclus == 'image')
@@ -68,15 +62,22 @@ function medias_raccourcis_doc(
 				or in_array($media, array('video', 'audio')))
 		) {
 			$raccourci =
-				'<span>' . _T('medias:info_inclusion_vignette') . '</span>'
+				'<span class="raccourcis_group_label">' . _T('medias:info_inclusion_vignette') . '</span>'
 				. $raccourci
-				. '<span>' . _T('medias:info_inclusion_directe') . '</span>'
-				. affiche_raccourci_doc('emb', $id_document, 'left')
-				. affiche_raccourci_doc('emb', $id_document, 'center')
-				. affiche_raccourci_doc('emb', $id_document, 'right');
+				. '<span class="raccourcis_group_label">' . _T('medias:info_inclusion_directe') . '</span>'
+				. medias_raccourcis_doc_groupe('emb', $id_document);
 		}
 	}
 
-
 	return "<div class='raccourcis'>" . $raccourci . '</div>';
+}
+
+
+function medias_raccourcis_doc_groupe($doc, $id_document) : string {
+	$raccourci =
+		affiche_raccourci_doc($doc, $id_document, '')
+		. affiche_raccourci_doc($doc, $id_document, 'left', true)
+		. affiche_raccourci_doc($doc, $id_document, 'center', true)
+		. affiche_raccourci_doc($doc, $id_document, 'right', true);
+	return "<div class='groupe-btns'>$raccourci</div>";
 }
