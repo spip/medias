@@ -238,21 +238,20 @@ function afficher_documents_colonne($id, $type = 'article', $script = null) {
  * @return string
  *    Texte du raccourcis
  **/
-function affiche_raccourci_doc($doc, $id, $align) {
-	static $num = 0;
-	$pipe = $onclick = '';
+function affiche_raccourci_doc($doc, $id, $align = '') {
 
+	$pipe = '';
 	if ($align) {
 		$pipe = "|$align";
-		$onclick = "\nondblclick=\"barre_inserer('\\x3C$doc$id$pipe&gt;', $('textarea[name=texte]')[0]);\"\ntitle=\"" .
-			str_replace(
-				'&amp;',
-				'&',
-				entites_html(_T('medias:double_clic_inserer_doc'))
-			) . '"';
 	} else {
 		$align = 'center';
 	}
 
-	return "\n<div style='text-align: $align'$onclick>&lt;$doc$id$pipe&gt;</div>\n";
+	$modele = "&lt;$doc$id$pipe&gt;";
+	$js = "console.log(document.activeElement); barre_inserer('$modele'); return false;";
+	$title = attribut_html(_T('medias:inserer_raccourci'));
+	$classes = "btn btn_link btn_mini";
+	$styles = "text-align: $align;";
+	
+	return "\n<button class=\"$classes\" style=\"$styles\" onmousedown=\"$js\" title=\"$title\">$modele</button>\n";
 }
