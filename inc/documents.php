@@ -252,10 +252,22 @@ function affiche_raccourci_doc($doc, $id, $align = '', $short = false) {
 	if ($short) {
 		$text = $align ? $align : $model;
 	}
-	$js = "barre_inserer('$model'); return false;";
-	$title = attribut_html(_T('medias:inserer_raccourci'));
+
 	$classes = "btn btn_link btn_mini";
-	$styles = "text-align: " . ($align ?? 'center') . ";";
+	$classes = " class=\"$classes\"";
+
+	$styles = '';
+	if ($align && !$short) {
+		// a priori ne sert plus de toutes façons… 
+		$styles = "text-align: " . ($align ?: 'center') . ";";
+		$styles = " style=\"$styles\"";
+	}
+
+	$js = "barre_inserer('$model'); return false;";
+	$js = " onmousedown=\"$js\"";
+
+	$title = attribut_html(_T('medias:inserer_raccourci'));
+	$title = " title=\"$title\"";
 	
-	return "\n<button class=\"$classes\" style=\"$styles\" onmousedown=\"$js\" title=\"$title\">$text</button>\n";
+	return "\n<button{$classes}{$styles}{$js}{$title}>$text</button>\n";
 }
