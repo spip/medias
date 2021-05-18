@@ -432,7 +432,7 @@ function verifier_upload_autorise($source, $mode = '') {
  *     Au format $_FILES
  * @param string $mode
  *     Mode d'inclusion du fichier, si connu
- * @return array
+ * @return array|string
  */
 function fixer_fichier_upload($file, $mode = '') {
 	/**
@@ -475,22 +475,16 @@ function fixer_fichier_upload($file, $mode = '') {
 			// deplacer le fichier tmp_name dans le dossier tmp
 			deplacer_fichier_upload($file['tmp_name'], $tmp, true);
 
-			include_spip('inc/pclzip');
 			$source = _DIR_TMP . basename($tmp_dir) . '.' . $ext;
-			$archive = new PclZip($source);
 
-			$v_list = $archive->create(
-				$tmp,
-				PCLZIP_OPT_REMOVE_PATH,
-				$tmp_dir,
-				PCLZIP_OPT_ADD_PATH,
-				''
-			);
+			include_spip('inc/archives');
+			$archive = new Spip\Archives\SpipArchives($source);
+			$res = $archive->emballer([$tmp]);
 
 			effacer_repertoire_temporaire($tmp_dir);
-			if (!$v_list) {
-				spip_log('Echec creation du zip');
-				return false;
+			if (!$res) {
+				spip_log("Echec creation du zip $source", 'medias' . _LOG_ERREUR);
+				return _T('medias:erreur_ecriture_fichier');
 			}
 
 			$row['fichier'] = copier_document($row['extension'], $file['name'], $source, $subdir);
