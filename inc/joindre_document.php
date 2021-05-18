@@ -243,10 +243,11 @@ function joindre_verifier_zip($files) {
 		);
 
 		// Est-ce qu'on sait le lire ?
-		include_spip('inc/pclzip');
+		include_spip('inc/archives');
 		if ($zip
-			and $archive = new PclZip($zip)
-			and $contenu = joindre_decrire_contenu_zip($archive)
+			and $archive = new Spip\Archives\SpipArchives($zip)
+			and $infos = $archive->informer()
+			and $contenu = joindre_decrire_contenu_zip($infos)
 			and $tmp = sous_repertoire(_DIR_TMP, 'zip')
 			and rename($zip, $tmp = $tmp . basename($zip))
 		) {
@@ -272,18 +273,18 @@ function joindre_verifier_zip($files) {
  * @param object $zip
  * @return array
  */
-function joindre_decrire_contenu_zip($zip) {
+function joindre_decrire_contenu_zip($infos) {
 	include_spip('action/ajouter_documents');
 	// si pas possible de decompacter: installer comme fichier zip joint
-	if (!$list = $zip->listContent()) {
+	if (empty($infos['fichiers'])) {
 		return false;
 	}
 
 	// Verifier si le contenu peut etre uploade (verif extension)
 	$fichiers = array();
 	$erreurs = array();
-	foreach ($list as $file) {
-		if (accepte_fichier_upload($f = $file['stored_filename'])) {
+	foreach ($infos['fichiers'] as $file) {
+		if (accepte_fichier_upload($f = $file['filename'])) {
 			$fichiers[$f] = $file;
 		} else // pas de message pour les dossiers et fichiers caches
 		{
@@ -306,28 +307,26 @@ function joindre_decrire_contenu_zip($zip) {
 
 // https://code.spip.net/@joindre_deballes
 function joindre_deballer_lister_zip($path, $tmp_dir) {
-	include_spip('inc/pclzip');
-	$archive = new PclZip($path);
-	$archive->extract(
-		PCLZIP_OPT_PATH,
-		$tmp_dir,
-		PCLZIP_CB_PRE_EXTRACT,
-		'callback_deballe_fichier'
-	);
-	if ($contenu = joindre_decrire_contenu_zip($archive)) {
-		$files = array();
-		$fichiers = reset($contenu);
-		foreach ($fichiers as $fichier) {
-			$f = basename($fichier['filename']);
-			$files[] = array(
-				'tmp_name' => $tmp_dir . $f,
-				'name' => $f,
-				'titrer' => _request('options_deballe_zip_titrer'),
-				'mode' => _request('options_deballe_zip_mode_document') ? 'document' : null
-			);
-		}
+	include_spip('inc/archives');
+	$archive = new Spip\Archives\SpipArchives($path);
 
-		return $files;
+	if ($infos = $archive->informer()
+	  and $contenu = joindre_decrire_contenu_zip($infos)) {
+		$fichiers = reset($contenu);
+		$fichiers = array_column($fichiers, 'filename');
+		if ($archive->deballer($tmp_dir, $fichiers)) {
+			$files = [];
+			foreach ($fichiers as $fichier) {
+				$f = basename($fichier);
+				$files[] = array(
+					'tmp_name' => $tmp_dir . $fichier,
+					'name' => $f,
+					'titrer' => _request('options_deballe_zip_titrer'),
+					'mode' => null
+				);
+			}
+			return $files;
+		}
 	}
 
 	return _T('avis_operation_impossible');
@@ -339,8 +338,8 @@ if (!function_exists('fixer_extension_document')) {
 	 * et corrige le nom du fichier ; retourne array(extension, nom corrige)
 	 * s'il ne trouve pas, retourne '' et le nom inchange
 	 *
-	 * @param unknown_type $doc
-	 * @return unknown
+	 * @param array $doc
+	 * @return array
 	 */
 // https://code.spip.net/@fixer_extension_document
 	function fixer_extension_document($doc) {
@@ -366,11 +365,13 @@ if (!function_exists('fixer_extension_document')) {
 	}
 }
 
-//
-// Gestion des fichiers ZIP
-//
-// https://code.spip.net/@accepte_fichier_upload
-
+/**
+ * Gestion des fichiers ZIP
+ * https://code.spip.net/@accepte_fichier_upload
+ *
+ * @param sring $f
+ * @return bool|int
+ */
 function accepte_fichier_upload($f) {
 	if (!preg_match(',.*__MACOSX/,', $f)
 		and !preg_match(',^\.,', basename($f))
@@ -385,16 +386,3 @@ function accepte_fichier_upload($f) {
 	}
 }
 
-# callback pour le deballage d'un zip telecharge
-# http://www.phpconcept.net/pclzip/man/en/?options-pclzip_cb_pre_extractfunction
-// https://code.spip.net/@callback_deballe_fichier
-
-function callback_deballe_fichier($p_event, &$p_header) {
-	if (accepte_fichier_upload($p_header['filename'])) {
-		$p_header['filename'] = _TMP_DIR . basename($p_header['filename']);
-
-		return 1;
-	} else {
-		return 0;
-	}
-}
