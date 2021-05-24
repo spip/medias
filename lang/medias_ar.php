@@ -137,6 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_telecharger' => 'تحميل من جهازك:',
 	'info_utilisation' => 'يستخدمه',
 	'infos' => 'معلومات تقنية',
+	'inserer_raccourci' => 'إدراج هذا المختصر في النص',
 	'item_autoriser_selectionner_date_en_ligne' => 'السماح بتعديل تاريخ كل مستند',
 	'item_non_autoriser_selectionner_date_en_ligne' => 'تاريخ المستندات هو تاريخ تحميلهم في الموقع',
 
