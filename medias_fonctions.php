@@ -185,23 +185,6 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles);
 }
 
-
-/**
- * Pour compat uniquement, utiliser generer_lien_entite
- *
- * @deprecated
- * @uses generer_lien_entite()
- *
- * @param int $id
- * @param string $type
- * @param int $longueur
- * @param null $connect
- * @return string
- */
-function lien_objet($id, $type, $longueur = 80, $connect = null) {
-	return generer_lien_entite($id, $type, $longueur, $connect);
-}
-
 /**
  * critere {orphelins} selectionne les documents sans liens avec un objet editorial
  *

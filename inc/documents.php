@@ -201,28 +201,6 @@ function image_du_document($document, $connect = null) {
 }
 
 /**
- * Afficher un document dans la colonne de gauche
- *
- * @deprecated
- *     Utiliser l'inclusion prévue ou une véritable
- *     déclaration d'objet éditorial (la colonne document
- *     est alors affichée automatiquement sur la page d'édition de l'objet)
- *
- * @param int $id
- *     Identifiant de l'objet, ou id_auteur négatif pour un nouvel objet
- * @param string $type
- *     Type d'objet
- * @param null $script
- *     ??
- * @return string
- *     Code HTML permettant de gérer des documents
- */
-function afficher_documents_colonne($id, $type = 'article', $script = null) {
-	return recuperer_fond('prive/objets/editer/colonne_document', array('objet' => $type, 'id_objet' => $id));
-}
-
-
-/**
  * Affiche le code d'un raccourcis de document, tel que <doc123|left>
  *
  * Affiche un code de raccourcis de document, et l'insère
