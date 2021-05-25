@@ -10,7 +10,7 @@
 $files = array_merge(glob(__DIR__ . '/*.svg'),glob(__DIR__ . '/*.png'));
 sort($files);
 ?>
-<h2><?=count($files) ?> Icones au Format SVG / PNG</h2>
+<h2><?=count($files) ?> Icones au format SVG</h2>
 <div class="thumbnails">
 	<?php
 	foreach ($files as $file) {
