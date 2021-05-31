@@ -131,7 +131,7 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
 			$img = $f($e, false);
 			$size = @spip_getimagesize($img);
 			$img = "<img src='$img' " . $size[3] . ' />';
-			$class .= " spip_icone";
+			$class .= " spip_document_icone";
 		}
 	} else {
 		$size = @spip_getimagesize($img);
