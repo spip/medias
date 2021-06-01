@@ -131,6 +131,7 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
 			$img = $f($e, false);
 			$size = @spip_getimagesize($img);
 			$img = "<img src='$img' " . $size[3] . ' />';
+			$class .= " spip_document_icone";
 		}
 	} else {
 		$size = @spip_getimagesize($img);
@@ -143,7 +144,7 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
 		$img = image_reduire($img, $x, $y);
 	}
 	$img = inserer_attribut($img, 'alt', '');
-	$img = inserer_attribut($img, 'class', $class);
+	$img = inserer_attribut($img, 'class', trim($class));
 	if ($align) {
 		$img = inserer_attribut($img, 'align', $align);
 	}
