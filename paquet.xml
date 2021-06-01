@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="3.1.0"
 	etat="stable"
-	compatibilite="[4.0.0-alpha;4.0.*]"
+	compatibilite="[4.0.0-beta;4.0.*]"
 	logo="prive/themes/spip/images/portfolio-32.png"
 	schema="1.7.0"
 >
@@ -49,11 +49,11 @@
 	<procure nom="ordoc" version="1.1.2" />
 	<procure nom="mejs" version="4.2.7" />
 
-	<necessite nom="archiviste" compatibilite="[0.3.0;]" />
+	<necessite nom="archiviste" compatibilite="[4.0.0-beta;4.0.*]" />
 
-	<utilise nom="Z" compatibilite="[1.7.30;]" />
-	<utilise nom="mediabox" compatibilite="[1.2.0;]" />
-	<utilise nom="mots" compatibilite="[2.9.0;]" />
+	<utilise nom="Z" compatibilite="[4.0.0-beta;4.0.*]" />
+	<utilise nom="mediabox" compatibilite="[4.0.0-beta;4.0.*]" />
+	<utilise nom="mots" compatibilite="[4.0.0-beta;4.0.*]" />
 
 	<menu nom="documents" titre="medias:info_documents" parent="menu_edition" icone="images/portfolio-16.png" />
 
