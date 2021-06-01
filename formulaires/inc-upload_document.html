@@ -13,7 +13,8 @@
 	<div class='joindre_mode#GET{domid}[(#GET{methode}|=={#CLE}|non)none-js]' id='joindre_#CLE#GET{domid}'>
 
 		<INCLURE{fond=formulaires/methodes_upload/#CLE,env,domid=#GET{domid}} />
-
+		
+		[(#GET{methodes_upload}|count|>{1}|oui)
 		<div class='sourceup'>
 			<:medias:bouton_download_depuis:>
 			<BOUCLE_methodes_liens(DATA){source tableau,#GET{methodes_upload}}{"|"}>
@@ -25,6 +26,7 @@
 				]
 			</BOUCLE_methodes_liens>
 		</div>
+		]
 		<p class='boutons'><input class='btn submit' type="submit" name="joindre_#CLE" value="#VALEUR{label_bouton}"/></p>
 	</div>
 </BOUCLE_methodes>
