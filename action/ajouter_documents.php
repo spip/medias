@@ -270,7 +270,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 			);
 		} else {
 			spip_log(
-				'Echec insert_document() du document ' . $file['tmp_name'] . ' ' . $file['name'] . "  (M '$mode' T '$objet' L '$id_objet' D '$id_document')",
+				'Echec document_inserer() du document ' . $file['tmp_name'] . ' ' . $file['name'] . "  (M '$mode' T '$objet' L '$id_objet' D '$id_document')",
 				'medias' . _LOG_ERREUR
 			);
 		}

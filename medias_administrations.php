@@ -38,7 +38,7 @@ function medias_check_statuts($affiche = false) {
 		include_spip('action/editer_document');
 		foreach ($docs as $id_document) {
 			// mettre a jour le statut si necessaire
-			instituer_document($id_document);
+			document_instituer($id_document);
 		}
 		if ($affiche) {
 			echo ' .';

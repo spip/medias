@@ -24,7 +24,7 @@ function action_verifier_documents_brises_dist() {
 	$arg = $securiser_action();
 
 	include_spip('inc/autoriser');
-	if (autoriser('administrer', 'mediatheque')) {
+	if (autoriser('voir', '_documents')) {
 		include_spip('inc/documents');
 		$res = sql_select('fichier,brise,id_document', 'spip_documents', "distant='non'");
 		while ($row = sql_fetch($res)) {
