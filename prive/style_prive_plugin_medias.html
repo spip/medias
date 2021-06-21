@@ -63,46 +63,140 @@
 
 a.bouton_fermer {display:block;text-align:#GET{right};}
 
-.galerie { float: none; width: 100%; padding:0;margin-bottom: #ENV{margin-bottom};}
-.galerie .pagination {clear:both;font-size:0.95em;}
-.galerie .pagination + .pagination {border-top: 0;margin-top:-1px;}
-.galerie table { width: 100%; border: none; margin-bottom: 0}
-.galerie table thead,.galerie table thead th  { background: #e5e5e5;background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#e0e0e0));background-image: -webkit-linear-gradient(top, #f0f0f0, #e0e0e0);background-image: -moz-linear-gradient(top, #f0f0f0, #e0e0e0);background-image: -ms-linear-gradient(top, #f0f0f0, #e0e0e0);background-image: -o-linear-gradient(top, #f0f0f0, #e0e0e0);background-image: linear-gradient(top, #f0f0f0, #e0e0e0);filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#f0f0f0', endColorstr='#e0e0e0');}
-.galerie table tbody tr:hover { background: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-.galerie table td { min-height: 100px; vertical-align: top; word-break: break-word;}
-.galerie table th, .galerie table td { padding: 0.5em .3em; border-bottom: 1px solid #ccc; }
-.galerie table th.id { text-align: right; }
-.galerie table td.id { width: 80px; text-align: right; vertical-align: top; line-height: normal; }
-.galerie table td.id strong { font-size: 1.6em; color: #666; font-weight: normal; }
-.galerie table td.infos {min-width: 24px;}
-.galerie table td.statut { width: 9px; }
-.galerie table td.logo { width: 250px; overflow: hidden; }
-.galerie table td.logo img { /*border: 1px solid #666;*/ }
-.galerie table .fichier {font-size:0.8em;width:250px;overflow:hidden;font-style:italic;}
+/**
+ * Galerie
+ */
 
-.galerie table td.exif { width: 140px;  }
-.galerie table td.exif small { display: inline; }
-.galerie table td.exif .extension {}
-.galerie table td.exif .dimensions { font-size: .9em; }
-.galerie table td.exif .taille { font-size: .9em; font-weight: bold; color: #666; }
-.galerie table td.exif .date { font-size: .9em; }
-.galerie table td.descriptif { }
+/* Caption */
+.liste-objets.galerie[class*="media-"] .caption {
+	padding-left: var(--spip-list-heading-iconpadding);
+	background-size: var(--spip-list-heading-iconsize);
+	background-repeat: no-repeat;
+	background-position: var(--spip-left) var(--spip-list-spacing-x) center;
+}
+.liste-objets.galerie.media-image .caption {
+	background-image: url(#CHEMIN_IMAGE{media-image-32.png});
+}
+.liste-objets.galerie.media-audio .caption {
+	background-image: url(#CHEMIN_IMAGE{media-audio-32.png});
+}
+.liste-objets.galerie.media-video .caption {
+	background-image: url(#CHEMIN_IMAGE{media-video-32.png});
+}
 
-.galerie table .supprimer {display:block;font-size:0.8em;margin-top:1em;}
+/* Colonne logo */
+.liste-objets.galerie th.logo,
+.liste-objets.galerie td.logo {
+	width: 270px; /* laisser un peu respirer (largeur max image = 250px) */
+	overflow: hidden;
+	text-align: center;
+}
 
-.galerie.media-image h2 { background: url(#CHEMIN_IMAGE{media-image-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;background-size:32px;}
-.galerie.media-audio h2 { background: url(#CHEMIN_IMAGE{media-audio-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;background-size:32px;}
-.galerie.media-video h2 { background: url(#CHEMIN_IMAGE{media-video-32.png}) no-repeat center left; padding: 6px;padding-left: 40px;background-size:32px;}
+/* Colonne infos : media, extension, distant, orphelin */
+.liste-objets.galerie td.infos {
+	min-width: 24px;
+}
+.liste-objets.galerie .type-media {
+	margin-bottom: 0.2em;
+}
+.liste-objets.galerie .extension {
+	text-transform: uppercase;
+}
 
-.galerie table td.exif { background-repeat: no-repeat; background-position: top right; }
+/* Colonne exif : infos techniques */
+.liste-objets.galerie td.exif {
+	vertical-align: top;
+}
+.liste-objets.galerie .fichier,
+.liste-objets.galerie .taille {
+	margin-bottom: 0.25em;
+}
+.liste-objets.galerie .fichier {
+	display: block;
+	max-width: 15em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.liste-objets.galerie .detaillees {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	margin-bottom: 0.5em;
+}
+.liste-objets.galerie .detaillees__label,
+.liste-objets.galerie .detaillees__valeur {
+	padding: 0.33em 0;
+	border-bottom: 1px solid var(--spip-box-sep-color);
+}
+.liste-objets.galerie .detaillees__valeur {
+	padding-#LEFT: 1em;
+	margin-bottom: 0;
+}
+.liste-objets.galerie .detaillees__label:last-of-type,
+.liste-objets.galerie .detaillees__valeur:last-of-type {
+	border-bottom: 0;
+}
+/* dans les détails il faut voir le nom de fichier en entier */
+.liste-objets.galerie .detaillees .fichier {
+	margin: 0;
+	word-wrap: break-word;
+}
+.liste-objets.galerie .detaillees .taille {
+	margin: 0;
+}
+.liste-objets.galerie .detaillees .taille {}
+.liste-objets.galerie .detaillees .date {}
+.liste-objets.galerie .exif .utilisations {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.liste-objets.galerie .exif .utilisations__item {}
+.liste-objets.galerie .exif .btn_link {
+	padding-#LEFT: 0;
+	margin: 0;
+}
 
+/* Colonne titre + crédits + descriptif */
+.liste-objets.galerie td.editorial {
+	vertical-align: top;
+}
+.liste-objets.galerie td.editorial .titre:not(:last-child),
+.liste-objets.galerie td.editorial .descriptif:not(:last-child),
+.liste-objets.galerie td.editorial p {
+	margin-bottom: 0.5em;
+}
+.liste-objets.galerie td.editorial p:last-child {
+	margin-bottom: 0;
+}
+.liste-objets.galerie .titre {
+	display: block;
+}
+.liste-objets.galerie .sans-titre {
+	font-weight: normal;
+	font-style: normal;
+	color: var(--spip-color-gray);
+}
+.liste-objets.galerie .descriptif { }
+.liste-objets.galerie .credits { }
+
+/* Modale avec galerie pour choisir */
 .popin-choisir_document {}
-.popin-choisir_document .onglets_simple.second {display:none;}
-.popin-choisir_document .galerie table td.id  {width:40px;}
-.popin-choisir_document .galerie table td.logo  {width:200px;}
-.popin-choisir_document .galerie table td.exif {width:120px;}
-.popin-choisir_document .galerie table td.descriptif {max-width:150px;}
-.popin-choisir_document .galerie table td {word-wrap: break-word;}
+.popin-choisir_document .onglets_simple.second {
+	display: none;
+}
+.popin-choisir_document .liste-objets.galerie td {
+	word-wrap: break-word;
+}
+.popin-choisir_document .liste-objets.galerie tr > .logo {
+	width: 200px;
+}
+.popin-choisir_document .liste-objets.galerie tr > .editorial {
+	max-width: 20em;
+}
+.liste-objets.galerie .fichier {
+	max-width: 12em;
+	word-wrap: initial;
+}
 
 .spip_documents_legende {border:1px solid #GET{foncee};text-align:center;font-size:0.9em;margin:0 0 1em;}
 .spip_documents_legende dt {background:#GET{foncee};color:#fff;padding:5px 3px;font-weight:bold;}

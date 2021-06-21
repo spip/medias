@@ -146,6 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_credits' => 'Crédits',
 	'label_fichier' => 'Fichier',
 	'label_fichier_vignette' => 'Vignette',
+	'label_titre_mimetype' => 'Type de fichier',
 	'label_paginer_par' => 'Paginer par :',
 	'label_parents' => 'Ce document est lié à',
 	'label_refdoc_joindre' => 'Document numéro',
