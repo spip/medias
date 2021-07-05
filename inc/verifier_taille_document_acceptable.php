@@ -82,7 +82,7 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
  * @param null|int $min_height
  * @return bool|string
  */
-function medias_verifier_largeur_hauteur_image($infos, $max_width = null, $max_height = null, $min_width = null, $min_height = null) {
+function medias_verifier_largeur_hauteur_image(&$infos, $max_width = null, $max_height = null, $min_width = null, $min_height = null) {
 
 	if (($max_width and $infos['largeur'] > $max_width)
 		or ($max_height and $infos['hauteur'] > $max_height)
