@@ -15,7 +15,7 @@
 <div class="liste_items documents ordonner_rang_lien" id="illustrations#ENV{id_unique}"  data-cookie-affichage="illustrations" data-lien="[(#OBJET|concat{'/',#ID_OBJET}|attribut_html)]">
 [<nav class='pagination'>(#PAGINATION{prive})</nav>]
 <div class="sortable">
-<BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){media=image}{id_objet}{objet}{par rang_lien, num titre, date,id_document}{pagination 50}{statut?}{si #CONST{_LEGACY_MODE_IMAGE_DOCUMENT}|non}>
+<BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){media=image}{id_objet}{objet}{par rang_lien, num titre, date,id_document}{pagination 50}{statut?}{si #CONST{_COMPORTEMENT_HISTORIQUE_PORTFOLIO}|non}>
 	#MODELE{document_desc,id_document,id_objet,objet}
 </BOUCLE_illustrations>
 </div>

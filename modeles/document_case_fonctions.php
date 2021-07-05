@@ -18,7 +18,7 @@ if (!defined('_BOUTON_MODE_IMAGE')) {
 }
 
 function affiche_bouton_mode_image_portfolio($inclus) {
-	if (!defined('_LEGACY_MODE_IMAGE_DOCUMENT') or _LEGACY_MODE_IMAGE_DOCUMENT === false) {
+	if (!defined('_COMPORTEMENT_HISTORIQUE_PORTFOLIO') or _COMPORTEMENT_HISTORIQUE_PORTFOLIO === false) {
 		return '';
 	}
 	if ($inclus === 'image' and _BOUTON_MODE_IMAGE) {
@@ -42,7 +42,7 @@ function medias_raccourcis_doc(
 	$raccourci = '';
 	$doc = 'doc';
 
-	if (!defined('_LEGACY_MODE_IMAGE_DOCUMENT') or _LEGACY_MODE_IMAGE_DOCUMENT === false){
+	if (!defined('_COMPORTEMENT_HISTORIQUE_PORTFOLIO') or _COMPORTEMENT_HISTORIQUE_PORTFOLIO === false) {
 		// Affichage du raccourci <doc...> correspondant
 		$raccourci = medias_raccourcis_doc_groupe($doc, $id_document);
 	}
