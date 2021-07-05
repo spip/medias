@@ -377,3 +377,31 @@ function medias_revisions_chercher_label($flux) {
 
 	return $flux;
 }
+
+
+/**
+ * Publier une rubrique ayant un document joint…
+ *
+ * @param array $flux
+ * @return array
+ */
+function medias_calculer_rubriques($flux) {
+	$r = sql_select(
+		"R.id_rubrique AS id, max(D.date) AS date_h",
+		["spip_rubriques AS R", "spip_documents_liens AS DL", "spip_documents AS D"],
+		[
+			"R.id_rubrique = DL.id_objet",
+			"DL.objet = 'rubrique'",
+			"D.id_document = DL.id_document",
+			"D.statut = 'publie'",
+			"D.date > R.date_tmp",
+			sql_in("D.mode", ['image', 'document'])
+		],
+		"R.id_rubrique",
+	);
+	while ($row = sql_fetch($r)) {
+		sql_updateq('spip_rubriques', array('statut_tmp' => 'publie', 'date_tmp' => $row['date_h']),
+			"id_rubrique=" . $row['id']);
+	}
+	return $flux;
+}
