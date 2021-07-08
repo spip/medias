@@ -325,6 +325,18 @@ function medias_optimiser_base_disparus($flux) {
 	$flux['data'] += objet_optimiser_liens(array('document' => '*'), '*');
 
 	// on ne nettoie volontairement pas automatiquement les documents orphelins
+	// mais il faut nettoyer les logos qui ne sont plus liés à rien
+	$res = sql_select("D.id_document",
+		"spip_documents AS D
+						LEFT JOIN spip_documents_liens AS L
+							ON (L.id_document=D.id_document)",
+		sql_in('D.mode', ['logoon', 'logooff']) . " AND L.id_document IS NULL");
+
+	$supprimer_document = charger_fonction('supprimer_document', 'action');
+	while ($row = sql_fetch($res)) {
+		$supprimer_document($row['id_document']);
+		$flux['data']++;
+	}
 
 	return $flux;
 }
