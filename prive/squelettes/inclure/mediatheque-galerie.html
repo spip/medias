@@ -54,10 +54,10 @@
 			<td class="logo">
 				#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
 				[(#MEDIA|=={image}|oui)[
-					<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+					<a href="#FICHIER" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
 				]]
 				[(#MEDIA|=={image}|non)[<div class="#EDIT{vignette} resize-250">
-					<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+					<a href="#FICHIER" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,250,100}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
 				</div>]]
 			</td>
 			<td class='infos'>

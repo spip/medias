@@ -21,7 +21,7 @@
 				[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-180-12.png}|balise_img{<:medias:image_tourner_180:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',180'},#SELF},ajax})]
 			</div>
 			]
-			[(#LOGO_DOCUMENT{#URL_DOCUMENT}|image_reduire{150,150})]
+			[(#LOGO_DOCUMENT{#FICHIER}|image_reduire{150,150})]
 			<BOUCLE_type_doc(TYPES_DOCUMENTS){extension}>
 			[(#MODE|=={document}|oui)<div class="type">
 			[(#TITRE|sinon{#VAL{<:medias:info_document:>}|concat{' ',#EXTENSION|majuscules}})]
