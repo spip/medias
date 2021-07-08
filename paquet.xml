@@ -1,4 +1,4 @@
-cd<paquet
+<paquet
 	prefix="medias"
 	categorie="multimedia"
 	version="3.3.0-dev"
