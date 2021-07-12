@@ -48,7 +48,7 @@ function medias_raccourcis_doc(
 	}
 	else {
 		// DEPRECATED
-		// on le garde juste pour la version SPIP 3.3, activable par la constante _LEGACY_MODE_IMAGE_DOCUMENT
+		// on le garde juste pour la version SPIP 4.0, activable par la constante _COMPORTEMENT_HISTORIQUE_PORTFOLIO
 		if ($mode == 'image' and (strlen($descriptif . $titre) == 0)) {
 			$doc = 'img';
 		}
