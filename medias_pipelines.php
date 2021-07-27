@@ -397,7 +397,7 @@ function medias_calculer_rubriques($flux) {
 			"D.date > R.date_tmp",
 			sql_in("D.mode", ['image', 'document'])
 		],
-		"R.id_rubrique",
+		"R.id_rubrique"
 	);
 	while ($row = sql_fetch($r)) {
 		sql_updateq('spip_rubriques', array('statut_tmp' => 'publie', 'date_tmp' => $row['date_h']),
