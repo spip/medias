@@ -233,8 +233,6 @@ p.actions {clear:both;}
 #documents_joints .item div.mode {text-align:right;font-size:x-small;}
 #documents_joints .item .actions {font-size:0.8em; margin-top: 1em}
 #documents_joints .item .actions a.editbox {
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	margin: 0;
 }
@@ -260,39 +258,34 @@ p.actions {clear:both;}
 .portfolios .liste_items .pagination { clear:both; width:100%; }
 .portfolios .liste_items > .pagination:first-child {  margin-top:0; margin-bottom:.6925em; }
 .portfolios .item { clear:both; }
-.portfolios .item .presentation { display:-webkit-box; display:-ms-flexbox; display:flex; -webkit-box-orient:horizontal; -webkit-box-direction:normal; -ms-flex-direction:row; flex-direction:row; width:100%; }
+.portfolios .item .presentation {
+	display:flex;
+	flex-direction:row;
+	width:100%;
+}
 .portfolios .item .vignette { width: 150px; min-width:150px; text-align: center; }
 .portfolios .item .descriptions {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
 	flex-direction: column;
 	padding-#GET{right}: 0.6925em;
 	margin-#GET{left}: 1em;
 	width: 100%;
-	-webkit-box-flex: 1;
-	-ms-flex-positive: 1;
 	flex-grow: 1;
 }
 .portfolios .item .titrem .vu { float:left; margin-#GET{right}:4px; }
 .portfolios .item .titrem {margin:0 0 5px;font-size:1em;}
 .portfolios .item .titrem .fichier {font-weight:normal;font-size:0.9em; font-style:italic; display:block; }
 .portfolios .item .titrem .titre {display:block;}
-.portfolios .item .descriptif { color:#444; margin-bottom:.6925em; -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; }
+.portfolios .item .descriptif {
+	color:#444;
+	margin-bottom:.6925em;
+	flex-grow: 1;
+}
 .portfolios .item .infos { }
 .portfolios .item .infos .permanentes {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-align: center;
-	   -ms-flex-align: center;
-	      align-items: center;
-	-webkit-box-pack: justify;
-	   -ms-flex-pack: justify;
-	 justify-content: space-between;
+	align-items: center;
+	justify-content: space-between;
 	padding: 2px 0; margin-top:.5em; color:rgba(0,0,0,.8);
 	border-top:1px solid rgba(100, 100, 100, .1);
 	border-bottom:1px solid rgba(100, 100, 100, .1);
@@ -324,12 +317,8 @@ p.actions {clear:both;}
 .portfolios .item .actions > *,
 .portfolios .item .mode {opacity:0.4;}
 .portfolios .item .actions .deplacer-modifier {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-align: center;
-	   -ms-flex-align: center;
-        align-items: center;
+	align-items: center;
 	visibility: visible;
 	opacity: 1;
 	float: #GET{right};
@@ -402,8 +391,6 @@ h3 .affichages {
 .portfolios .documents_liste .item  {
 	position:relative;
 	padding:7px;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 }
 .portfolios .documents_liste .item .vignette {
@@ -417,22 +404,13 @@ h3 .affichages {
 	width:auto;
 }
 .portfolios .documents_liste .item .presentation {
-	-webkit-box-align: center;
-	   -ms-flex-align: center;
-	      align-items: center;
-	 -webkit-box-flex: 1;
-	-ms-flex-positive: 1;
-	        flex-grow: 1;
+	align-items: center;
+	flex-grow: 1;
 	overflow:hidden;
 }
 .portfolios .documents_liste .item .descriptions {
-	 -webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	   -ms-flex-direction: row;
-	       flex-direction: row;
-	-webkit-box-align: center;
-	   -ms-flex-align: center;
-	      align-items: center;
+	flex-direction: row;
+	align-items: center;
 }
 .portfolios .item .descriptions {  overflow: hidden; }
 .portfolios .documents_liste .item .infos,
@@ -462,8 +440,6 @@ h3 .affichages {
 	min-width:80px;
 }
 .portfolios .documents_liste .item .actions .deplacer-modifier {
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
 	display: inline-flex;
 	float:none;
 	margin-#GET{right}:0;
@@ -473,11 +449,7 @@ h3 .affichages {
 
 /* Grille en cases des documents. */
 .portfolios .documents_cases .sortable {
-	display:-webkit-box;
-	display:-ms-flexbox;
 	display:flex;
-	-ms-flex-wrap: wrap;
-	    flex-wrap: wrap;
 }
 .portfolios .documents_cases .item {
 	padding: 2px;
@@ -486,35 +458,19 @@ h3 .affichages {
 	border-radius:5px;
 	width:113px;
 	height:130px;
-	display:-webkit-box;
-	display:-ms-flexbox;
 	display:flex;
-	-webkit-box-orient:vertical;
-	-webkit-box-direction:normal;
-	    -ms-flex-direction:column;
-	        flex-direction:column;
-	-webkit-box-align:center;
-	    -ms-flex-align:center;
-	        align-items:center;
+	flex-direction:column;
+	align-items:center;
 }
 .portfolios .documents_cases .item .presentation {
-	-webkit-box-flex:1;
-	-ms-flex-positive:1;
 	flex-grow:1;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
 	justify-content: center;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	    -ms-flex-direction: column;
-	        flex-direction: column;
+	flex-direction: column;
 }
 .portfolios .documents_cases .item .descriptions {
 	margin: 0;
 	padding: 0;
-	-webkit-box-pack: end;
-	   -ms-flex-pack: end;
-	 justify-content: flex-end;
+	justify-content: flex-end;
 }
 .portfolios .documents_cases .item .descriptions > *:not(.actions),
 .portfolios .documents_cases .item .mode,
