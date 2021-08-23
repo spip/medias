@@ -334,6 +334,9 @@ p.actions {clear:both;}
 	opacity: 1;
 	float: #GET{right};
 }
+.portfolios .item .actions .editbox  {
+	margin: 0;
+}
 .portfolios .item:hover .actions > *,
 .portfolios .item:hover .mode,
 .portfolios .item.hover .actions > *,
@@ -344,12 +347,16 @@ p.actions {clear:both;}
 
 .portfolios .actions-liste { clear:both; margin-top:.6925em; }
 .portfolios .actions-liste > * {display:inline; }
-.portfolios .tout_dissocier span {display:block; text-align:#GET{right};}
 
 .item.vu_oui {background:#f9f9f9;}
 .item.deplacer-document-placeholder { background-color: var(--spip-color-theme-lighter); }
 
-.deplacer-document { float: #GET{left}; margin-top:1px; cursor:move; }
+.deplacer-document {
+	display: inline-flex;
+	float: var(--spip-left);
+	margin-top: 1px;
+	cursor: move;
+}
 .document-en-mouvement { cursor:move; }
 
 
@@ -514,11 +521,11 @@ h3 .affichages {
 .portfolios .documents_cases .item .actions > * {
 	display:none;
 }
-.portfolios .documents_cases .item .actions .deplacer-modifier  {
+.portfolios .documents_cases .item .actions .deplacer-modifier {
 	display: flex;
-	width:100%;
+	width: 100%;
 }
-.portfolios .documents_cases .item .actions .editbox  { float:right; }
+.documents_cases .deplacer-document { flex-shrink: 0 }
 .documents_cases .deplacer-document-placeholder { height:130px; width:113px; padding: 2px; margin: 2px;}
 
 .portfolios .documents_cases .item .vignette {
@@ -544,8 +551,4 @@ h3 .affichages {
 	margin-bottom:0;
 	box-sizing:border-box;
 	padding: 2px 5px 1px 5px;
-}
-.portfolios .documents_cases .tout_dissocier {
-	-ms-flex-preferred-size: 100%;
-	    flex-basis: 100%;
 }
