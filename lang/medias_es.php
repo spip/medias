@@ -10,6 +10,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'affichage_documents_en_cases' => 'Mostrar en cajas',
+	'affichage_documents_en_grand' => 'Pantalla grande',
+	'affichage_documents_en_liste_compacte' => 'Visualización compacta de la lista',
 	'aucun_audio' => 'Ninguna pista de sonido',
 	'aucun_document' => 'Ningún documento',
 	'aucun_file' => 'Ningún documento',
@@ -39,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Sustituir esta imagen',
 	'bouton_remplacer_image_document' => 'Sustituir por una imagen o documento',
 	'bouton_supprimer' => 'Eliminar',
-	'bouton_supprimer_tous_orphelins' => 'Eliminar todos documentos no utilizados', # MODIF
-	'bouton_supprimer_tous_orphelins_confirmation' => '¿Está seguro de querer eliminar @nb@ documentos no utilizados?', # MODIF
+	'bouton_supprimer_tous_orphelins' => 'Eliminar todos los documentos no utilizados',
+	'bouton_supprimer_tous_orphelins_confirmation' => '¿Está seguro de querer eliminar @nb@ documentos no utilizados?',
 	'bouton_upload' => 'Subir',
 
 	// D
@@ -51,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_utilisations' => '@nb@ usos',
 	'des_videos' => '@nb@ secuencias',
 	'descriptif' => 'Descripción',
+	'details_document' => 'Detalles',
 	'details_document_afficher_masquer' => 'Mostrar / ocultar los detalles del documento',
 	'document_attache_succes' => 'El documento ha sido añadido',
 	'document_copie_locale_succes' => '	El archivo ha sido copiado en el sitio',
@@ -76,11 +80,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_chemin_distant' => 'No se encontró el archivo remoto @nom@',
 	'erreur_chemin_ftp' => 'El archivo indicado no se encuentra en el servidor',
 	'erreur_copie_fichier' => 'No se puede copiar el archivo @nom@',
+	'erreur_deplacement_impossible' => 'No se puede mover.',
 	'erreur_dossier_tmp_manquant' => 'Falta una carpeta temporal para poder subir los archivos',
 	'erreur_ecriture_fichier' => 'Error durante la escritura del archivo en disco',
 	'erreur_format_fichier_image' => 'El formato de @nom@ no es adecuado para una imagen',
 	'erreur_indiquez_un_fichier' => 'Especifique un archivo!',
 	'erreur_insertion_document_base' => 'Imposible guardar el documento @fichier@ en la base de datos',
+	'erreur_objet_absent' => 'Informaciones recibidas incompletas.',
 	'erreur_suppression_vignette' => 'Error al eliminar la miniatura',
 	'erreur_upload_type_interdit' => 'Descarga de archivos de tipo @nom@ no permitida',
 	'erreur_upload_vignette' => 'Error al cargar miniatura @nom@',
@@ -99,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_tourner_180' => 'Rotación de 180°',
 	'image_tourner_droite' => 'Rotación de 90° a la derecha',
 	'image_tourner_gauche' => 'Rotación de 90° a la izquierda',
+	'info_alt' => 'Descripción del contenido de la imagen cuando no es visible, además del título.',
 	'info_dimensions_image' => 'Tamaño',
 	'info_doc_max_poids' => 'Los documentos deben tener un tamaño inferior a @maxi@ (este archivo es de @actuel@).',
 	'info_document' => 'Documento',
@@ -111,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_illustrations' => 'Ilustraciones',
 	'info_image_max_poids' => 'Las imágenes deben obligatoriamente pesar menos de @maxi@ (este archivo pesa @actuel@).',
 	'info_image_max_taille' => 'Las imágenes deben obligatoriamente pesar menos de @maxi@ (este archivo pesa @actuel@).',
+	'info_image_min_taille' => 'Las imágenes deben ser como mínimo de @mini@ (ahora es de @actual@).',
 	'info_inclusion_directe' => 'Inclusión directa:',
 	'info_inclusion_vignette' => 'Inclusión de la miniatura:',
 	'info_installer_tous_documents' => 'Instalar todos los documentos',
@@ -128,11 +136,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_telecharger' => 'Subir desde tu equipo:',
 	'info_utilisation' => 'Uso(s)',
 	'infos' => 'Información técnica',
+	'inserer_raccourci' => 'Inserte este atajo en el texto',
 	'item_autoriser_selectionner_date_en_ligne' => 'Permitir la modificación de la fecha de cada documento',
 	'item_non_autoriser_selectionner_date_en_ligne' => 'La fecha de los documentos corresponde al momento en que fueron subidos al sitio web',
 
 	// L
 	'label_activer_document_objets' => 'Activar el poder subir archivos para los contenidos:',
+	'label_alt' => 'Texto alternativo (alt)',
 	'label_apercu' => 'Vista previa',
 	'label_caracteristiques' => 'Características',
 	'label_credits' => 'Créditos',
@@ -141,6 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Paginar por:',
 	'label_parents' => 'Este documento está relacionado con',
 	'label_refdoc_joindre' => 'Documento número',
+	'label_titre_mimetype' => 'Tipo de archivo',
 	'lien_tout_desordonner' => 'Reinicializar le órden',
 	'lien_tout_desordonner_verif' => 'El órden definido para esta lsita va a ser reinicializado. 
 ¿Seguro?',
@@ -162,6 +173,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'objet_document' => 'Documento',
 	'objet_documents' => 'Documentos',
+	'ordonner_ce_document' => 'Ordenar este documento',
 
 	// P
 	'par_date' => 'Fecha',
