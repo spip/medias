@@ -32,7 +32,8 @@
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="el" url="https://trad.spip.net/tradlang_module/medias?lang_cible=el" total="178" traduits="14" relire="0" modifs="3" nouveaux="161" pourcent="7.87" />
-	<langue code="en" url="https://trad.spip.net/tradlang_module/medias?lang_cible=en" total="178" traduits="177" relire="0" modifs="0" nouveaux="1" pourcent="99.44">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/medias?lang_cible=en" total="178" traduits="178" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="comcinco" lien="https://trad.spip.net/auteur/comcinco-7293" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="Gilles" lien="https://trad.spip.net/auteur/gilles" />
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
