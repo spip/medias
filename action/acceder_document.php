@@ -31,7 +31,8 @@ function action_acceder_document_dist() {
 	$arg = rawurldecode(_request('arg'));
 
 	$status = false;
-	if (strpos($f, '../') !== false
+	if (
+		strpos($f, '../') !== false
 		or preg_match(',^\w+://,', $f)
 	) {
 		$status = 403;
@@ -52,7 +53,8 @@ function action_acceder_document_dist() {
 			} else {
 				// ETag pour gerer le status 304
 				$ETag = md5($file . ': ' . filemtime($file));
-				if (isset($_SERVER['HTTP_IF_NONE_MATCH'])
+				if (
+					isset($_SERVER['HTTP_IF_NONE_MATCH'])
 					and $_SERVER['HTTP_IF_NONE_MATCH'] == $ETag
 				) {
 					http_status(304); // Not modified
@@ -100,7 +102,8 @@ function action_acceder_document_dist() {
 				// sinon l'ignorer car certains navigateurs pataugent
 
 				$f = basename($file);
-				if (isset($doc['titre'])
+				if (
+					isset($doc['titre'])
 					and (preg_match('/^\w+[.]\w+$/', $doc['titre']) or $doc['titre'] == 'Makefile')
 				) {
 					$f = $doc['titre'];

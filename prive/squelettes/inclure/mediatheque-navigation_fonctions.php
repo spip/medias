@@ -10,7 +10,6 @@
  *  Pour plus de détails voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -24,5 +23,5 @@ function liste_extensions_utilisees($media) {
 			'media=' . sql_quote($media)
 		),
 		'extension'
-	) : array();
+	) : [];
 }

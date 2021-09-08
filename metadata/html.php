@@ -23,11 +23,12 @@ include_spip('inc/autoriser');
  * @return array
  */
 function medata_html_dist($file) {
-	$meta = array();
+	$meta = [];
 
 	// Securite si pas autorise : virer les scripts et les references externes
 	// sauf si on est en mode javascript 'ok' (1), cf. inc_version
-	if ($GLOBALS['filtrer_javascript'] < 1
+	if (
+		$GLOBALS['filtrer_javascript'] < 1
 		and !autoriser('televerser', 'script')
 	) {
 		$texte = spip_file_get_contents($file);

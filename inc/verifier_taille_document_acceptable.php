@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
@@ -56,7 +57,7 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 			return $res;
 		}
 
-		if ($is_logo){
+		if ($is_logo) {
 			$max_size = (defined('_IMG_MAX_SIZE') and _IMG_MAX_SIZE) ? _IMG_MAX_SIZE : null;
 		}
 		else {
@@ -84,7 +85,8 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
  */
 function medias_verifier_largeur_hauteur_image(&$infos, $max_width = null, $max_height = null, $min_width = null, $min_height = null) {
 
-	if (($max_width and $infos['largeur'] > $max_width)
+	if (
+		($max_width and $infos['largeur'] > $max_width)
 		or ($max_height and $infos['hauteur'] > $max_height)
 	) {
 		// pas la peine d'embeter le redacteur avec ca si on a active le calcul des miniatures
@@ -104,63 +106,65 @@ function medias_verifier_largeur_hauteur_image(&$infos, $max_width = null, $max_
 			}
 		}
 
-		if (($max_width and $infos['largeur'] > $max_width)
+		if (
+			($max_width and $infos['largeur'] > $max_width)
 			or ($max_height and $infos['hauteur'] > $max_height)
 		) {
 			return _T(
 				'medias:info_image_max_taille',
-				array(
+				[
 					'maxi' =>
 						_T(
 							'info_largeur_vignette',
-							array(
+							[
 								'largeur_vignette' => $max_width,
 								'hauteur_vignette' => $max_height
-							)
+							]
 						),
 					'actuel' =>
 						_T(
 							'info_largeur_vignette',
-							array(
+							[
 								'largeur_vignette' => $infos['largeur'],
 								'hauteur_vignette' => $infos['hauteur']
-							)
+							]
 						)
-				)
+				]
 			);
 		}
 	}
 
-	if (($min_width and $infos['largeur'] < $min_width)
+	if (
+		($min_width and $infos['largeur'] < $min_width)
 		or ($min_height and $infos['hauteur'] < $min_height)
 	) {
-		if ($min_width and $max_width and $min_width>$max_width){
+		if ($min_width and $max_width and $min_width > $max_width) {
 			spip_log('Constantes invalides détectées, modifiez votre fichier de configuration (_IMG_MIN_WIDTH > _IMG_MAX_WIDTH)', 'medias' . _LOG_INFO_IMPORTANTE);
 		}
-		if ($min_height and $max_height and $min_height>$max_height){
+		if ($min_height and $max_height and $min_height > $max_height) {
 			spip_log('Constantes invalides détectées, modifiez votre fichier de configuration (_IMG_MIN_HEIGHT > _IMG_MAX_HEIGHT)', 'medias' . _LOG_INFO_IMPORTANTE);
 		}
 
 		return _T(
 			'medias:info_image_min_taille',
-			array(
+			[
 				'mini' =>
 					_T(
 						'info_largeur_vignette',
-						array(
+						[
 							'largeur_vignette' => $min_width,
 							'hauteur_vignette' => $min_height
-						)
+						]
 					),
 				'actuel' =>
 					_T(
 						'info_largeur_vignette',
-						array(
+						[
 							'largeur_vignette' => $infos['largeur'],
 							'hauteur_vignette' => $infos['hauteur']
-						)
+						]
 					)
-			)
+			]
 		);
 	}
 
@@ -178,10 +182,10 @@ function medias_verifier_poids_fichier($infos, $max_size = null, $is_image = fal
 	if ($max_size and $infos['taille'] > $max_size * 1024) {
 		return _T(
 			$is_image ? 'medias:info_image_max_poids' : 'medias:info_doc_max_poids',
-			array(
+			[
 				'maxi' => taille_en_octets($max_size * 1024),
 				'actuel' => taille_en_octets($infos['taille'])
-			)
+			]
 		);
 	}
 

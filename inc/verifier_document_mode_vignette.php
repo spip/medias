@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
@@ -17,12 +18,12 @@ function inc_verifier_document_mode_vignette_dist($infos) {
 
 	// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
 	if ($infos['inclus'] != 'image') {
-		return _T('medias:erreur_format_fichier_image', array('nom' => $infos['fichier']));
+		return _T('medias:erreur_format_fichier_image', ['nom' => $infos['fichier']]);
 	}
 
 	if (isset($infos['largeur']) and isset($infos['hauteur'])) {
 		if (!($infos['largeur'] or $infos['hauteur'])) {
-			return _T('medias:erreur_upload_vignette', array('nom' => $infos['fichier']));
+			return _T('medias:erreur_upload_vignette', ['nom' => $infos['fichier']]);
 		}
 	}
 

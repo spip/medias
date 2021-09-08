@@ -33,7 +33,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Nom du squelette par défaut qui sera utilisé
  **/
 function medias_detecter_fond_par_defaut($fond) {
-	if (empty($_GET) and empty($_POST) and empty($_FILES)
+	if (
+		empty($_GET) and empty($_POST) and empty($_FILES)
 		and isset($_SERVER['CONTENT_LENGTH'])
 		and isset($_SERVER['CONTENT_TYPE'])
 		and strstr($_SERVER['CONTENT_TYPE'], 'multipart/form-data;')
@@ -75,12 +76,12 @@ function medias_post_insertion($flux) {
 
 		# utiliser l'api editer_lien pour les appels aux pipeline edition_lien
 		include_spip('action/editer_liens');
-		$liens = objet_trouver_liens(array('document' => '*'), array($objet => 0 - $id_auteur));
+		$liens = objet_trouver_liens(['document' => '*'], [$objet => 0 - $id_auteur]);
 		foreach ($liens as $lien) {
-			objet_associer(array('document' => $lien['document']), array($objet => $id_objet), $lien);
+			objet_associer(['document' => $lien['document']], [$objet => $id_objet], $lien);
 		}
 		// un simple delete pour supprimer les liens temporaires
-		sql_delete('spip_documents_liens', array('id_objet = ' . (0 - $id_auteur), 'objet=' . sql_quote($objet)));
+		sql_delete('spip_documents_liens', ['id_objet = ' . (0 - $id_auteur), 'objet=' . sql_quote($objet)]);
 	}
 
 	return $flux;
@@ -97,7 +98,7 @@ function medias_affiche_milieu($flux) {
 	if ($flux['args']['exec'] == 'configurer_contenu') {
 		$flux['data'] .= recuperer_fond(
 			'prive/squelettes/inclure/configurer',
-			array('configurer' => 'configurer_documents')
+			['configurer' => 'configurer_documents']
 		);
 	}
 
@@ -146,8 +147,16 @@ function medias_post_edition($flux) {
 			$table_objet = isset($flux['args']['table_objet']) ?
 				$flux['args']['table_objet'] : table_objet($flux['args']['table'], $serveur);
 			$marquer_doublons_doc = charger_fonction('marquer_doublons_doc', 'inc');
-			$marquer_doublons_doc($flux['data'], $flux['args']['id_objet'], $type, id_table_objet($type, $serveur),
-				$table_objet, $flux['args']['table'], '', $serveur);
+			$marquer_doublons_doc(
+				$flux['data'],
+				$flux['args']['id_objet'],
+				$type,
+				id_table_objet($type, $serveur),
+				$table_objet,
+				$flux['args']['table'],
+				'',
+				$serveur
+			);
 		}
 
 		if (($flux['args']['action'] and $flux['args']['action'] == 'instituer') or isset($flux['data']['statut'])) {
@@ -167,9 +176,16 @@ function medias_post_edition($flux) {
 		if (isset($flux['args']['table']) and $flux['args']['table'] !== 'spip_documents') {
 			// verifier les doublons !
 			$marquer_doublons_doc = charger_fonction('marquer_doublons_doc', 'inc');
-			$marquer_doublons_doc($flux['data'], $flux['args']['id_objet'], $flux['args']['type'],
-				id_table_objet($flux['args']['type'], $serveur), $flux['args']['table_objet'],
-				$flux['args']['spip_table_objet'], '', $serveur);
+			$marquer_doublons_doc(
+				$flux['data'],
+				$flux['args']['id_objet'],
+				$flux['args']['type'],
+				id_table_objet($flux['args']['type'], $serveur),
+				$flux['args']['table_objet'],
+				$flux['args']['spip_table_objet'],
+				'',
+				$serveur
+			);
 		}
 	}
 
@@ -186,7 +202,8 @@ function medias_post_edition($flux) {
  * @return array
  */
 function medias_afficher_complement_objet($flux) {
-	if ($type = $flux['args']['type']
+	if (
+		$type = $flux['args']['type']
 		and $id = intval($flux['args']['id'])
 	) {
 		include_spip('inc/config');
@@ -221,7 +238,8 @@ function medias_afficher_complement_objet($flux) {
  *     Données du pipeline
  */
 function medias_affiche_gauche($flux) {
-	if ($en_cours = trouver_objet_exec($flux['args']['exec'])
+	if (
+		$en_cours = trouver_objet_exec($flux['args']['exec'])
 		and $en_cours['edition'] !== false // page edition uniquement
 		and $type = $en_cours['type']
 		and $id_table_objet = $en_cours['id_table_objet']
@@ -233,7 +251,7 @@ function medias_affiche_gauche($flux) {
 	) {
 		$flux['data'] .= recuperer_fond(
 			'prive/objets/editer/colonne_document',
-			array('objet' => $type, 'id_objet' => $id)
+			['objet' => $type, 'id_objet' => $id]
 		);
 	}
 
@@ -304,7 +322,8 @@ function medias_renseigner_document_distant($flux) {
  * @return array
  */
 function medias_objet_compte_enfants($flux) {
-	if ($objet = $flux['args']['objet']
+	if (
+		$objet = $flux['args']['objet']
 		and $id = intval($flux['args']['id_objet'])
 	) {
 		// juste les publies ?
@@ -332,7 +351,8 @@ function medias_objet_compte_enfants($flux) {
  * @return array
  */
 function medias_boite_infos($flux) {
-	if ($flux['args']['type'] == 'rubrique'
+	if (
+		$flux['args']['type'] == 'rubrique'
 		and $id_rubrique = $flux['args']['id']
 	) {
 		if ($nb = sql_countsel('spip_documents_liens', "objet='rubrique' AND id_objet=" . intval($id_rubrique))) {
@@ -357,14 +377,14 @@ function medias_boite_infos($flux) {
  * @return array      Données du pipeline
  **/
 function medias_revisions_chercher_label($flux) {
-	foreach (array('id_vignette', 'hauteur', 'largeur', 'mode', 'taille') as $champ) {
+	foreach (['id_vignette', 'hauteur', 'largeur', 'mode', 'taille'] as $champ) {
 		if ($flux['args']['champ'] == $champ) {
 			$flux['data'] = 'medias:info_' . $champ;
 
 			return $flux;
 		}
 	}
-	foreach (array('fichier', 'taille', 'mode', 'credits') as $champ) {
+	foreach (['fichier', 'taille', 'mode', 'credits'] as $champ) {
 		if ($flux['args']['champ'] == $champ) {
 			$flux['data'] = 'medias:label_' . $champ;
 
@@ -387,21 +407,24 @@ function medias_revisions_chercher_label($flux) {
  */
 function medias_calculer_rubriques($flux) {
 	$r = sql_select(
-		"R.id_rubrique AS id, max(D.date) AS date_h",
-		["spip_rubriques AS R", "spip_documents_liens AS DL", "spip_documents AS D"],
+		'R.id_rubrique AS id, max(D.date) AS date_h',
+		['spip_rubriques AS R', 'spip_documents_liens AS DL', 'spip_documents AS D'],
 		[
-			"R.id_rubrique = DL.id_objet",
+			'R.id_rubrique = DL.id_objet',
 			"DL.objet = 'rubrique'",
-			"D.id_document = DL.id_document",
+			'D.id_document = DL.id_document',
 			"D.statut = 'publie'",
-			"D.date > R.date_tmp",
-			sql_in("D.mode", ['image', 'document'])
+			'D.date > R.date_tmp',
+			sql_in('D.mode', ['image', 'document'])
 		],
-		"R.id_rubrique"
+		'R.id_rubrique'
 	);
 	while ($row = sql_fetch($r)) {
-		sql_updateq('spip_rubriques', array('statut_tmp' => 'publie', 'date_tmp' => $row['date_h']),
-			"id_rubrique=" . $row['id']);
+		sql_updateq(
+			'spip_rubriques',
+			['statut_tmp' => 'publie', 'date_tmp' => $row['date_h']],
+			'id_rubrique=' . $row['id']
+		);
 	}
 	return $flux;
 }

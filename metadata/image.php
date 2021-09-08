@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 function metadata_image_dist($fichier) {
-	$meta = array();
+	$meta = [];
 
 	if ($size_image = @spip_getimagesize($fichier)) {
 		$meta['largeur'] = intval($size_image[0]);

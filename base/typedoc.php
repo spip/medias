@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 global $tables_images, $tables_sequences, $tables_documents, $tables_mime, $mime_alias;
 
-$tables_images = array(
+$tables_images = [
 	// Images reconnues par PHP
 	'jpg' => 'JPEG',
 	'png' => 'PNG',
@@ -26,11 +26,11 @@ $tables_images = array(
 	// Autres images (peuvent utiliser le tag <img>)
 	'bmp' => 'BMP',
 	'svg' => 'SVG',
-);
+];
 
 // Multimedia (peuvent utiliser le tag <embed>)
 
-$tables_sequences = array(
+$tables_sequences = [
 	'aac' => 'Advanced Audio Coding',
 	'ac3' => 'AC-3 Compressed Audio',
 	'aifc' => 'Compressed AIFF Audio',
@@ -86,10 +86,10 @@ $tables_sequences = array(
 	'y4m' => 'YUV4MPEG2',
 	'3ga' => '3GP Audio File',
 	'3gp' => '3rd Generation Partnership Project'
-);
+];
 
 // Documents varies
-$tables_documents = array(
+$tables_documents = [
 	'7z' => '7 Zip',
 	'abw' => 'Abiword',
 	'ai' => 'Adobe Illustrator',
@@ -210,9 +210,9 @@ $tables_documents = array(
 	'xlsx' => 'Excel',
 	'xltm' => 'Excel template',
 	'xltx' => 'Excel template'
-);
+];
 
-$tables_mime = array(
+$tables_mime = [
 	// Images reconnues par PHP
 	'jpg' => 'image/jpeg',
 	'png' => 'image/png',
@@ -399,10 +399,10 @@ $tables_mime = array(
 	'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 	'xltm' => 'application/vnd.ms-excel.template.macroEnabled.12',
 	'xltx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.template'
-);
+];
 
 
-$mime_alias = array(
+$mime_alias = [
 	'application/x-ogg' => 'application/ogg',
 	'audio/3gpp' => 'video/3gpp',
 	'audio/x-mpeg' => 'audio/mpeg',
@@ -411,4 +411,4 @@ $mime_alias = array(
 	'video/flv' => 'video/x-flv',
 	'video/mp4' => 'application/mp4',
 	'image/jpg' => 'image/jpeg'
-);
+];

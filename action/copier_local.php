@@ -54,7 +54,7 @@ function action_copier_local_dist($id_document = null) {
 function action_copier_local_post($id_document) {
 
 	// Il faut la source du document pour le copier
-	$row = sql_fetsel('mode,fichier, descriptif, credits', 'spip_documents', 'id_document='.intval($id_document));
+	$row = sql_fetsel('mode,fichier, descriptif, credits', 'spip_documents', 'id_document=' . intval($id_document));
 	$source = $row['fichier'];
 
 	// si la source est bien un fichier distant
@@ -62,14 +62,16 @@ function action_copier_local_post($id_document) {
 	if (tester_url_absolue($source)) {
 		include_spip('inc/distant'); // pour 'copie_locale'
 		$fichier = copie_locale($source);
-		if ($fichier
-			and tester_url_absolue($source)) {
+		if (
+			$fichier
+			and tester_url_absolue($source)
+		) {
 			$fichier = _DIR_RACINE . $fichier;
-			$files = array();
-			$files[] = array('tmp_name' => $fichier, 'name' => basename($fichier));
+			$files = [];
+			$files[] = ['tmp_name' => $fichier, 'name' => basename($fichier)];
 			$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 			spip_log("convertit doc $id_document en local: $source => $fichier", 'medias');
-			$liste = array();
+			$liste = [];
 			$ajouter_documents($id_document, $files, '', 0, $row['mode'], $liste);
 
 			spip_unlink($fichier);
@@ -78,7 +80,7 @@ function action_copier_local_post($id_document) {
 			include_spip('action/editer_document');
 			document_modifier(
 				$id_document,
-				array('credits' => ($row['credits'] ? $row['credits'] . ', ' : '') . $source)
+				['credits' => ($row['credits'] ? $row['credits'] . ', ' : '') . $source]
 			);
 
 			return true;
@@ -89,5 +91,5 @@ function action_copier_local_post($id_document) {
 		spip_log("echec copie locale $source n'est pas une URL distante", 'medias' . _LOG_ERREUR);
 	}
 
-	return _T('medias:erreur_copie_fichier', array('nom' => $source));
+	return _T('medias:erreur_copie_fichier', ['nom' => $source]);
 }

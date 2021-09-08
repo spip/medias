@@ -34,12 +34,12 @@ function action_editer_document_dist($arg = null) {
 	}
 
 	if (!$id_document) {
-		return array(0, '');
+		return [0, ''];
 	} // erreur
 
 	$err = document_modifier($id_document);
 
-	return array($id_document, $err);
+	return [$id_document, $err];
 }
 
 /**
@@ -52,10 +52,10 @@ function action_editer_document_dist($arg = null) {
  */
 function document_inserer($id_parent = null, $set = null) {
 
-	$champs = array(
+	$champs = [
 		'statut' => 'prop',
 		'date' => 'NOW()',
-	);
+	];
 
 	if ($set) {
 		$champs = array_merge($champs, $set);
@@ -64,23 +64,23 @@ function document_inserer($id_parent = null, $set = null) {
 	// Envoyer aux plugins
 	$champs = pipeline(
 		'pre_insertion',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'table' => 'spip_documents',
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 	$id_document = sql_insertq('spip_documents', $champs);
 	pipeline(
 		'post_insertion',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'table' => 'spip_documents',
 				'id_objet' => $id_document
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
 	return $id_document;
@@ -105,7 +105,7 @@ function document_modifier($id_document, $set = null) {
 		// white list
 		objet_info('document', 'champs_editables'),
 		// black list
-		array('parents', 'ajout_parents'),
+		['parents', 'ajout_parents'],
 		// donnees eventuellement fournies
 		$set
 	);
@@ -127,21 +127,24 @@ function document_modifier($id_document, $set = null) {
 		$ancien_fichier = sql_getfetsel('fichier', 'spip_documents', 'id_document=' . intval($id_document));
 	}
 
-	if ($err = objet_modifier_champs(
-		'document',
-		$id_document,
-		array(
+	if (
+		$err = objet_modifier_champs(
+			'document',
+			$id_document,
+			[
 			'data' => $set,
 			'invalideur' => $invalideur,
 			'indexation' => $indexation
-		),
-		$champs
-	)) {
+			],
+			$champs
+		)
+	) {
 		return $err;
 	}
 
 	// nettoyer l'ancien fichier si necessaire
-	if (isset($champs['fichier']) // un plugin a pu interdire la modif du fichier en virant le champ
+	if (
+		isset($champs['fichier']) // un plugin a pu interdire la modif du fichier en virant le champ
 		and $champs['fichier']
 		and $ancien_fichier // on avait bien note le nom du fichier avant la modif
 		and $ancien_fichier !== $champs['fichier'] // et il a ete modifie
@@ -153,7 +156,7 @@ function document_modifier($id_document, $set = null) {
 
 	// Changer le statut du document ?
 	// le statut n'est jamais fixe manuellement mais decoule de celui des objets lies
-	$champs = collecter_requests(array('parents', 'ajouts_parents'), array(), $set);
+	$champs = collecter_requests(['parents', 'ajouts_parents'], [], $set);
 	if (document_instituer($id_document, $champs)) {
 		//
 		// Post-modifications
@@ -174,7 +177,7 @@ function document_modifier($id_document, $set = null) {
  * @param array $champs
  * @return bool
  */
-function document_instituer($id_document, $champs = array()) {
+function document_instituer($id_document, $champs = []) {
 
 	$statut = isset($champs['statut']) ? $champs['statut'] : null;
 	$date_publication = isset($champs['date_publication']) ? $champs['date_publication'] : null;
@@ -185,11 +188,11 @@ function document_instituer($id_document, $champs = array()) {
 		medias_revision_document_parents($id_document, $champs['ajout_parents'], true);
 	}
 
-	$row = sql_fetsel('statut,date_publication', 'spip_documents', 'id_document='.intval($id_document));
+	$row = sql_fetsel('statut,date_publication', 'spip_documents', 'id_document=' . intval($id_document));
 	$statut_ancien = $row['statut'];
 	$date_publication_ancienne = $row['date_publication'];
 
-	$champs = array();
+	$champs = [];
 
 	/* Autodetermination du statut si non fourni */
 	if (is_null($statut)) {
@@ -200,7 +203,6 @@ function document_instituer($id_document, $champs = array()) {
 		if ($champs === false) {
 			return false;
 		}
-
 	}
 	else {
 		if ($statut !== $statut_ancien) {
@@ -208,24 +210,27 @@ function document_instituer($id_document, $champs = array()) {
 		}
 	}
 
-	if (!is_null($date_publication)
+	if (
+		!is_null($date_publication)
 		and empty($champs['date_publication'])
-		and $date_publication != $date_publication_ancienne) {
+		and $date_publication != $date_publication_ancienne
+	) {
 		$champs['date_publication'] = $date_publication;
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_edition',
-		array(
-			'args' => array(
+	$champs = pipeline(
+		'pre_edition',
+		[
+			'args' => [
 				'table' => 'spip_documents',
 				'id_objet' => $id_document,
 				'action' => 'instituer',
 				'statut_ancien' => $statut_ancien,
 				'date_ancienne' => $date_publication_ancienne,
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
 	if (!count($champs)) {
@@ -242,7 +247,7 @@ function document_instituer($id_document, $champs = array()) {
 		if (count($publier_rubriques)) {
 			include_spip('inc/rubriques');
 			foreach ($publier_rubriques as $r) {
-				calculer_rubriques_if($r['id_objet'], array('statut' => $champs['statut']), $statut_ancien, false);
+				calculer_rubriques_if($r['id_objet'], ['statut' => $champs['statut']], $statut_ancien, false);
 			}
 		}
 	}
@@ -251,17 +256,18 @@ function document_instituer($id_document, $champs = array()) {
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='document/$id_document'");
 
-	pipeline('post_edition',
-		array(
-			'args' => array(
+	pipeline(
+		'post_edition',
+		[
+			'args' => [
 				'table' => 'spip_documents',
 				'id_objet' => $id_document,
 				'action' => 'instituer',
 				'statut_ancien' => $statut_ancien,
 				'date_ancienne' => $date_publication_ancienne,
-			),
+			],
 			'data' => $champs
-		)
+		]
 	);
 
 	return true;
@@ -283,13 +289,14 @@ function medias_revision_document_parents($id_document, $parents = null, $ajout 
 		return;
 	}
 
-	$insertions = array();
-	$objets_parents = array(); // array('article'=>array(12,23))
+	$insertions = [];
+	$objets_parents = []; // array('article'=>array(12,23))
 
 	// au format objet|id_objet
 	foreach ($parents as $p) {
 		$p = explode('|', $p);
-		if (preg_match('/^[a-z0-9_]+$/i', $objet = $p[0])
+		if (
+			preg_match('/^[a-z0-9_]+$/i', $objet = $p[0])
 			and (($p[1] = intval($p[1])) or in_array($objet, ['site', 'rubrique']))
 		) { // securite
 			$objets_parents[$p[0]][] = $p[1];
@@ -298,14 +305,14 @@ function medias_revision_document_parents($id_document, $parents = null, $ajout 
 
 	include_spip('action/editer_liens');
 	// les liens actuels
-	$liens = objet_trouver_liens(array('document' => $id_document), '*');
-	$deja_parents = array();
+	$liens = objet_trouver_liens(['document' => $id_document], '*');
+	$deja_parents = [];
 	// si ce n'est pas un ajout, il faut supprimer les liens actuels qui ne sont pas dans $objets_parents
 	if (!$ajout) {
 		foreach ($liens as $k => $lien) {
 			if (!isset($objets_parents[$lien['objet']]) or !in_array($lien['id_objet'], $objets_parents[$lien['objet']])) {
 				if (autoriser('dissocierdocuments', $lien['objet'], $lien['id_objet'])) {
-					objet_dissocier(array('document' => $id_document), array($lien['objet'] => $lien['id_objet']));
+					objet_dissocier(['document' => $id_document], [$lien['objet'] => $lien['id_objet']]);
 				}
 				unset($liens[$k]);
 			} else {
@@ -317,7 +324,8 @@ function medias_revision_document_parents($id_document, $parents = null, $ajout 
 	// trier les objets à traiter : ne pas prendre en compte ceux qui sont déjà associés ou qu'on n'a pas le droit d'associer
 	foreach ($objets_parents as $objet => $ids) {
 		foreach ($ids as $k => $id) {
-			if ((
+			if (
+				(
 					isset($deja_parents[$objet])
 					and in_array($id, $deja_parents[$objet])
 				)
@@ -327,5 +335,5 @@ function medias_revision_document_parents($id_document, $parents = null, $ajout 
 			}
 		}
 	}
-	objet_associer(array('document' => $id_document), $objets_parents);
+	objet_associer(['document' => $id_document], $objets_parents);
 }

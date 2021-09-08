@@ -24,7 +24,7 @@ function action_supprimer_tous_orphelins() {
 	//on recupere le contexte pour ne supprimer les orphelins que de ce dernier
 	list($media, $distant, $statut, $sanstitre) = explode('/', $arg);
 
-	$where = array();
+	$where = [];
 	//critere sur le media
 	if ($media) {
 		$select = 'media=' . sql_quote($media);

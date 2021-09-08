@@ -57,7 +57,8 @@ function inc_choisir_mode_document($infos, $type_inclus_image, $objet) {
 		return 'image';
 	}
 
-	if ($infos['largeur'] > 0
+	if (
+		$infos['largeur'] > 0
 		and $infos['largeur'] < _LARGEUR_MODE_IMAGE
 	) {
 		return 'image';

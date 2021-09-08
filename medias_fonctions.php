@@ -23,7 +23,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 // nettoyer les zip abandonnes par l'utilisateur
-if (isset($GLOBALS['visiteur_session']['zip_to_clean'])
+if (
+	isset($GLOBALS['visiteur_session']['zip_to_clean'])
 	and test_espace_prive()
 	and isset($_SERVER['REQUEST_METHOD'])
 	and $_SERVER['REQUEST_METHOD'] !== 'POST'
@@ -41,7 +42,8 @@ if (isset($GLOBALS['visiteur_session']['zip_to_clean'])
 
 // capturer un formulaire POST plus grand que post_max_size
 // on genere un minipres car on ne peut rien faire de mieux
-if (isset($_SERVER['REQUEST_METHOD'])
+if (
+	isset($_SERVER['REQUEST_METHOD'])
 	and $_SERVER['REQUEST_METHOD'] == 'POST'
 	and empty($_POST)
 	and isset($_SERVER['CONTENT_TYPE'])
@@ -50,7 +52,7 @@ if (isset($_SERVER['REQUEST_METHOD'])
 	and $_SERVER['CONTENT_LENGTH'] > medias_inigetoctets('post_max_size')
 ) {
 	include_spip('inc/minipres');
-	echo minipres(_T('medias:upload_limit', array('max' => ini_get('post_max_size'))));
+	echo minipres(_T('medias:upload_limit', ['max' => ini_get('post_max_size')]));
 	exit;
 }
 
@@ -65,12 +67,12 @@ function medias_modeles_styliser($modele, $id) {
 	if (defined('_COMPORTEMENT_HISTORIQUE_IMG_DOC_EMB') and _COMPORTEMENT_HISTORIQUE_IMG_DOC_EMB) {
 		return $modele;
 	}
-	switch($modele) {
+	switch ($modele) {
 		case 'img':
 		case 'doc':
 		case 'emb':
 			$m = 'file';
-			if ($doc = sql_fetsel('id_document,media', 'spip_documents', 'id_document='.intval($id))) {
+			if ($doc = sql_fetsel('id_document,media', 'spip_documents', 'id_document=' . intval($id))) {
 				$m = $doc['media']; // image, audio, video, file
 			}
 			if (trouve_modele("{$m}_{$modele}")) {
@@ -167,19 +169,20 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 
 	// on ne veut pas des fichiers de taille nulle,
 	// sauf s'ils sont distants (taille inconnue)
-	array_unshift($boucle->where, array("'($id_table.taille > 0 OR $id_table.distant=\\'oui\\')'"));
+	array_unshift($boucle->where, ["'($id_table.taille > 0 OR $id_table.distant=\\'oui\\')'"]);
 
 	/**
 	 * N'afficher que les modes de documents que l'on accepte
 	 * Utiliser le "pipeline medias_documents_visibles" pour en ajouter
 	 */
-	if (!isset($boucle->modificateur['criteres']['mode'])
+	if (
+		!isset($boucle->modificateur['criteres']['mode'])
 		and !isset($boucle->modificateur['tout'])
 	) {
-		$modes = pipeline('medias_documents_visibles', array('image', 'document'));
+		$modes = pipeline('medias_documents_visibles', ['image', 'document']);
 		$f = sql_serveur('quote', $boucle->sql_serveur, true);
 		$modes = addslashes(join(',', array_map($f, array_unique($modes))));
-		array_unshift($boucle->where, array("'IN'", "'$id_table.mode'", "'($modes)'"));
+		array_unshift($boucle->where, ["'IN'", "'$id_table.mode'", "'($modes)'"]);
 	}
 
 	return calculer_boucle($id_boucle, $boucles);
@@ -312,55 +315,56 @@ function medias_lister_methodes_upload($env) {
 		$env = unserialize($env);
 	}
 
-	$methodes = array();
+	$methodes = [];
 	// méthodes d'upload disponibles
-	$methodes = array();
-	$methodes['upload'] = array('label_lien'=>_T('medias:bouton_download_local'),'label_bouton'=>_T('bouton_upload'));
+	$methodes = [];
+	$methodes['upload'] = ['label_lien' => _T('medias:bouton_download_local'),'label_bouton' => _T('bouton_upload')];
 
-	if((isset($env['mediatheque']) and $env['mediatheque'])){
-		$methodes['mediatheque'] = array('label_lien'=>_T('medias:bouton_download_par_mediatheque'),'label_bouton'=>_T('medias:bouton_attacher_document'));
+	if ((isset($env['mediatheque']) and $env['mediatheque'])) {
+		$methodes['mediatheque'] = ['label_lien' => _T('medias:bouton_download_par_mediatheque'),'label_bouton' => _T('medias:bouton_attacher_document')];
 	}
-	
-	if((isset($env['proposer_ftp']) and $env['proposer_ftp'])){
-		$methodes['ftp'] = array('label_lien'=>_T('medias:bouton_download_par_ftp'),'label_bouton'=>_T('bouton_choisir'));
+
+	if ((isset($env['proposer_ftp']) and $env['proposer_ftp'])) {
+		$methodes['ftp'] = ['label_lien' => _T('medias:bouton_download_par_ftp'),'label_bouton' => _T('bouton_choisir')];
 	}
-	$methodes['distant'] = array('label_lien'=>_T('medias:bouton_download_sur_le_web'),'label_bouton'=>_T('bouton_choisir'));
+	$methodes['distant'] = ['label_lien' => _T('medias:bouton_download_sur_le_web'),'label_bouton' => _T('bouton_choisir')];
 
 	// pipeline pour les méthodes d'upload
 	$objet = isset($env['objet']) ? $env['objet'] : '';
 	$id_objet = isset($env['id_objet']) ? $env['id_objet'] : '';
 
-	$methodes = pipeline('medias_methodes_upload',
-		array(
-			'args' => array('objet' => $objet, 'id_objet' => $id_objet),
+	$methodes = pipeline(
+		'medias_methodes_upload',
+		[
+			'args' => ['objet' => $objet, 'id_objet' => $id_objet],
 			'data' => $methodes
-		)
+		]
 	);
 
 	return $methodes;
 }
 
 function duree_en_secondes($duree, $precis = false) {
-	$out = "";
+	$out = '';
 	$heures = $minutes = 0;
-	if ($duree>3600) {
-		$heures = intval(floor($duree/3600));
+	if ($duree > 3600) {
+		$heures = intval(floor($duree / 3600));
 		$duree -= $heures * 3600;
 	}
-	if ($duree>60) {
-		$minutes = intval(floor($duree/60));
+	if ($duree > 60) {
+		$minutes = intval(floor($duree / 60));
 		$duree -= $minutes * 60;
 	}
 
-	if ($heures>0 or $minutes>0) {
-		$out = _T('date_fmt_heures_minutes', array('h' => $heures, 'm' => $minutes));
+	if ($heures > 0 or $minutes > 0) {
+		$out = _T('date_fmt_heures_minutes', ['h' => $heures, 'm' => $minutes]);
 		if (!$heures) {
 			$out = preg_replace(',^0[^\d]+,Uims', '', $out);
 		}
 	}
 
 	if (!$heures or $precis) {
-		$out .= intval($duree).'s';
+		$out .= intval($duree) . 's';
 	}
 	return $out;
 }
@@ -380,7 +384,7 @@ function duree_en_secondes($duree, $precis = false) {
  * @param  $mime_type
  * @return mixed
  */
-function medias_trouver_modele_emb($extension, $mime_type, $modele_base='file') {
+function medias_trouver_modele_emb($extension, $mime_type, $modele_base = 'file') {
 	if ($extension and trouve_modele($fond = $modele_base . '_emb_' . $extension)) {
 		return $fond;
 	}
@@ -405,7 +409,7 @@ function medias_trouver_modele_emb($extension, $mime_type, $modele_base='file') 
  * @note
  *     le nomage au pluriel est historique.
  *     préférer au singulier pour toute nouvelle classe.
- * 
+ *
  * @param int $id_document
  * @param string $media
  * @param array $env
@@ -429,12 +433,12 @@ function filtre_medias_modele_document_standard_classes_dist($Pile, $id_document
 		$classes[] = 'spip_document_center';
 	}
 	if (!empty($var['legende'])) {
-		$classes[] = "spip_document_avec_legende";
+		$classes[] = 'spip_document_avec_legende';
 	}
 	if (!empty($env['class'])) {
 		$classes[] = $env['class'];
 	}
-	return implode(" ", $classes);
+	return implode(' ', $classes);
 }
 
 
@@ -454,14 +458,14 @@ function filtre_medias_modele_document_standard_attributs_dist($Pile, $id_docume
 	if (!empty($var['legende'])) {
 		$len = spip_strlen(textebrut($var['legende']));
 		// des x. "x" = 32 caratères, "xx" => 64, "xxx" => 128, etc...
-		$lenx = medias_str_repeat_log($len, 2, "x", 4);
+		$lenx = medias_str_repeat_log($len, 2, 'x', 4);
 		$attrs['data-legende-len'] = $len;
 		$attrs['data-legende-lenx'] = $lenx;
 	}
 
-	$res = "";
-	foreach($attrs as $attr => $value) {
-		$res .= "$attr=\"" . attribut_html($value) . "\""; 
+	$res = '';
+	foreach ($attrs as $attr => $value) {
+		$res .= "$attr=\"" . attribut_html($value) . '"';
 	};
 	return $res;
 }
@@ -471,54 +475,54 @@ function filtre_medias_modele_document_standard_attributs_dist($Pile, $id_docume
  * Retourne une chaine répétée d'autant de fois le logarithme
  *
  * @example medias_str_repeat_log(124, 2)
- * 
+ *
  *     Avec $base = 2 et $remove = 0
- * 
- *     0 => 
+ *
+ *     0 =>
  *     2 => x
  *     4 => xx
  *     8 => xxx
  *     16 => xxxx
  *     32 => xxxxx
  *     64 => xxxxxx
- * 
+ *
  * @example medias_str_repeat_log(124, 2, "x", 4)
- * 
+ *
  *     Avec $base = 2 et $remove = 4
- * 
- *     0 => 
- *     2 => 
- *     4 => 
- *     8 => 
- *     16 => 
+ *
+ *     0 =>
+ *     2 =>
+ *     4 =>
+ *     8 =>
+ *     16 =>
  *     32 => x
  *     64 => xx
- * 
- * @note 
+ *
+ * @note
  *     L'inverse (nb caractères => valeur) est donc `pow($base, $nb_char)`
- * 
+ *
  *     En partant du nombre de "x" on retrouve la fourchette du nombre de départ.
  *     Si $base = 2 et $remove = 4 :
- * 
+ *
  *    - "xxx" = 2 ^ (strlen("xxx") + 4) = 2 ^ (3 + 4) = 128
  *    - "xxxxx" = 2 ^ (5 + 4) = 512
- 
+
  *     x = 32,
  *     xx = 64
  *     xxx = 128
  *     xxxx = 256
- *     xxxxx = 512 
+ *     xxxxx = 512
  *     ...
- * 
+ *
  *     Ce qui veut dire que "xxx" provient d'une valeur entre 128 et 255.
- * 
+ *
  * @note
  *     C'est surtout utile pour une sélection en CSS (car CSS ne permet pas de sélecteur "lower than" ou "greater than") :
- * 
+ *
  *    ```spip
  *    <div class='demo' data-demo-lenx='[(#TEXTE|textebrut|spip_strlen|medias_str_repeat_log{2,x,4})]'>...</div>`
  *    ```
- * 
+ *
  *    ```css
  *    .demo[data-demo-lenx^="xxxx"] {
  *       // le contenu fait au moins 256 caractères
@@ -527,15 +531,15 @@ function filtre_medias_modele_document_standard_attributs_dist($Pile, $id_docume
  *       // le contenu fait au moins 256 caractères
  *    }
  *    ```
- * 
- * @param float $num 
+ *
+ * @param float $num
  * @param float $log
  * @param string $pad_string
  * @param int $remove : Nombre de caractères à enlever.
- * 
+ *
  * @return string Des x
  */
-function medias_str_repeat_log($num, $base = 2, $string = "x", $remove = 0) {
+function medias_str_repeat_log($num, $base = 2, $string = 'x', $remove = 0) {
 	$pad = str_repeat($string, (int)log($num, $base));
 	return substr($pad, $remove);
 }

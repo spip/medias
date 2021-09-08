@@ -36,5 +36,5 @@ function action_verifier_documents_liens_dist($id_document = null) {
 
 	$id_document = ($id_document == '*') ? '*' : intval($id_document);
 	include_spip('action/editer_liens');
-	objet_optimiser_liens(array('document' => $id_document), '*');
+	objet_optimiser_liens(['document' => $id_document], '*');
 }

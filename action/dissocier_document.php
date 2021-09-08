@@ -56,7 +56,8 @@ function action_dissocier_document_dist($arg = null) {
 	if (count($arg) > 4 and $arg[4] == 'safe') {
 		$check = true;
 	}
-	if ($id_objet = intval($id_objet)
+	if (
+		$id_objet = intval($id_objet)
 		and (
 			($id_objet < 0 and $id_objet == -$GLOBALS['visiteur_session']['id_auteur'])
 			or autoriser('dissocierdocuments', $objet, $id_objet)
@@ -91,11 +92,11 @@ function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = fa
 
 	// D'abord on ne supprime pas, on dissocie
 	include_spip('action/editer_liens');
-	objet_dissocier(array('document' => $id_document), array($objet => $id_objet), array('role' => '*'));
+	objet_dissocier(['document' => $id_document], [$objet => $id_objet], ['role' => '*']);
 
 	// Si c'est une vignette, l'eliminer du document auquel elle appartient
 	// cas tordu peu probable
-	sql_updateq('spip_documents', array('id_vignette' => 0), 'id_vignette=' . $id_document);
+	sql_updateq('spip_documents', ['id_vignette' => 0], 'id_vignette=' . $id_document);
 
 	// verifier son statut apres une suppression de lien
 	include_spip('action/editer_document');
@@ -107,17 +108,17 @@ function supprimer_lien_document($id_document, $objet, $id_objet, $supprime = fa
 
 	pipeline(
 		'post_edition',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'operation' => 'delier_document', // compat v<=2
 				'action' => 'delier_document',
 				'table' => 'spip_documents',
 				'id_objet' => $id_document,
 				'objet' => $objet,
 				'id' => $id_objet
-			),
+			],
 			'data' => null
-		)
+		]
 	);
 
 	if ($check) {
@@ -165,7 +166,7 @@ function dissocier_document($document, $objet, $id_objet, $supprime = false, $ch
 	} else {
 		list($image, $mode) = explode('/', $document);
 		$image = ($image == 'I');
-		$typdoc = sql_in('docs.extension', array('gif', 'jpg', 'png'), $image ? '' : 'NOT');
+		$typdoc = sql_in('docs.extension', ['gif', 'jpg', 'png'], $image ? '' : 'NOT');
 
 		$obj = 'id_objet=' . intval($id_objet) . ' AND objet=' . sql_quote($objet);
 
