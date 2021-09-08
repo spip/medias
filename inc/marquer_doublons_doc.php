@@ -66,7 +66,7 @@ function inc_marquer_doublons_doc_dist(
 	$id_table_objet,
 	$table_objet,
 	$spip_table_objet,
-	$desc = array(),
+	$desc = [],
 	$serveur = ''
 ) {
 
@@ -84,7 +84,7 @@ function inc_marquer_doublons_doc_dist(
 	// Il faut récupérer toutes les données qui impactent les liens de documents vus
 	// afin de savoir lesquels sont présents dans les textes, et pouvoir actualiser avec
 	// les liens actuellement enregistrés.
-	$absents = array();
+	$absents = [];
 
 	// Récupérer chaque champ impactant qui existe dans la table de l'objet et qui nous manque
 	foreach ($GLOBALS['medias_liste_champs'] as $champ) {
@@ -111,24 +111,24 @@ function inc_marquer_doublons_doc_dist(
 	$modeles = $modeles['modeles'];
 
 	// liste d'id_documents trouvés dans les textes
-	$GLOBALS['doublons_documents_inclus'] = array();
+	$GLOBALS['doublons_documents_inclus'] = [];
 
 	// detecter les doublons dans ces textes
-	traiter_modeles(implode(' ', $champs), array('documents' => $modeles), '', '', null, array(
+	traiter_modeles(implode(' ', $champs), ['documents' => $modeles], '', '', null, [
 		'objet' => $type,
 		'id_objet' => $id,
 		$id_table_objet => $id
-	));
+	]);
 
 	$texte_documents_vus = $GLOBALS['doublons_documents_inclus'];
 
 	// on ne modifie les liaisons que si c'est nécessaire
-	$bdd_documents_vus = array(
-		'oui' => array(),
-		'non' => array()
-	);
+	$bdd_documents_vus = [
+		'oui' => [],
+		'non' => []
+	];
 
-	$liaisons = objet_trouver_liens(array('document' => '*'), array($type => $id));
+	$liaisons = objet_trouver_liens(['document' => '*'], [$type => $id]);
 	foreach ($liaisons as $l) {
 		$bdd_documents_vus[$l['vu']][] = $l['id_document'];
 	}
@@ -145,12 +145,12 @@ function inc_marquer_doublons_doc_dist(
 		$ids = array_column($ids, 'id_document');
 		if ($ids) {
 			// Creer le lien s'il n'existe pas déjà
-			objet_associer(array('document' => $ids), array($type => $id), array('vu' => 'oui'));
-			objet_qualifier_liens(array('document' => $ids), array($type => $id), array('vu' => 'oui'));
+			objet_associer(['document' => $ids], [$type => $id], ['vu' => 'oui']);
+			objet_qualifier_liens(['document' => $ids], [$type => $id], ['vu' => 'oui']);
 		}
 	}
 
 	if ($anciens) {
-		objet_qualifier_liens(array('document' => $anciens), array($type => $id), array('vu' => 'non'));
+		objet_qualifier_liens(['document' => $anciens], [$type => $id], ['vu' => 'non']);
 	}
 }

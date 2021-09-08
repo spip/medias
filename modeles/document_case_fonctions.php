@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************\
  *  SPIP, Système de publication pour l'internet                           *
  *                                                                         *
@@ -56,10 +57,11 @@ function medias_raccourcis_doc(
 		// Affichage du raccourci <doc...> correspondant
 		$raccourci = medias_raccourcis_doc_groupe($doc, $id_document);
 
-		if ($mode == 'document'
+		if (
+			$mode == 'document'
 			and ($inclus == 'embed' or $inclus == 'image')
 			and (($largeur > 0 and $hauteur > 0)
-				or in_array($media, array('video', 'audio')))
+				or in_array($media, ['video', 'audio']))
 		) {
 			$raccourci =
 				'<span class="raccourcis_group_label">' . _T('medias:info_inclusion_vignette') . '</span>'
@@ -73,7 +75,7 @@ function medias_raccourcis_doc(
 }
 
 
-function medias_raccourcis_doc_groupe($doc, $id_document) : string {
+function medias_raccourcis_doc_groupe($doc, $id_document): string {
 	$raccourci =
 		affiche_raccourci_doc($doc, $id_document, '')
 		. affiche_raccourci_doc($doc, $id_document, 'left', true)

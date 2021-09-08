@@ -104,12 +104,12 @@ function action_tourner_post($id_document, $angle) {
 
 	// succes !
 	if ($largeur > 0 and $hauteur > 0) {
-		$set = array(
+		$set = [
 			'fichier' => set_spip_doc($dest),
 			'largeur' => $largeur,
 			'hauteur' => $hauteur,
 			'distant' => 'non' // le document n'est plus distant apres une transformation
-		);
+		];
 		if ($taille = @filesize($dest)) {
 			$set['taille'] = $taille;
 		}
@@ -121,18 +121,18 @@ function action_tourner_post($id_document, $angle) {
 		// pipeline pour les plugins
 		pipeline(
 			'post_edition',
-			array(
-				'args' => array(
+			[
+				'args' => [
 					'table' => 'spip_documents',
 					'table_objet' => 'documents',
 					'spip_table_objet' => 'spip_documents',
 					'type' => 'document',
 					'id_objet' => $id_document,
-					'champs' => array('rotation' => $angle, 'orientation' => $var_rot, 'fichier' => $row['fichier']),
+					'champs' => ['rotation' => $angle, 'orientation' => $var_rot, 'fichier' => $row['fichier']],
 					'action' => 'tourner',
-				),
+				],
 				'data' => $set
-			)
+			]
 		);
 	}
 }
@@ -142,7 +142,8 @@ function action_tourner_post($id_document, $angle) {
 // https://code.spip.net/@tourner_selon_exif_orientation
 function tourner_selon_exif_orientation($id_document, $fichier) {
 
-	if (function_exists('exif_read_data')
+	if (
+		function_exists('exif_read_data')
 		and $exif = exif_read_data($fichier)
 		and (
 			$ort = $exif['IFD0']['Orientation']
@@ -161,7 +162,7 @@ function tourner_selon_exif_orientation($id_document, $fichier) {
 				$rot = -90;
 		}
 		if ($rot) {
-			action_tourner_post(array(null, $id_document, $rot));
+			action_tourner_post([null, $id_document, $rot]);
 		}
 	}
 }

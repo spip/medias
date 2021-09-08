@@ -49,7 +49,7 @@ function erreur_upload_trop_gros() {
 		. '<br />'
 		. _T(
 			'medias:upload_limit',
-			array('max' => ini_get('upload_max_filesize'))
+			['max' => ini_get('upload_max_filesize')]
 		)
 		. '</p>';
 

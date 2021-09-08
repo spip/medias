@@ -44,23 +44,25 @@ function action_ordonner_liens_dist() {
 
 	list($_id_objet, $table_liens) = objet_associable($objet);
 
-	$success = $errors = array();
+	$success = $errors = [];
 
 	$actuels = sql_allfetsel(
-		array($_id_objet . ' AS id', 'rang_lien'),
+		[$_id_objet . ' AS id', 'rang_lien'],
 		$table_liens,
-		array(
+		[
 			sql_in($_id_objet, $ordre),
 			'objet = ' . sql_quote($objet_lie),
 			'id_objet = ' . sql_quote($id_objet_lie)
-		)
+		]
 	);
 
 	$futurs = array_flip($ordre);
 	// ordre de 1 à n (pas de 0 à n).
-	array_walk($futurs, function(&$v) { $v++; });
+	array_walk($futurs, function (&$v) {
+ $v++;
+	});
 
-	$updates = array();
+	$updates = [];
 
 	foreach ($actuels as $l) {
 		if ($futurs[$l['id']] !== $l['rang_lien']) {
@@ -72,21 +74,21 @@ function action_ordonner_liens_dist() {
 		foreach ($updates as $id => $ordre) {
 			sql_updateq(
 				$table_liens,
-				array('rang_lien' => $ordre),
-				array(
+				['rang_lien' => $ordre],
+				[
 					$_id_objet . ' = ' . $id,
 					'objet = ' . sql_quote($objet_lie),
 					'id_objet = ' . sql_quote($id_objet_lie)
-				)
+				]
 			);
 		}
 	}
 
-	return envoyer_json_envoi(array(
+	return envoyer_json_envoi([
 		'done' => true,
 		'success' => $success,
 		'errors' => $errors,
-	));
+	]);
 }
 
 function envoyer_json_envoi($data) {
@@ -95,9 +97,9 @@ function envoyer_json_envoi($data) {
 }
 
 function envoyer_json_erreur($msg) {
-	return envoyer_json_envoi(array(
+	return envoyer_json_envoi([
 		'done' => false,
-		'success' => array(),
-		'errors' => array($msg)
-	));
+		'success' => [],
+		'errors' => [$msg]
+	]);
 }

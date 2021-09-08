@@ -42,7 +42,7 @@ function inc_determiner_statut_document($id_document, $statut_ancien, $date_publ
 	while ($row = sql_fetch($res)) {
 		if (
 			// si ce n'est pas un logo
-			!in_array($row['mode'], array('logoon','logooff'))
+			!in_array($row['mode'], ['logoon','logooff'])
 			and (
 				// cas particulier des rubriques qui sont publiees des qu'elles contiennent un document !
 				$row['objet'] == 'rubrique'
@@ -54,7 +54,8 @@ function inc_determiner_statut_document($id_document, $statut_ancien, $date_publ
 			$date_publication = 0;
 			continue;
 		} // si pas publie, et article, il faut checker la date de post-publi eventuelle
-		elseif ($row['objet'] == 'article'
+		elseif (
+			$row['objet'] == 'article'
 			and $row2 = sql_fetsel(
 				'date',
 				'spip_articles',

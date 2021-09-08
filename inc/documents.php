@@ -131,7 +131,7 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
 			$img = $f($e, false);
 			$size = @spip_getimagesize($img);
 			$img = "<img src='$img' " . $size[3] . ' />';
-			$class .= " spip_document_icone";
+			$class .= ' spip_document_icone';
 		}
 	} else {
 		$size = @spip_getimagesize($img);
@@ -180,7 +180,8 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
  * @return string Chemin de l’image
  */
 function image_du_document($document, $connect = null) {
-	if ($e = $document['extension']
+	if (
+		$e = $document['extension']
 		and in_array($e, formats_image_acceptables())
 		and (!test_espace_prive() or $GLOBALS['meta']['creer_preview'] == 'oui')
 		and $document['fichier']
@@ -224,7 +225,7 @@ function affiche_raccourci_doc($doc, $id, $align = '', $short = false) {
 	$pipe = '';
 	if ($align) {
 		$pipe = "|$align";
-	} 
+	}
 
 	$model = "&lt;$doc$id$pipe&gt;";
 	$text = $model;
@@ -232,13 +233,13 @@ function affiche_raccourci_doc($doc, $id, $align = '', $short = false) {
 		$text = $align ? $align : $model;
 	}
 
-	$classes = "btn btn_link btn_mini";
+	$classes = 'btn btn_link btn_mini';
 	$classes = " class=\"$classes\"";
 
 	$styles = '';
 	if ($align && !$short) {
-		// a priori ne sert plus de toutes façons… 
-		$styles = "text-align: " . ($align ?: 'center') . ";";
+		// a priori ne sert plus de toutes façons…
+		$styles = 'text-align: ' . ($align ?: 'center') . ';';
 		$styles = " style=\"$styles\"";
 	}
 
@@ -247,6 +248,6 @@ function affiche_raccourci_doc($doc, $id, $align = '', $short = false) {
 
 	$title = attribut_html(_T('medias:inserer_raccourci'));
 	$title = " title=\"$title\"";
-	
+
 	return "\n<button{$classes}{$styles}{$js}{$title}>$text</button>\n";
 }

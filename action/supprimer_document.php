@@ -30,7 +30,7 @@ function action_supprimer_document_dist($id_document = 0) {
 	// si c'etait une vignette, modifier le document source !
 	if ($source = sql_getfetsel('id_document', 'spip_documents', 'id_vignette=' . intval($id_document))) {
 		include_spip('action/editer_document');
-		document_modifier($source, array('id_vignette' => 0));
+		document_modifier($source, ['id_vignette' => 0]);
 	}
 
 	include_spip('inc/documents');
@@ -46,7 +46,7 @@ function action_supprimer_document_dist($id_document = 0) {
 	// Si c'est un document ayant une vignette, supprimer aussi la vignette
 	if ($doc['id_vignette']) {
 		action_supprimer_document_dist($doc['id_vignette']);
-		objet_dissocier(array('document' => $doc['id_vignette']), '*');
+		objet_dissocier(['document' => $doc['id_vignette']], '*');
 	}
 	// Si c'est un document ayant des documents annexes (sous-titre, ...)
 	// les supprimer aussi
@@ -59,7 +59,7 @@ function action_supprimer_document_dist($id_document = 0) {
 	}
 
 	// dereferencer dans la base
-	objet_dissocier(array('document' => $id_document), '*', array('role' => '*'));
+	objet_dissocier(['document' => $id_document], '*', ['role' => '*']);
 	sql_delete('spip_documents', 'id_document=' . intval($id_document));
 
 
@@ -76,16 +76,16 @@ function action_supprimer_document_dist($id_document = 0) {
 
 	pipeline(
 		'post_edition',
-		array(
-			'args' => array(
+		[
+			'args' => [
 				'operation' => 'supprimer_document', // compat v<=2
 				'action' => 'supprimer_document',
 				'table' => 'spip_documents',
 				'id_objet' => $id_document,
 				'document' => $doc,
-			),
+			],
 			'data' => null
-		)
+		]
 	);
 
 	return true;
