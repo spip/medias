@@ -30,8 +30,8 @@ function formulaires_configurer_documents_charger_dist() {
 	$valeurs = [];
 	foreach (
 		[
-		'documents_objets',
-		'documents_date',
+			'documents_objets',
+			'documents_date',
 		] as $m
 	) {
 		$valeurs[$m] = isset($GLOBALS['meta'][$m]) ? $GLOBALS['meta'][$m] : '';
