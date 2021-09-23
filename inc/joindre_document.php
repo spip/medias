@@ -33,44 +33,20 @@ function joindre_trouver_fichier_envoye() {
 	}
 
 	if (_request('joindre_upload')) {
-		$post = isset($_FILES) ? $_FILES : $GLOBALS['HTTP_POST_FILES'];
-		$files = array();
-		if (is_array($post)) {
-			include_spip('action/ajouter_documents');
-			foreach ($post as $file) {
-				if (is_array($file['name'])) {
-					while (count($file['name'])) {
-						$test = array(
-							'error' => array_shift($file['error']),
-							'name' => array_shift($file['name']),
-							'tmp_name' => array_shift($file['tmp_name']),
-							'type' => array_shift($file['type']),
-						);
-						if (!($test['error'] == 4)) {
-							if (is_string($err = joindre_upload_error($test['error']))) {
-								return $err;
-							} // un erreur upload
-							if (!is_array(verifier_upload_autorise($test['name']))) {
-								return _T('medias:erreur_upload_type_interdit', array('nom' => $test['name']));
-							}
-							$files[] = $test;
-						}
-					}
-				} else {
-					//UPLOAD_ERR_NO_FILE
-					if (!($file['error'] == 4)) {
-						if (is_string($err = joindre_upload_error($file['error']))) {
-							return $err;
-						} // un erreur upload
-						if (!is_array(verifier_upload_autorise($file['name']))) {
-							return _T('medias:erreur_upload_type_interdit', array('nom' => $file['name']));
-						}
-						$files[] = $file;
-					}
-				}
-			}
-			if (!count($files)) {
-				return _T('medias:erreur_indiquez_un_fichier');
+		$files = joindre_trouver_http_post_files();
+		// erreur ?
+		if (is_string($files)) {
+			return $files;
+		}
+		// rien envoye ?
+		if (!count($files)) {
+			return _T('medias:erreur_indiquez_un_fichier');
+		}
+		// verifions les types de fichier envoyes
+		include_spip('action/ajouter_documents');
+		foreach ($files as $file) {
+			if (!is_array(verifier_upload_autorise($file['name']))) {
+				return _T('medias:erreur_upload_type_interdit', ['nom' => $file['name']]);
 			}
 		}
 
@@ -163,6 +139,56 @@ function joindre_trouver_fichier_envoye() {
 	}
 
 	return array();
+}
+
+/**
+ * Récupérer et mettre en forme la liste des fichiers postes
+ * que ce soit via plusieurs input file ou via un input file multiple
+ * @param $name : nom de l'input qu'on veut recuperer si on ne veut pas tous les fichiers
+ * @return array|string
+ *   string en cas d'erreur
+ */
+function joindre_trouver_http_post_files($name = null) {
+	$post = isset($_FILES) ? $_FILES : $GLOBALS['HTTP_POST_FILES'];
+	$files = [];
+	if (is_array($post)) {
+		foreach ($post as $input_name => $file) {
+			if ($name and $input_name !== $name) {
+				continue;
+			}
+			if (is_array($file['name'])) {
+				while (count($file['name'])) {
+					$test = [
+						'input_name' => $input_name,
+						'error' => array_shift($file['error']),
+						'name' => array_shift($file['name']),
+						'tmp_name' => array_shift($file['tmp_name']),
+						'type' => array_shift($file['type']),
+					];
+					//UPLOAD_ERR_NO_FILE
+					if (!($test['error'] == 4)) {
+						// un erreur upload
+						if (is_string($err = joindre_upload_error($test['error']))) {
+							return $err;
+						}
+						$files[] = $test;
+					}
+				}
+			} else {
+				//UPLOAD_ERR_NO_FILE
+				if (!($file['error'] == 4)) {
+					// un erreur upload
+					if (is_string($err = joindre_upload_error($file['error']))) {
+						return $err;
+					}
+					$file['input_name'] = $input_name;
+					$files[] = $file;
+				}
+			}
+		}
+	}
+
+	return $files;
 }
 
 
