@@ -136,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_telecharger' => 'Von Ihrem Computer hochladen:',
 	'info_utilisation' => 'Verwendunge(en)',
 	'infos' => 'Technische Informationen',
+	'inserer_raccourci' => 'Kürzel in den Text einfügen',
 	'item_autoriser_selectionner_date_en_ligne' => 'Festlegen eines Datums für jedes Dokument gestatten',
 	'item_non_autoriser_selectionner_date_en_ligne' => 'Das Datum der Dokumente entspricht dem Zeitpunkt des Uploads.',
 
@@ -150,6 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Seitenweise sortieren nach:',
 	'label_parents' => 'Dieses Dokument gehört zu',
 	'label_refdoc_joindre' => 'Dokument Nummer',
+	'label_titre_mimetype' => 'Dateityp',
 	'lien_tout_desordonner' => 'Sortierung zurücksetzen',
 	'lien_tout_desordonner_verif' => 'Die Sortierung für diese Liste von Dokumenten wird zurückgesetzt. Sind Sie sicher?',
 	'lien_tout_enlever' => 'Alle entfernen',
