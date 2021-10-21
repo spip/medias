@@ -68,6 +68,9 @@ function renseigner_source_distante($source) {
 		unset($a['body']);
 		$a['distant'] = 'oui';
 		$a['mode'] = 'document';
+		if (!empty($a['fichier'])) {
+			$a['copie_locale'] = $a['fichier'];
+		}
 		$a['fichier'] = set_spip_doc($source);
 	}
 
