@@ -375,14 +375,24 @@ function duree_en_secondes($duree, $precis = false) {
  * - avec une extension
  * - avec un mime_type donne
  *
- * => modeles/{modele_base}_emb_html.html si il existe
- * => modeles/{modele_base}_text_html.html si il existe,
- * => modeles/{modele_base}_text.html si il existe,
- * => modeles/{modele_base}.html sinon
+ *  En priorité :
+ *  - modeles/{modele_base}_emb_{extension}.html si il existe
+ *  - modeles/{modele_base}_emb_{mimetype}.html si il existe,
+ *          dans {mimetype}, les caractères non alphanumériques (typiquement '/') ont été remplacés par '_'.
+ *          Par exemple "text/css" devient "text_css"
+ *  - modeles/{modele_base}_emb_{mimetypeprincipal}.html si il existe
+ *          {mimetypeprincipal} est la partie du mimetype avant le '/'. C'est par exemple 'text' pour 'text/css'
+ *  - modeles/{modele_base} sinon
  *
- * @param  $extension
- * @param  $mime_type
- * @return mixed
+ * Pour une image jpg cela donne par priorité :
+ * modeles/image_emb_jpg.html
+ * modeles/image_emb_image_jpeg.html
+ * modeles/image_emb_image.html
+ * modeles/image.html
+ *
+ * @param string $extension
+ * @param string $mime_type
+ * @return string
  */
 function medias_trouver_modele_emb($extension, $mime_type, $modele_base = 'file') {
 	if ($extension and trouve_modele($fond = $modele_base . '_emb_' . $extension)) {
