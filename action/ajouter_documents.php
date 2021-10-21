@@ -127,9 +127,19 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		if (is_array($a = renseigner_source_distante($source))) {
 			$champs = $a;
 			# NB: dans les bonnes conditions (fichier autorise et pas trop gros)
-			# $a['fichier'] est une copie locale du fichier
+			# $a['copie_locale'] est une copie locale du fichier
 
-			$infos = renseigner_taille_dimension_image($champs['fichier'], $champs['extension'], true);
+			spip_ray("Retour renseigner_source_distante : ",$champs);
+			// voir si le document a besoin d'un nettoyage et le cas echeant relire ses infos apres
+			if (!empty($champs['copie_locale']) and file_exists($champs['copie_locale'])) {
+				$res_sanitize = sanitizer_document($champs['copie_locale'], $champs['extension']);
+				spip_ray("Retour sanitize : ",$res_sanitize);
+				$infos = renseigner_taille_dimension_image($champs['copie_locale'], $champs['extension']);
+			}
+			else {
+				$infos = renseigner_taille_dimension_image($champs['fichier'], $champs['extension'], true);
+			}
+
 			// on ignore erreur eventuelle sur $infos car on est distant, ca ne marche pas forcement
 			if (is_array($infos)) {
 				foreach ($infos as $k => $v) {
