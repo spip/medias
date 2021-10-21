@@ -129,11 +129,9 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 			# NB: dans les bonnes conditions (fichier autorise et pas trop gros)
 			# $a['copie_locale'] est une copie locale du fichier
 
-			spip_ray("Retour renseigner_source_distante : ",$champs);
 			// voir si le document a besoin d'un nettoyage et le cas echeant relire ses infos apres
 			if (!empty($champs['copie_locale']) and file_exists($champs['copie_locale'])) {
 				$res_sanitize = sanitizer_document($champs['copie_locale'], $champs['extension']);
-				spip_ray("Retour sanitize : ",$res_sanitize);
 				$infos = renseigner_taille_dimension_image($champs['copie_locale'], $champs['extension']);
 			}
 			else {
