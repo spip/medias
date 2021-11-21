@@ -152,6 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'تصفح حسب:',
 	'label_parents' => 'هذا المستند مرتبط بـ',
 	'label_refdoc_joindre' => 'مستند رقم',
+	'label_titre_mimetype' => 'نوع الملفات',
 	'lien_tout_desordonner' => 'إعادة تأصيل الترتيب',
 	'lien_tout_desordonner_verif' => 'سيتم إعادة تأصيل ترتيب هذه اللائحة. هل تؤكدون ذلك؟',
 	'lien_tout_enlever' => 'فك ربط الكل',
