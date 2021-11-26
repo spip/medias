@@ -39,8 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Sostituisci l’immagine',
 	'bouton_remplacer_image_document' => 'Sostituisci con un’immagine o un documento',
 	'bouton_supprimer' => 'Cancella',
-	'bouton_supprimer_tous_orphelins' => 'Cancella tutti i non utilizzati', # MODIF
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Vuoi veramente cancellare @nb@ documenti non utilizzati?', # MODIF
+	'bouton_supprimer_tous_orphelins' => 'Elimina tutti i documenti non utilizzati',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Vuoi veramente eliminare @nb@ documenti non utilizzati?',
 	'bouton_upload' => 'Carica',
 
 	// D
@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Impaginare da :',
 	'label_parents' => 'Il documento è collegato a',
 	'label_refdoc_joindre' => 'Documento numero',
-	'lien_tout_enlever' => 'Rimuovi tutto', # MODIF
+	'lien_tout_enlever' => 'Rimuovi tutto',
 	'logo' => 'Logo',
 
 	// M
