@@ -59,11 +59,14 @@ function action_copier_local_post($id_document) {
 
 	// si la source est bien un fichier distant
 	// sinon c'est une donnee moisie, on ne fait rien
-	if (tester_url_absolue($source)) {
-		include_spip('inc/distant'); // pour 'copie_locale'
+	include_spip('inc/distant');
+	if (tester_url_absolue($source)
+		and valider_url_distante($source)) {
 		$fichier = copie_locale($source);
-		if ($fichier
-			and tester_url_absolue($source)) {
+		if (
+			$fichier
+			and valider_url_distante($source)
+		) {
 			$fichier = _DIR_RACINE . $fichier;
 			$files = array();
 			$files[] = array('tmp_name' => $fichier, 'name' => basename($fichier));
@@ -84,6 +87,9 @@ function action_copier_local_post($id_document) {
 			return true;
 		} else {
 			spip_log("echec copie locale $source", 'medias' . _LOG_ERREUR);
+			if ($fichier) {
+				@unlink(_DIR_RACINE . $fichier);
+			}
 		}
 	} else {
 		spip_log("echec copie locale $source n'est pas une URL distante", 'medias' . _LOG_ERREUR);
