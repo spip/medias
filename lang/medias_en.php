@@ -151,6 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Paginate by:',
 	'label_parents' => 'This document is linked to',
 	'label_refdoc_joindre' => 'Document number',
+	'label_titre_mimetype' => 'File type',
 	'lien_tout_desordonner' => 'Reset the order',
 	'lien_tout_desordonner_verif' => 'The order set for this list of documents will be reset. Are you sure?',
 	'lien_tout_enlever' => 'Unlink all',
