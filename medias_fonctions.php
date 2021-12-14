@@ -475,9 +475,9 @@ function filtre_medias_modele_document_standard_attributs_dist($Pile, $id_docume
 
 	$res = '';
 	foreach ($attrs as $attr => $value) {
-		$res .= "$attr=\"" . attribut_html($value) . '"';
+		$res .= "$attr=\"" . attribut_html($value) . '" ';
 	};
-	return $res;
+	return rtrim($res);
 }
 
 
