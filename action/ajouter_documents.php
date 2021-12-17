@@ -333,42 +333,6 @@ function determiner_sous_dossier_document($ext, $fichier, $mode) {
 }
 
 /**
- * Corrige l'extension du fichier dans quelques cas particuliers
- *
- * @note
- *     Une extension 'pdf ' passe dans la requête de contrôle
- *     mysql> SELECT * FROM spip_types_documents WHERE extension="pdf ";
- *
- * @todo
- *     À passer dans base/typedoc
- *
- * @param string $ext
- * @return string
- */
-function corriger_extension($ext) {
-	$ext = preg_replace(',[^a-z0-9],i', '', $ext);
-	switch ($ext) {
-		case 'htm':
-			$ext = 'html';
-			break;
-		case 'jpeg':
-			$ext = 'jpg';
-			break;
-		case 'tiff':
-			$ext = 'tif';
-			break;
-		case 'aif':
-			$ext = 'aiff';
-			break;
-		case 'mpeg':
-			$ext = 'mpg';
-			break;
-	}
-
-	return $ext;
-}
-
-/**
  * Vérifie la possibilité d'uploader une extension
  *
  * Vérifie aussi si l'extension est autorisée pour le mode demandé
