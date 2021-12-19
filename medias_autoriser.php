@@ -85,7 +85,7 @@ function autoriser_document_tailler_dist($faire, $type, $id, $qui, $options) {
 		in_array($document['extension'], ['gif', 'jpg', 'png'])
 		and $document['hauteur']
 		and $document['largeur']
-		and $document['distant'] != 'oui'
+		and $document['distant'] !== 'oui'
 	) {
 		return false;
 	}
@@ -95,18 +95,20 @@ function autoriser_document_tailler_dist($faire, $type, $id, $qui, $options) {
 	$type_inclus = sql_getfetsel('inclus', 'spip_types_documents', 'extension=' . sql_quote($extension));
 
 	if (
-		($type_inclus == 'embed' or $type_inclus == 'image')
+		($type_inclus === 'embed' or $type_inclus === 'image')
 		and (
 			// documents dont la taille est definie
 			($document['largeur'] * $document['hauteur'])
 			// ou distants
-			or $document['distant'] == 'oui'
+			or $document['distant'] === 'oui'
 			// ou tous les formats qui s'affichent en embed
-			or $type_inclus == 'embed'
+			or $type_inclus === 'embed'
 		)
 	) {
 		return true;
 	}
+
+	return false;
 }
 
 /**
