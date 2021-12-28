@@ -164,7 +164,7 @@ function document_modifier($id_document, $set = null) {
 
 		// Invalider les caches
 		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_document/$id_document'");
+		suivre_invalideur("id='document/$id_document'");
 	}
 }
 
