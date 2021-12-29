@@ -17,7 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function formulaires_changer_fichier_document_charger_dist($id_document) {
 	$valeurs = sql_fetsel('id_document,fichier,distant', 'spip_documents', 'id_document=' . intval($id_document));
 	if (!$valeurs) {
-		return array('editable' => false);
+		return ['editable' => false];
 	}
 
 	$charger = charger_fonction('charger', 'formulaires/joindre_document');
@@ -29,7 +29,7 @@ function formulaires_changer_fichier_document_charger_dist($id_document) {
 }
 
 function formulaires_changer_fichier_document_verifier_dist($id_document) {
-	$erreurs = array();
+	$erreurs = [];
 	if (_request('copier_local')) {
 	} else {
 		$verifier = charger_fonction('verifier', 'formulaires/joindre_document');
@@ -42,7 +42,7 @@ function formulaires_changer_fichier_document_verifier_dist($id_document) {
 function formulaires_changer_fichier_document_traiter_dist($id_document) {
 	if (_request('copier_local')) {
 		$copier_local = charger_fonction('copier_local', 'action');
-		$res = array('editable' => true);
+		$res = ['editable' => true];
 		if (($err = $copier_local($id_document)) === true) {
 			$res['message_ok'] = _T('medias:document_copie_locale_succes');
 		} else {
@@ -50,7 +50,8 @@ function formulaires_changer_fichier_document_traiter_dist($id_document) {
 		}
 	} else {
 		// liberer le nom de l'ancien fichier pour permettre le remplacement par un fichier du meme nom
-		if ($ancien_fichier = sql_getfetsel('fichier', 'spip_documents', 'id_document=' . intval($id_document))
+		if (
+			$ancien_fichier = sql_getfetsel('fichier', 'spip_documents', 'id_document=' . intval($id_document))
 			and @file_exists($f = get_spip_doc($ancien_fichier))
 		) {
 			spip_unlink($f);

@@ -27,11 +27,13 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Environnement du formulaire
  **/
 function formulaires_configurer_documents_charger_dist() {
-	$valeurs = array();
-	foreach (array(
-		'documents_objets',
-		'documents_date',
-	) as $m) {
+	$valeurs = [];
+	foreach (
+		[
+			'documents_objets',
+			'documents_date',
+		] as $m
+	) {
 		$valeurs[$m] = isset($GLOBALS['meta'][$m]) ? $GLOBALS['meta'][$m] : '';
 	}
 	$valeurs['documents_objets'] = explode(',', $valeurs['documents_objets']);
@@ -46,7 +48,7 @@ function formulaires_configurer_documents_charger_dist() {
  *     Retours du traitement
  **/
 function formulaires_configurer_documents_traiter_dist() {
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 	if (!is_null($v = _request($m = 'documents_date'))) {
 		ecrire_meta($m, $v == 'oui' ? 'oui' : 'non');
 	}

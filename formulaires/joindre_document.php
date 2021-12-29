@@ -36,10 +36,12 @@ function joindre_determiner_mode($mode, $id_document, $objet) {
 		if (intval($id_document)) {
 			$mode = sql_getfetsel('mode', 'spip_documents', 'id_document=' . intval($id_document));
 		}
-		if (!in_array($mode, array('choix', 'document', 'image'))) {
+		if (!in_array($mode, ['choix', 'document', 'image'])) {
 			$mode = 'choix';
-			if ($objet
-				and !in_array(table_objet_sql($objet), explode(',', $GLOBALS['meta']['documents_objets']))) {
+			if (
+				$objet
+				and !in_array(table_objet_sql($objet), explode(',', $GLOBALS['meta']['documents_objets']))
+			) {
 				$mode = 'image';
 			}
 		}
@@ -80,7 +82,7 @@ function formulaires_joindre_document_charger_dist(
 	$proposer_media = true,
 	$proposer_ftp = true
 ) {
-	$valeurs = array();
+	$valeurs = [];
 	$mode = joindre_determiner_mode($mode, $id_document, $objet);
 
 
@@ -91,7 +93,7 @@ function formulaires_joindre_document_charger_dist(
 	$valeurs['fichier_upload'] = $valeurs['_options_upload_ftp'] = $valeurs['_dir_upload_ftp'] = '';
 	$valeurs['joindre_upload'] = $valeurs['joindre_distant'] =
 	$valeurs['joindre_ftp'] = $valeurs['joindre_mediatheque'] = '';
-	
+
 	// gérer le focus de la méthode d'upload lorsque le formulaire est envoyé
 	$valeurs['methode_focus'] = _request('methode_focus');
 
@@ -181,7 +183,7 @@ function formulaires_joindre_document_verifier_dist(
 ) {
 	include_spip('inc/joindre_document');
 
-	$erreurs = array();
+	$erreurs = [];
 	// on joint un document deja dans le site
 	if (_request('joindre_mediatheque')) {
 		$refdoc_joindre = intval(preg_replace(',^(doc|document|img),', '', _request('refdoc_joindre')));
@@ -200,7 +202,8 @@ function formulaires_joindre_document_verifier_dist(
 			} else {
 				// regarder si on a eu une erreur sur l'upload d'un fichier
 				foreach ($files as $file) {
-					if (isset($file['error'])
+					if (
+						isset($file['error'])
 						and $test = joindre_upload_error($file['error'])
 					) {
 						if (is_string($test)) {
@@ -213,7 +216,8 @@ function formulaires_joindre_document_verifier_dist(
 
 				// si ce n'est pas deja un post de zip confirme
 				// regarder si il faut lister le contenu du zip et le presenter
-				if (!count($erreurs)
+				if (
+					!count($erreurs)
 					and !_request('joindre_zip')
 					and $contenu_zip = joindre_verifier_zip($files)
 				) {
@@ -224,11 +228,11 @@ function formulaires_joindre_document_verifier_dist(
 						$erreurs['message_erreur'] = '';
 						$erreurs['lister_contenu_archive'] = recuperer_fond(
 							'formulaires/inc-lister_archive_jointe',
-							array(
+							[
 								'chemin_zip' => $token_zip,
 								'liste_fichiers_zip' => $fichiers,
 								'erreurs_fichier_zip' => $erreurs
-							)
+							]
 						);
 					} else {
 						$erreurs['message_erreur'] = _T('medias:erreur_aucun_fichier');
@@ -277,11 +281,11 @@ function formulaires_joindre_document_traiter_dist(
 	$proposer_media = true,
 	$proposer_ftp = true
 ) {
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 	$ancre = '';
 	// on joint un document deja dans le site
 	if (_request('joindre_mediatheque')) {
-		$sel = array();
+		$sel = [];
 		$refdoc_joindre = _request('refdoc_joindre');
 		$refdoc_joindre = strtr($refdoc_joindre, ';,', '  ');
 		$refdoc_joindre = preg_replace(',\b(doc|document|img),', '', $refdoc_joindre);
@@ -294,7 +298,7 @@ function formulaires_joindre_document_traiter_dist(
 		foreach ($refdoc_joindre as $j) {
 			if ($j = intval(preg_replace(',^(doc|document|img),', '', $j))) {
 				// lier le parent en plus
-				$champs = array('ajout_parents' => array("$objet|$id_objet"));
+				$champs = ['ajout_parents' => ["$objet|$id_objet"]];
 				document_modifier($j, $champs);
 				if (!$ancre) {
 					$ancre = $j;
@@ -329,14 +333,14 @@ function formulaires_joindre_document_traiter_dist(
 		}
 
 		// checker les erreurs eventuelles
-		$messages_erreur = array();
-		$sel = array();
+		$messages_erreur = [];
+		$sel = [];
 		foreach ($nouveaux_doc as $doc) {
 			if (!is_numeric($doc)) {
 				$messages_erreur[] = $doc;
 			} // cas qui devrait etre traite en amont
 			elseif (!$doc) {
-				$messages_erreur[] = _T('medias:erreur_insertion_document_base', array('fichier' => '<em>???</em>'));
+				$messages_erreur[] = _T('medias:erreur_insertion_document_base', ['fichier' => '<em>???</em>']);
 			} else {
 				if (!$ancre) {
 					$ancre = $doc;
@@ -394,7 +398,7 @@ function formulaires_joindre_document_traiter_dist(
  */
 function joindre_options_upload_ftp($dir, $mode = 'document') {
 	$fichiers = preg_files($dir);
-	$exts = $dirs = $texte_upload = array();
+	$exts = $dirs = $texte_upload = [];
 
 	// en mode "charger une image", ne proposer que les inclus
 	$inclus = ($mode == 'image' or $mode == 'vignette')
@@ -425,7 +429,7 @@ function joindre_options_upload_ftp($dir, $mode = 'document') {
 				if (!in_array($ledossier, $dirs)) {
 					$texte_upload[] = "\n<option value=\"$ledossier\">"
 						. str_repeat('&nbsp;', $k)
-						. _T('medias:tout_dossier_upload', array('upload' => $ledossier))
+						. _T('medias:tout_dossier_upload', ['upload' => $ledossier])
 						. '</option>';
 					$dirs[] = $ledossier;
 				}
@@ -496,7 +500,7 @@ function joindre_liste_erreurs_to_li($erreurs) {
 	if (count($erreurs) > 4) {
 		$res = "<p style='cursor:pointer;' onclick='jQuery(this).siblings(\"ul\").toggle();return false;'>" . _T(
 			'medias:erreurs_voir',
-			array('nb' => count($erreurs))
+			['nb' => count($erreurs)]
 		) . '</p><ul class="spip none-js">' . $res . '</ul>';
 	} else {
 		$res = "<ul class=\"spip\">$res</ul>";

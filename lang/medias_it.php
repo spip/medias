@@ -10,6 +10,9 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'affichage_documents_en_cases' => 'Visualizza in box',
+	'affichage_documents_en_grand' => 'Visualizza in grande',
+	'affichage_documents_en_liste_compacte' => 'Visualizzazione elenco compatto',
 	'aucun_audio' => 'Nessun suono',
 	'aucun_document' => 'Nessun documento',
 	'aucun_file' => 'Nessun documento',
@@ -39,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_remplacer_image' => 'Sostituisci l’immagine',
 	'bouton_remplacer_image_document' => 'Sostituisci con un’immagine o un documento',
 	'bouton_supprimer' => 'Cancella',
-	'bouton_supprimer_tous_orphelins' => 'Cancella tutti i non utilizzati', # MODIF
-	'bouton_supprimer_tous_orphelins_confirmation' => 'Vuoi veramente cancellare @nb@ documenti non utilizzati?', # MODIF
+	'bouton_supprimer_tous_orphelins' => 'Elimina tutti i documenti non utilizzati',
+	'bouton_supprimer_tous_orphelins_confirmation' => 'Vuoi veramente eliminare @nb@ documenti non utilizzati?',
 	'bouton_upload' => 'Carica',
 
 	// D
@@ -51,6 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'des_utilisations' => '@nb@ utilizzazioni',
 	'des_videos' => '@nb@ video',
 	'descriptif' => 'Descrizione',
+	'details_document' => 'Dettagli',
+	'details_document_afficher_masquer' => 'Visualizza/nascondi i dettagli del documento',
 	'document_attache_succes' => 'Il documento è stato aggiunto con successo',
 	'document_copie_locale_succes' => 'Il documento è stato copiato con successo nel sito',
 	'document_installe_succes' => 'Il file è stato caricato con successo',
@@ -71,14 +76,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre_image' => 'Titolo dell’immagine:',
 	'erreur_aucun_document' => 'Il documento non esiste nella media library',
 	'erreur_aucun_fichier' => 'Nessun file è stato trovato',
+	'erreur_autorisation' => 'Autorizzazione fallita',
 	'erreur_chemin_distant' => 'Il file remoto @nom@ non può essere trovato',
 	'erreur_chemin_ftp' => 'Il file indicato non è stato trovato nel server',
 	'erreur_copie_fichier' => 'Impossibile copiare il file @nom@',
+	'erreur_deplacement_impossible' => 'Spostamento impossibile',
 	'erreur_dossier_tmp_manquant' => 'La directory temporanea per scaricare il file è mancante',
 	'erreur_ecriture_fichier' => 'Errore scrivendo il file sul disco',
 	'erreur_format_fichier_image' => 'Il formato di @nom@ non è assimilabile a un’immagine',
 	'erreur_indiquez_un_fichier' => 'Specifica un file!',
 	'erreur_insertion_document_base' => 'Impossibile salvare il documento @fichier@ nel database',
+	'erreur_objet_absent' => 'Informazioni ricevute incomplete',
 	'erreur_suppression_vignette' => 'Errore durante la cancellazione della miniatura',
 	'erreur_upload_type_interdit' => 'Il caricamento di file del tipo @nom@ non è consentito',
 	'erreur_upload_vignette' => 'Errore caricando la miniatura  @nom@',
@@ -97,16 +105,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'image_tourner_180' => 'Ruota 180°',
 	'image_tourner_droite' => 'Ruota 90° a destra',
 	'image_tourner_gauche' => 'Ruota 90° a sinistra',
+	'info_alt' => 'Descrizione del contenuto dell’immagine quando non è visibile, oltre al titolo.',
+	'info_dimensions_image' => 'Dimensioni',
 	'info_doc_max_poids' => 'Il documento deve necessariamente essere più piccolo di @maxi@ (il file è attualmente @actuel@).',
 	'info_document' => 'Documento',
 	'info_document_indisponible' => 'Questo documento non è disponibile',
 	'info_documents' => 'Documenti',
+	'info_duree' => 'Durata',
 	'info_gauche_numero_document' => 'DOCUMENTO NUMERO',
 	'info_hauteur' => 'Altezza',
 	'info_heure' => 'Ora',
 	'info_illustrations' => 'Illustrazioni',
 	'info_image_max_poids' => 'L’immagine deve essere necessariamente grande meno di @maxi@ (il file è @actuel@).',
 	'info_image_max_taille' => 'L’immagine deve essere necessariamente grande meno di @maxi@ (il file è @actuel@).',
+	'info_image_min_taille' => 'Le immagini devono essere almeno @mini@ (questo file è @actuel@).',
 	'info_inclusion_directe' => 'Inclusione diretta:',
 	'info_inclusion_vignette' => 'Inclusione dell’immagine:',
 	'info_installer_tous_documents' => 'Installare tutti i documenti',
@@ -116,16 +128,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_document' => 'Modifica il documento',
 	'info_portfolio' => 'Portfolio',
 	'info_referencer_doc_distant' => 'Mettere in repertorio un documento su Internet:',
+	'info_resolution_image' => 'Risoluzione',
+	'info_resolution_mpx' => '@resolution@ Mpx',
 	'info_sans_vignette' => 'Nessuna miniatura',
 	'info_statut_document' => 'Il documento è:',
 	'info_taille' => 'Peso',
 	'info_telecharger' => 'Upload dal tuo computer:',
+	'info_utilisation' => 'Utilizzo(i)',
 	'infos' => 'Informazioni tecniche',
+	'inserer_raccourci' => 'Inserisci questa scorciatoia nel testo',
 	'item_autoriser_selectionner_date_en_ligne' => 'Permetti di modificare la data di ogni documento',
 	'item_non_autoriser_selectionner_date_en_ligne' => 'La data dei documenti è quella in cui sono stati aggiunti al sito.',
 
 	// L
 	'label_activer_document_objets' => 'Attiva il caricamento di documento per il contenuto:',
+	'label_alt' => 'Testo alternativo (alt)',
 	'label_apercu' => 'Anteprima',
 	'label_caracteristiques' => 'Specifiche',
 	'label_credits' => 'Crediti',
@@ -134,7 +151,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Impaginare da :',
 	'label_parents' => 'Il documento è collegato a',
 	'label_refdoc_joindre' => 'Documento numero',
-	'lien_tout_enlever' => 'Rimuovi tutto', # MODIF
+	'label_titre_mimetype' => 'Tipo di file',
+	'lien_tout_desordonner' => 'Ripristina l’ordine',
+	'lien_tout_desordonner_verif' => 'L’ordine definito per questo elenco di documenti verrà reimpostato. Sei sicuro?',
+	'lien_tout_enlever' => 'Rimuovi tutto',
+	'lien_tout_enlever_verif' => 'Vuoi staccare tutti i documenti?',
 	'logo' => 'Logo',
 
 	// M
@@ -151,6 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'objet_document' => 'Documento',
 	'objet_documents' => 'Documenti',
+	'ordonner_ce_document' => 'Ordina questo documento',
 
 	// P
 	'par_date' => 'Data',

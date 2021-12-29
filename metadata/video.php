@@ -1,4 +1,5 @@
 <?php
+
 /**
  * GetID3
  * Gestion des métadonnées de fichiers sonores et vidéos directement dans SPIP
@@ -24,11 +25,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *    Le tableau comprenant les différentes metas à mettre en base
  */
 function metadata_video($file) {
-	$meta = array();
+	$meta = [];
 
 	include_spip('lib/getid3/getid3');
-	$getID3 = new getID3;
-	$getID3->setOption(array('tempdir' => _DIR_TMP));
+	$getID3 = new getID3();
+	$getID3->setOption(['tempdir' => _DIR_TMP]);
 
 	// Scan file - should parse correctly if file is not corrupted
 	$file_info = $getID3->analyze($file);

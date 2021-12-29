@@ -81,10 +81,11 @@ function autoriser_document_tailler_dist($faire, $type, $id, $qui, $options) {
 
 	// (on ne le propose pas pour les images qu'on sait
 	// lire : gif jpg png), sauf bug, ou document distant
-	if (in_array($document['extension'], array('gif', 'jpg', 'png'))
+	if (
+		in_array($document['extension'], ['gif', 'jpg', 'png'])
 		and $document['hauteur']
 		and $document['largeur']
-		and $document['distant'] != 'oui'
+		and $document['distant'] !== 'oui'
 	) {
 		return false;
 	}
@@ -93,18 +94,21 @@ function autoriser_document_tailler_dist($faire, $type, $id, $qui, $options) {
 	$extension = $document['extension'];
 	$type_inclus = sql_getfetsel('inclus', 'spip_types_documents', 'extension=' . sql_quote($extension));
 
-	if (($type_inclus == 'embed' or $type_inclus == 'image')
+	if (
+		($type_inclus === 'embed' or $type_inclus === 'image')
 		and (
 			// documents dont la taille est definie
 			($document['largeur'] * $document['hauteur'])
 			// ou distants
-			or $document['distant'] == 'oui'
+			or $document['distant'] === 'oui'
 			// ou tous les formats qui s'affichent en embed
-			or $type_inclus == 'embed'
+			or $type_inclus === 'embed'
 		)
 	) {
 		return true;
 	}
+
+	return false;
 }
 
 /**
@@ -156,7 +160,7 @@ function autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt) {
-	static $m = array();
+	static $m = [];
 
 	$q = $qui['id_auteur'];
 	if (isset($m[$q][$id])) {
@@ -165,7 +169,8 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	$s = sql_getfetsel('statut', 'spip_documents', 'id_document=' . intval($id));
 	// les admins ont le droit de modifier tous les documents existants
-	if ($qui['statut'] == '0minirezo'
+	if (
+		$qui['statut'] == '0minirezo'
 		and !$qui['restreint']
 	) {
 		return is_string($s) ? true : false;
@@ -210,7 +215,8 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_document_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	if (!intval($id)
+	if (
+		!intval($id)
 		or !$qui['id_auteur']
 		or !autoriser('ecrire', '', '', $qui)
 	) {
@@ -230,11 +236,13 @@ function autoriser_document_supprimer_dist($faire, $type, $id, $qui, $opt) {
 		return !$id_document or autoriser('modifier', 'document', $id_document);
 	}
 	// si c'est un document annexe, se ramener a l'autorisation de son parent
-	if ($id_document = sql_getfetsel(
-		'id_objet',
-		'spip_documents_liens',
-		"objet='document' AND id_document=" . intval($id)
-	)) {
+	if (
+		$id_document = sql_getfetsel(
+			'id_objet',
+			'spip_documents_liens',
+			"objet='document' AND id_document=" . intval($id)
+		)
+	) {
 		return autoriser('modifier', 'document', $id_document);
 	}
 
@@ -264,7 +272,8 @@ function autoriser_document_supprimer_dist($faire, $type, $id, $qui, $opt) {
  **/
 function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 
-	if (!isset($GLOBALS['meta']['creer_htaccess'])
+	if (
+		!isset($GLOBALS['meta']['creer_htaccess'])
 		or $GLOBALS['meta']['creer_htaccess'] != 'oui'
 	) {
 		return true;
@@ -274,7 +283,7 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 		return false;
 	}
 
-	if (in_array($qui['statut'], array('0minirezo', '1comite'))) {
+	if (in_array($qui['statut'], ['0minirezo', '1comite'])) {
 		return 'htaccess';
 	}
 
@@ -282,13 +291,15 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 		foreach ($liens as $l) {
 			$table_sql = table_objet_sql($l['objet']);
 			$id_table = id_table_objet($l['objet']);
-			if (sql_countsel(
-				$table_sql,
-				"$id_table = " . intval($l['id_objet'])
-					. (in_array($l['objet'], array('article', 'rubrique', 'breve'))
+			if (
+				sql_countsel(
+					$table_sql,
+					"$id_table = " . intval($l['id_objet'])
+					. (in_array($l['objet'], ['article', 'rubrique', 'breve'])
 					? " AND statut = 'publie'"
 					: '')
-			) > 0) {
+				) > 0
+			) {
 				return 'htaccess';
 			}
 		}
@@ -327,7 +338,8 @@ function autoriser_autoassocierdocument_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_orphelins_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	if ($qui['statut'] == '0minirezo'
+	if (
+		$qui['statut'] == '0minirezo'
 		and !$qui['restreint']
 	) {
 		return true;

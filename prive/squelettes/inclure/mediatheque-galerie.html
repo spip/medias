@@ -37,9 +37,9 @@
 			</th>
 		</tr>]
 		<tr class="first_row">
+			<th class="id"><:medias:id:></th>
 			<th class="logo"><:medias:logo:></th>
 			<th class="infos"></th>
-			<th class="id"><:medias:id:></th>
 			<th class="statut"></th>
 			<th class="exif"><:medias:infos:></th>
 			<th class="editorial"><:medias:descriptif:></th>
@@ -51,6 +51,7 @@
 		#SET{titre_mimetype,''}
 		<BOUCLE_type(types_documents) {extension}>#SET{titre_mimetype,#TITRE}</BOUCLE_type>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#ENV{media}|non)[ media-(#MEDIA)]]" id="#ENV{iddoc,media}#ID_DOCUMENT">
+			<td class="id">#ID_DOCUMENT</td>
 			<td class="logo">
 				#SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
 				[(#MEDIA|=={image}|oui)[
@@ -66,9 +67,6 @@
 				[<div class="extension">(#EXTENSION)</div>]
 				[(#GET{missing}|oui)[(#CHEMIN_IMAGE{document-manquant-32.png}|balise_img{<:medias:fichier_manquant:>}|inserer_attribut{title,<:medias:fichier_manquant:>})]]
 				[(#DISTANT|=={oui}|oui)[(#CHEMIN_IMAGE{document-distant-32.png}|balise_img{<:medias:fichier_distant:>}|inserer_attribut{title,<:medias:fichier_distant:>})]]
-			</td>
-			<td class="id">
-				<strong>#ID_DOCUMENT</strong>
 			</td>
 			<td class='statut'>
 				[(#ID_DOCUMENT|medias_puce_statut_document{#STATUT})]
@@ -129,8 +127,8 @@
 			<td class="editorial">
 				[<strong class="titre #EDIT{titre}">(#TITRE|sinon{#VAL{<i class="sans-titre">}|concat{<:info_sans_titre:>,'</i>'}})</strong>]
 				[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
-				[<p class="credits #EDIT{credits}"><span class="label"><:medias:label_credits:></span><span class="sep"> &ndash; </span><span class="valeur">(#CREDITS)</span></p>]
-				[<p class="alt #EDIT{alt}"><span class="label"><:medias:label_alt:></span><span class="sep"> &ndash; </span><span class="valeur">(#ALT)</span></p>]
+				[<p class="credits #EDIT{credits}">[<span class="label">(#VAL{medias:label_credits}|_T|label_nettoyer|label_ponctuer)</span> ]<span class="valeur">(#CREDITS)</span></p>]
+				[<p class="alt #EDIT{alt}">[<span class="label">(#VAL{medias:label_alt}|_T|label_nettoyer|label_ponctuer)</span> ]<span class="valeur">(#ALT)</span></p>]
 			</td>
 			<td class="action">
 				[(#REM) Utilisation de la galerie en mode portfolio, avec renvoi vers l'edition]

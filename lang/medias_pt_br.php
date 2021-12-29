@@ -136,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_telecharger' => 'Transferir do seu computador:',
 	'info_utilisation' => 'Utilização(ões)',
 	'infos' => 'Exibir informações técnicas',
+	'inserer_raccourci' => 'Inserir este atalho no texto',
 	'item_autoriser_selectionner_date_en_ligne' => 'Permite modificar a data de cada documento',
 	'item_non_autoriser_selectionner_date_en_ligne' => 'A data dos documentos é a mesma da incorporação ao site',
 
@@ -150,6 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_paginer_par' => 'Paginar por:',
 	'label_parents' => 'Este documento está relacionado a',
 	'label_refdoc_joindre' => 'Número do documento',
+	'label_titre_mimetype' => 'Tipo de arquivo',
 	'lien_tout_desordonner' => 'Reinicializar a ordenação',
 	'lien_tout_desordonner_verif' => 'A ordenação desta listagem de documentos será reinicializada. Você confirma?',
 	'lien_tout_enlever' => 'Desvincular todos',

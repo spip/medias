@@ -36,17 +36,17 @@ function sanitizer_svg_dist($file) {
 
 	include_spip('inc/svg');
 	if ($svg = svg_charger($file)) {
-
 		// forcer une viewBox et width+height en px
 		$svg = svg_force_viewBox_px($svg, true);
 
 		// Securite si pas autorise : virer les scripts et les references externes
 		// sauf si on est en mode javascript 'ok' (1), cf. inc_version
-		if ($GLOBALS['filtrer_javascript'] < 1
+		if (
+			$GLOBALS['filtrer_javascript'] < 1
 			// qu'on soit admin ou non, on sanitize les SVGs car rien ne dit qu'un admin sait que ca contient du JS
-		  // and !autoriser('televerser', 'script')
+			// and !autoriser('televerser', 'script')
 		) {
-			spip_log("sanitization SVG $file", "svg");
+			spip_log("sanitization SVG $file", 'svg');
 
 			if (!class_exists('enshrined\svgSanitize\Sanitizer')) {
 				spl_autoload_register(function ($class) {
@@ -60,7 +60,7 @@ function sanitizer_svg_dist($file) {
 					$file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
 									if (file_exists($file)) {
 						require $file;
-					}
+									}
 				});
 			}
 
@@ -75,14 +75,14 @@ function sanitizer_svg_dist($file) {
 				$svg = $sanitizer->sanitize($svg);
 
 				// loger les sanitization
-				$trace = "";
+				$trace = '';
 				foreach ($sanitizer->getXmlIssues() as $issue) {
-					$trace .= $issue['message'] . " L".$issue['line']."\n";
+					$trace .= $issue['message'] . ' L' . $issue['line'] . "\n";
 				}
 				if ($trace) {
-					spip_log($trace, "svg" . _LOG_DEBUG);
+					spip_log($trace, 'svg' . _LOG_DEBUG);
 				}
-			} while (strlen($svg) !== $size and $maxiter-->0);
+			} while (strlen($svg) !== $size and $maxiter-- > 0);
 		}
 
 		ecrire_fichier($file, $svg);

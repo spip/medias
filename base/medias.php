@@ -30,13 +30,13 @@ function medias_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['documents'] = 'documents';
 	$interfaces['table_des_tables']['types_documents'] = 'types_documents';
 
-	$interfaces['exceptions_des_tables']['documents']['type_document'] = array('types_documents', 'titre');
-	$interfaces['exceptions_des_tables']['documents']['extension_document'] = array('types_documents', 'extension');
-	$interfaces['exceptions_des_tables']['documents']['mime_type'] = array('types_documents', 'mime_type');
-	$interfaces['exceptions_des_tables']['documents']['media_document'] = array('types_documents', 'media');
+	$interfaces['exceptions_des_tables']['documents']['type_document'] = ['types_documents', 'titre'];
+	$interfaces['exceptions_des_tables']['documents']['extension_document'] = ['types_documents', 'extension'];
+	$interfaces['exceptions_des_tables']['documents']['mime_type'] = ['types_documents', 'mime_type'];
+	$interfaces['exceptions_des_tables']['documents']['media_document'] = ['types_documents', 'media'];
 
-	$interfaces['exceptions_des_jointures']['spip_documents']['id_forum'] = array('spip_documents_liens', 'id_forum');
-	$interfaces['exceptions_des_jointures']['spip_documents']['vu'] = array('spip_documents_liens', 'vu');
+	$interfaces['exceptions_des_jointures']['spip_documents']['id_forum'] = ['spip_documents_liens', 'id_forum'];
+	$interfaces['exceptions_des_jointures']['spip_documents']['vu'] = ['spip_documents_liens', 'vu'];
 	$interfaces['table_date']['types_documents'] = 'date';
 
 	$interfaces['table_des_traitements']['FICHIER'][] = 'get_spip_doc(%s)';
@@ -53,7 +53,7 @@ function medias_declarer_tables_interfaces($interfaces) {
  */
 function medias_declarer_tables_principales($tables_principales) {
 
-	$spip_types_documents = array(
+	$spip_types_documents = [
 		'extension' => "varchar(10) DEFAULT '' NOT NULL",
 		'titre' => "text DEFAULT '' NOT NULL",
 		'descriptif' => "text DEFAULT '' NOT NULL",
@@ -62,15 +62,15 @@ function medias_declarer_tables_principales($tables_principales) {
 		'upload' => "ENUM('oui', 'non') DEFAULT 'oui'  NOT NULL",
 		'media_defaut' => "varchar(10) DEFAULT 'file' NOT NULL",
 		'maj' => 'TIMESTAMP'
-	);
+	];
 
-	$spip_types_documents_key = array(
+	$spip_types_documents_key = [
 		'PRIMARY KEY' => 'extension',
 		'KEY inclus' => 'inclus'
-	);
+	];
 
 	$tables_principales['spip_types_documents'] =
-		array('field' => &$spip_types_documents, 'key' => &$spip_types_documents_key);
+		['field' => &$spip_types_documents, 'key' => &$spip_types_documents_key];
 
 	return $tables_principales;
 }
@@ -83,25 +83,25 @@ function medias_declarer_tables_principales($tables_principales) {
  */
 function medias_declarer_tables_auxiliaires($tables_auxiliaires) {
 
-	$spip_documents_liens = array(
+	$spip_documents_liens = [
 		'id_document' => "bigint(21) DEFAULT '0' NOT NULL",
 		'id_objet' => "bigint(21) DEFAULT '0' NOT NULL",
 		'objet' => "VARCHAR (25) DEFAULT '' NOT NULL",
 		'vu' => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 		'rang_lien' => "int(4) DEFAULT '0' NOT NULL"
-	);
+	];
 
-	$spip_documents_liens_key = array(
+	$spip_documents_liens_key = [
 		'PRIMARY KEY' => 'id_document,id_objet,objet',
 		'KEY id_document' => 'id_document',
 		'KEY id_objet' => 'id_objet',
 		'KEY objet' => 'objet',
-	);
+	];
 
-	$tables_auxiliaires['spip_documents_liens'] = array(
+	$tables_auxiliaires['spip_documents_liens'] = [
 		'field' => &$spip_documents_liens,
 		'key' => &$spip_documents_liens_key
-	);
+	];
 
 	return $tables_auxiliaires;
 }
@@ -121,9 +121,9 @@ function medias_declarer_tables_objets_surnoms($surnoms) {
 
 function medias_declarer_tables_objets_sql($tables) {
 	$tables['spip_articles']['champs_versionnes'][] = 'jointure_documents';
-	$tables['spip_documents'] = array(
-		'table_objet_surnoms' => array('doc', 'img', 'emb'),
-		'type_surnoms' => array(),
+	$tables['spip_documents'] = [
+		'table_objet_surnoms' => ['doc', 'img', 'emb'],
+		'type_surnoms' => [],
 		'url_voir' => 'document_edit',
 		'url_edit' => 'document_edit',
 		'page' => '',
@@ -137,7 +137,7 @@ function medias_declarer_tables_objets_sql($tables) {
 		'titre' => "CASE WHEN length(titre)>0 THEN titre ELSE fichier END as titre, '' AS lang",
 		'date' => 'date',
 		'principale' => 'oui',
-		'field' => array(
+		'field' => [
 			'id_document' => 'bigint(21) NOT NULL',
 			'id_vignette' => "bigint(21) DEFAULT '0' NOT NULL",
 			'extension' => "VARCHAR(10) DEFAULT '' NOT NULL",
@@ -158,34 +158,34 @@ function medias_declarer_tables_objets_sql($tables) {
 			'date_publication' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			'brise' => 'tinyint DEFAULT 0',
 			'maj' => 'TIMESTAMP'
-		),
-		'key' => array(
+		],
+		'key' => [
 			'PRIMARY KEY' => 'id_document',
 			'KEY id_vignette' => 'id_vignette',
 			'KEY mode' => 'mode',
 			'KEY extension' => 'extension'
-		),
-		'join' => array(
+		],
+		'join' => [
 			'id_document' => 'id_document',
 			'extension' => 'extension'
-		),
-		'statut' => array(
-			array(
+		],
+		'statut' => [
+			[
 				'champ' => 'statut',
 				'publie' => 'publie',
 				'previsu' => 'publie,prop,prepa',
 				'post_date' => 'date_publication',
-				'exception' => array('statut', 'tout')
-			)
-		),
-		'tables_jointures' => array('types_documents'),
-		'rechercher_champs' => array(
+				'exception' => ['statut', 'tout']
+			]
+		],
+		'tables_jointures' => ['types_documents'],
+		'rechercher_champs' => [
 			'titre' => 3,
 			'descriptif' => 1,
 			'fichier' => 1,
 			'credits' => 1,
-		),
-		'champs_editables' => array(
+		],
+		'champs_editables' => [
 			'titre',
 			'descriptif',
 			'date',
@@ -201,8 +201,8 @@ function medias_declarer_tables_objets_sql($tables) {
 			'extension',
 			'id_vignette',
 			'media'
-		),
-		'champs_versionnes' => array(
+		],
+		'champs_versionnes' => [
 			'id_vignette',
 			'titre',
 			'descriptif',
@@ -214,17 +214,17 @@ function medias_declarer_tables_objets_sql($tables) {
 			'credits',
 			'fichier',
 			'distant'
-		),
-		'modeles' => array('document', 'doc', 'img', 'emb', 'image', 'video', 'audio', 'file'),
+		],
+		'modeles' => ['document', 'doc', 'img', 'emb', 'image', 'video', 'audio', 'file'],
 		'modeles_styliser' => 'medias_modeles_styliser',
-	);
+	];
 
 	// jointures sur les forum pour tous les objets
 	$tables[]['tables_jointures'][] = 'documents_liens';
 
 	// recherche jointe sur les documents pour les articles et rubriques
-	$tables['spip_articles']['rechercher_jointures']['document'] = array('titre' => 2, 'descriptif' => 1);
-	$tables['spip_rubriques']['rechercher_jointures']['document'] = array('titre' => 2, 'descriptif' => 1);
+	$tables['spip_articles']['rechercher_jointures']['document'] = ['titre' => 2, 'descriptif' => 1];
+	$tables['spip_rubriques']['rechercher_jointures']['document'] = ['titre' => 2, 'descriptif' => 1];
 
 	return $tables;
 }
@@ -243,13 +243,13 @@ function creer_base_types_doc($serveur = '', $champ_media = 'media_defaut') {
 
 	// charger en memoire tous les types deja definis pour limiter les requettes
 	$rows = sql_allfetsel('mime_type,titre,inclus,extension,' . $champ_media . ',upload,descriptif', 'spip_types_documents', '', '', '', '', '', $serveur);
-	$deja = array();
+	$deja = [];
 	foreach ($rows as $k => $row) {
 		$deja[$row['extension']] = &$rows[$k];
 	}
 
-	$insertions = array();
-	$updates = array();
+	$insertions = [];
+	$updates = [];
 
 	foreach ($tables_mime as $extension => $type_mime) {
 		if (isset($tables_images[$extension])) {
@@ -271,18 +271,20 @@ function creer_base_types_doc($serveur = '', $champ_media = 'media_defaut') {
 
 		// type de media
 		$media = 'file';
-		if (preg_match(',^image/,', $type_mime) or in_array($type_mime, array('application/illustrator'))) {
+		if (preg_match(',^image/,', $type_mime) or in_array($type_mime, ['application/illustrator'])) {
 			$media = 'image';
 		} elseif (preg_match(',^audio/,', $type_mime)) {
 			$media = 'audio';
-		} elseif (preg_match(',^video/,', $type_mime) or in_array(
-			$type_mime,
-			array('application/ogg', 'application/x-shockwave-flash', 'application/mp4')
-		)) {
+		} elseif (
+			preg_match(',^video/,', $type_mime) or in_array(
+				$type_mime,
+				['application/ogg', 'application/x-shockwave-flash', 'application/mp4']
+			)
+		) {
 			$media = 'video';
 		}
 
-		$set = array(
+		$set = [
 			'mime_type' => $type_mime,
 			'titre' => $titre,
 			'inclus' => $inclus,
@@ -290,7 +292,7 @@ function creer_base_types_doc($serveur = '', $champ_media = 'media_defaut') {
 			$champ_media => $media,
 			'upload' => 'oui',
 			'descriptif' => '',
-		);
+		];
 		if (!isset($deja[$extension])) {
 			$insertions[] = $set;
 		} elseif (array_diff($deja[$extension], $set)) {
@@ -322,9 +324,23 @@ function medias_optimiser_base_disparus($flux) {
 	// optimiser les liens morts :
 	// entre documents vers des objets effaces
 	// depuis des documents effaces
-	$flux['data'] += objet_optimiser_liens(array('document' => '*'), '*');
+	$flux['data'] += objet_optimiser_liens(['document' => '*'], '*');
 
 	// on ne nettoie volontairement pas automatiquement les documents orphelins
+	// mais il faut nettoyer les logos qui ne sont plus liés à rien
+	$res = sql_select(
+		'D.id_document',
+		'spip_documents AS D
+						LEFT JOIN spip_documents_liens AS L
+							ON (L.id_document=D.id_document)',
+		sql_in('D.mode', ['logoon', 'logooff']) . ' AND L.id_document IS NULL'
+	);
+
+	$supprimer_document = charger_fonction('supprimer_document', 'action');
+	while ($row = sql_fetch($res)) {
+		$supprimer_document($row['id_document']);
+		$flux['data']++;
+	}
 
 	return $flux;
 }

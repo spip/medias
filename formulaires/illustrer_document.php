@@ -18,7 +18,7 @@ function formulaires_illustrer_document_charger_dist($id_document) {
 	include_spip('inc/documents');
 	$valeurs = sql_fetsel('id_document,mode,id_vignette,extension,media', 'spip_documents', 'id_document=' . intval($id_document));
 	if (!$valeurs /*OR in_array($valeurs['extension'],array('jpg','gif','png'))*/) {
-		return array('editable' => false, 'id' => $id_document);
+		return ['editable' => false, 'id' => $id_document];
 	}
 
 	$valeurs['id'] = $id_document;
@@ -36,7 +36,7 @@ function formulaires_illustrer_document_charger_dist($id_document) {
 		$valeurs['largeur'] = null;
 		$valeurs['id_vignette'] = null;
 	}
-	$valeurs['_pipeline'] = array('editer_contenu_objet', array('type' => 'illustrer_document', 'id' => $id_document));
+	$valeurs['_pipeline'] = ['editer_contenu_objet', ['type' => 'illustrer_document', 'id' => $id_document]];
 
 	if (intval($id_document) and !autoriser('modifier', 'document', intval($id_document))) {
 		$valeurs['editable'] = '';
@@ -46,7 +46,7 @@ function formulaires_illustrer_document_charger_dist($id_document) {
 }
 
 function formulaires_illustrer_document_verifier_dist($id_document) {
-	$erreurs = array();
+	$erreurs = [];
 	if (_request('supprimer')) {
 	} else {
 		$id_vignette = sql_getfetsel('id_vignette', 'spip_documents', 'id_document=' . intval($id_document));
@@ -59,7 +59,7 @@ function formulaires_illustrer_document_verifier_dist($id_document) {
 
 function formulaires_illustrer_document_traiter_dist($id_document) {
 	$id_vignette = sql_getfetsel('id_vignette', 'spip_documents', 'id_document=' . intval($id_document));
-	$res = array('editable' => true);
+	$res = ['editable' => true];
 	if (_request('supprimer')) {
 		$supprimer_document = charger_fonction('supprimer_document', 'action');
 		if ($id_vignette and $supprimer_document($id_vignette)) {
@@ -75,11 +75,12 @@ function formulaires_illustrer_document_traiter_dist($id_document) {
 
 		$ajoute = $ajouter_documents($id_vignette, $files, '', 0, 'vignette');
 
-		if (is_numeric(reset($ajoute))
+		if (
+			is_numeric(reset($ajoute))
 			and $id_vignette = reset($ajoute)
 		) {
 			include_spip('action/editer_document');
-			document_modifier($id_document, array('id_vignette' => $id_vignette, 'mode' => 'document'));
+			document_modifier($id_document, ['id_vignette' => $id_vignette, 'mode' => 'document']);
 			$res['message_ok'] = _T('medias:document_installe_succes');
 		} else {
 			$res['message_erreur'] = reset($ajoute);

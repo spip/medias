@@ -45,7 +45,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     - fichier : Chemin local du fichier s'il a été recopié
  */
 function renseigner_source_distante($source) {
-	static $infos = array();
+	static $infos = [];
 	if (isset($infos[$source])) {
 		return $infos[$source];
 	}
@@ -55,19 +55,22 @@ function renseigner_source_distante($source) {
 	// qui est capable de renseigner complete
 	// fichier et mode + tous les autres champs a son gout
 	// ex : oembed
-	$a = pipeline('renseigner_document_distant', array('source' => $source));
+	$a = pipeline('renseigner_document_distant', ['source' => $source]);
 
 	// si la source est encore la, en revenir a la
 	// methode traditionnelle : chargement de l'url puis analyse
 	if (!isset($a['fichier']) or !isset($a['mode'])) {
 		if (!$a = recuperer_infos_distantes($a['source'])) {
-			return _T('medias:erreur_chemin_distant', array('nom' => $source));
+			return _T('medias:erreur_chemin_distant', ['nom' => $source]);
 		}
 		# NB: dans les bonnes conditions (fichier autorise et pas trop gros)
 		# $a['fichier'] est une copie locale du fichier
 		unset($a['body']);
 		$a['distant'] = 'oui';
 		$a['mode'] = 'document';
+		if (!empty($a['fichier'])) {
+			$a['copie_locale'] = $a['fichier'];
+		}
 		$a['fichier'] = set_spip_doc($source);
 	}
 
@@ -100,12 +103,12 @@ function renseigner_source_distante($source) {
  */
 function renseigner_taille_dimension_image($fichier, $ext, $distant = false) {
 
-	$infos = array(
+	$infos = [
 		'largeur' => 0,
 		'hauteur' => 0,
 		'type_image' => '',
 		'taille' => 0
-	);
+	];
 
 	// Quelques infos sur le fichier
 	if (
@@ -119,22 +122,22 @@ function renseigner_taille_dimension_image($fichier, $ext, $distant = false) {
 
 			// recuperer un debut de fichier 512ko semblent suffire
 			$tmp = _DIR_TMP . md5($fichier);
-			$res = recuperer_url($fichier, array('file' => $tmp, 'taille_max' => 512 * 1024));
+			$res = recuperer_url($fichier, ['file' => $tmp, 'taille_max' => 512 * 1024]);
 			if (!$res) {
 				spip_log("Echec copie du fichier $fichier", 'medias');
 
-				return _T('medias:erreur_copie_fichier', array('nom' => $fichier));
+				return _T('medias:erreur_copie_fichier', ['nom' => $fichier]);
 			}
 			$fichier = $tmp;
 		} else {
 			spip_log("Echec copie du fichier $fichier", 'medias');
 
-			return _T('medias:erreur_copie_fichier', array('nom' => $fichier));
+			return _T('medias:erreur_copie_fichier', ['nom' => $fichier]);
 		}
 	}
 
 	// chercher une fonction de description
-	$meta = array();
+	$meta = [];
 	if ($metadata = charger_fonction($ext, 'metadata', true)) {
 		$meta = $metadata($fichier);
 	} else {
@@ -146,7 +149,7 @@ function renseigner_taille_dimension_image($fichier, $ext, $distant = false) {
 
 	$meta = pipeline(
 		'renseigner_document',
-		array('args' => array('extension' => $ext, 'fichier' => $fichier), 'data' => $meta)
+		['args' => ['extension' => $ext, 'fichier' => $fichier], 'data' => $meta]
 	);
 
 	include_spip('inc/filtres'); # pour objet_info()
@@ -169,10 +172,11 @@ function sanitizer_document($fichier, $ext) {
 	// verifier que le fichier existe, sinon on ne peut rien faire
 	if (
 		!$fichier
-		or !@file_exists($fichier)) {
+		or !@file_exists($fichier)
+	) {
 		return false;
 	}
-	if ($sanitizer = charger_fonction($ext, 'sanitizer', true)){
+	if ($sanitizer = charger_fonction($ext, 'sanitizer', true)) {
 		return $sanitizer($fichier);
 	}
 

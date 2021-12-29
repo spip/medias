@@ -7,15 +7,15 @@
 <body style="background: #fff; text-align: center;">
 <h1>Index des vignettes de SPIP</h1>
 <?php
-$files = array_merge(glob(__DIR__ . '/*.svg'),glob(__DIR__ . '/*.png'));
+$files = array_merge(glob(__DIR__ . '/*.svg'), glob(__DIR__ . '/*.png'));
 sort($files);
 ?>
 <h2><?=count($files) ?> Icones au format SVG</h2>
 <div class="thumbnails">
 	<?php
 	foreach ($files as $file) {
-		$file = substr($file, strlen(__DIR__) +1);
-		$extension = substr($file,-3);
+		$file = substr($file, strlen(__DIR__) + 1);
+		$extension = substr($file, -3);
 		$r = "\n\t<figure class='ext-$extension'><img src='$file' alt='$file' /><figcaption>$file</figcaption></figure>";
 		echo $r;
 	}

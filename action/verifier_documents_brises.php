@@ -29,7 +29,7 @@ function action_verifier_documents_brises_dist() {
 		$res = sql_select('fichier,brise,id_document', 'spip_documents', "distant='non'");
 		while ($row = sql_fetch($res)) {
 			if (($brise = !@file_exists(get_spip_doc($row['fichier']))) != $row['brise']) {
-				sql_updateq('spip_documents', array('brise' => $brise), 'id_document=' . intval($row['id_document']));
+				sql_updateq('spip_documents', ['brise' => $brise], 'id_document=' . intval($row['id_document']));
 			}
 		}
 	}

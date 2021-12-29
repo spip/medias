@@ -37,7 +37,8 @@ function action_changer_mode_document_dist($id_document = null, $mode = null) {
 		}
 	}
 
-	if ($id_document
+	if (
+		$id_document
 		and include_spip('inc/autoriser')
 		and autoriser('modifier', 'document', $id_document)
 	) {
@@ -49,10 +50,11 @@ function action_changer_mode_document_dist($id_document = null, $mode = null) {
 function action_changer_mode_document_post($id_document, $mode) {
 	// - id_document le doc a modifier
 	// - mode le mode a lui donner
-	if ($id_document = intval($id_document)
-		and in_array($mode, array('vignette', 'image', 'document'))
+	if (
+		$id_document = intval($id_document)
+		and in_array($mode, ['vignette', 'image', 'document'])
 	) {
 		include_spip('action/editer_document');
-		document_modifier($id_document, array('mode' => $mode));
+		document_modifier($id_document, ['mode' => $mode]);
 	}
 }

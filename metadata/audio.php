@@ -1,4 +1,5 @@
 <?php
+
 /**
  * GetID3
  * Gestion des métadonnées de fichiers sonores et vidéos directement dans SPIP
@@ -24,25 +25,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *    Le tableau comprenant les différentes metas à mettre en base
  */
 function metadata_audio($file) {
-	$meta = array();
+	$meta = [];
 
 	include_spip('lib/getid3/getid3');
-	$getID3 = new getID3;
-	$getID3->setOption(array('tempdir' => _DIR_TMP));
+	$getID3 = new getID3();
+	$getID3->setOption(['tempdir' => _DIR_TMP]);
 
 	// Scan file - should parse correctly if file is not corrupted
 	$file_info = $getID3->analyze($file);
 
 	if (isset($file_info['id3v2']['comments']['title'])) {
-		$meta['titre'] = ucfirst(trim(implode(' ',$file_info['id3v2']['comments']['title'])));
+		$meta['titre'] = ucfirst(trim(implode(' ', $file_info['id3v2']['comments']['title'])));
 	}
 	if (isset($file_info['id3v2']['comments']['artist'])) {
-		$meta['credits'] = implode(', ',$file_info['id3v2']['comments']['artist']);
+		$meta['credits'] = implode(', ', $file_info['id3v2']['comments']['artist']);
 		if (isset($file_info['id3v2']['comments']['album'])) {
-			$meta['credits'] .= '/'.trim(implode(' ',$file_info['id3v2']['comments']['album']));
+			$meta['credits'] .= '/' . trim(implode(' ', $file_info['id3v2']['comments']['album']));
 		}
 		if (isset($file_info['id3v2']['comments']['year'])) {
-			$meta['credits'] .= ' ('.trim(implode(' ',$file_info['id3v2']['comments']['year'])).')';
+			$meta['credits'] .= ' (' . trim(implode(' ', $file_info['id3v2']['comments']['year'])) . ')';
 		}
 	}
 	if (isset($file_info['playtime_seconds'])) {

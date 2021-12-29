@@ -73,7 +73,7 @@ function desordonner_liens_documents($document, $objet, $id_objet) {
 	} else {
 		list($image, $mode) = explode('/', $document);
 		$image = ($image == 'I');
-		$typdoc = sql_in('docs.extension', array('gif', 'jpg', 'png'), $image ? '' : 'NOT');
+		$typdoc = sql_in('docs.extension', ['gif', 'jpg', 'png'], $image ? '' : 'NOT');
 
 		$obj = 'id_objet=' . intval($id_objet) . ' AND objet=' . sql_quote($objet);
 
@@ -101,8 +101,8 @@ function desordonner_liens_documents($document, $objet, $id_objet) {
  */
 function desordonner_liens_document($id_document, $objet, $id_objet) {
 	objet_qualifier_liens(
-		array('document' => $id_document),
-		array($objet => $id_objet),
-		array('rang_lien' => 0)
+		['document' => $id_document],
+		[$objet => $id_objet],
+		['rang_lien' => 0]
 	);
 }
