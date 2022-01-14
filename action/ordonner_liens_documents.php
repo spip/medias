@@ -42,7 +42,7 @@ function action_ordonner_liens_dist() {
 		return envoyer_json_erreur(_T('medias:erreur_autorisation') . ' ' . _T('medias:erreur_deplacement_impossible'));
 	}
 
-	list($_id_objet, $table_liens) = objet_associable($objet);
+	[$_id_objet, $table_liens] = objet_associable($objet);
 
 	$success = $errors = [];
 
@@ -93,7 +93,7 @@ function action_ordonner_liens_dist() {
 
 function envoyer_json_envoi($data) {
 	header('Content-Type: application/json; charset=' . $GLOBALS['meta']['charset']);
-	echo json_encode($data);
+	echo json_encode($data, JSON_THROW_ON_ERROR);
 }
 
 function envoyer_json_erreur($msg) {

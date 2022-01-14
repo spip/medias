@@ -230,7 +230,7 @@ function affiche_raccourci_doc($doc, $id, $align = '', $short = false) {
 	$model = "&lt;$doc$id$pipe&gt;";
 	$text = $model;
 	if ($short) {
-		$text = $align ? $align : $model;
+		$text = $align ?: $model;
 	}
 
 	$classes = 'btn btn_link btn_mini';

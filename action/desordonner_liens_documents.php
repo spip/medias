@@ -40,7 +40,7 @@ function action_desordonner_liens_documents_dist($arg = null) {
 	}
 
 	$arg = explode('-', $arg);
-	list($id_objet, $objet, $document) = $arg;
+	[$id_objet, $objet, $document] = $arg;
 
 	if (
 		$id_objet = intval($id_objet)
@@ -71,7 +71,7 @@ function desordonner_liens_documents($document, $objet, $id_objet) {
 	if ($id_document = intval($document)) {
 		desordonner_liens_document($id_document, $objet, $id_objet);
 	} else {
-		list($image, $mode) = explode('/', $document);
+		[$image, $mode] = explode('/', $document);
 		$image = ($image == 'I');
 		$typdoc = sql_in('docs.extension', ['gif', 'jpg', 'png'], $image ? '' : 'NOT');
 

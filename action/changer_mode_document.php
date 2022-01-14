@@ -33,7 +33,7 @@ function action_changer_mode_document_dist($id_document = null, $mode = null) {
 			spip_log("action_changer_mode_document $arg pas compris");
 		} else {
 			array_shift($r);
-			list($id_document, $mode) = $r;
+			[$id_document, $mode] = $r;
 		}
 	}
 

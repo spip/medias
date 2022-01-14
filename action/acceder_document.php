@@ -23,6 +23,7 @@ include_spip('inc/headers');
 
 // https://code.spip.net/@action_acceder_document_dist
 function action_acceder_document_dist() {
+	$doc = [];
 	include_spip('inc/documents');
 
 	// $file exige pour eviter le scan id_document par id_document

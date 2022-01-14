@@ -330,8 +330,8 @@ function medias_lister_methodes_upload($env) {
 	$methodes['distant'] = ['label_lien' => _T('medias:bouton_download_sur_le_web'),'label_bouton' => _T('bouton_choisir')];
 
 	// pipeline pour les méthodes d'upload
-	$objet = isset($env['objet']) ? $env['objet'] : '';
-	$id_objet = isset($env['id_objet']) ? $env['id_objet'] : '';
+	$objet = $env['objet'] ?? '';
+	$id_objet = $env['id_objet'] ?? '';
 
 	$methodes = pipeline(
 		'medias_methodes_upload',

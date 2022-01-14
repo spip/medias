@@ -42,11 +42,11 @@ function action_dissocier_document_dist($arg = null) {
 	// attention au cas ou id_objet est negatif !
 	if (strncmp($arg, '-', 1) == 0) {
 		$arg = explode('-', substr($arg, 1));
-		list($id_objet, $objet, $document) = $arg;
+		[$id_objet, $objet, $document] = $arg;
 		$id_objet = -$id_objet;
 	} else {
 		$arg = explode('-', $arg);
-		list($id_objet, $objet, $document) = $arg;
+		[$id_objet, $objet, $document] = $arg;
 	}
 
 	$suppr = $check = false;
@@ -164,7 +164,7 @@ function dissocier_document($document, $objet, $id_objet, $supprime = false, $ch
 	if ($id_document = intval($document)) {
 		supprimer_lien_document($id_document, $objet, $id_objet, $supprime, $check);
 	} else {
-		list($image, $mode) = explode('/', $document);
+		[$image, $mode] = explode('/', $document);
 		$image = ($image == 'I');
 		$typdoc = sql_in('docs.extension', ['gif', 'jpg', 'png'], $image ? '' : 'NOT');
 

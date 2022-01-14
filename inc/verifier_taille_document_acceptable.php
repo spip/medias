@@ -93,13 +93,13 @@ function medias_verifier_largeur_hauteur_image(&$infos, $max_width = null, $max_
 		// on met directement a la taille maxi a la volee
 		if (isset($GLOBALS['meta']['creer_preview']) and $GLOBALS['meta']['creer_preview'] == 'oui') {
 			include_spip('inc/filtres');
-			$img = filtrer('image_reduire', $infos['fichier'], $max_width ? $max_width : '*', $max_height ? $max_height : '*');
+			$img = filtrer('image_reduire', $infos['fichier'], $max_width ?: '*', $max_height ?: '*');
 			$img = extraire_attribut($img, 'src');
 			$img = supprimer_timestamp($img);
 			if (@file_exists($img) and $img !== $infos['fichier']) {
 				spip_unlink($infos['fichier']);
 				@rename($img, $infos['fichier']);
-				list($h, $w) = taille_image($infos['fichier'], true);
+				[$h, $w] = taille_image($infos['fichier'], true);
 				$infos['largeur'] = $w;
 				$infos['hauteur'] = $h;
 				$infos['taille'] = @filesize($infos['fichier']);

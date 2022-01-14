@@ -221,7 +221,7 @@ function formulaires_joindre_document_verifier_dist(
 					and !_request('joindre_zip')
 					and $contenu_zip = joindre_verifier_zip($files)
 				) {
-					list($fichiers, $erreurs, $tmp_zip) = $contenu_zip;
+					[$fichiers, $erreurs, $tmp_zip] = str_split($contenu_zip);
 					if ($fichiers) {
 						// on passe le md5 du fichier uniquement, on le retrouvera dans zip_to_clean de la session
 						$token_zip = md5($tmp_zip);

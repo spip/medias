@@ -28,7 +28,7 @@ function joindre_trouver_fichier_envoye() {
 	// on est appele deux fois dans un hit, resservir ce qu'on a trouve a la verif
 	// lorsqu'on est appelle au traitement
 
-	if (count($files)) {
+	if (is_countable($files) ? count($files) : 0) {
 		return $files;
 	}
 
@@ -151,7 +151,7 @@ function joindre_trouver_fichier_envoye() {
  *   string en cas d'erreur
  */
 function joindre_trouver_http_post_files($name = null) {
-	$post = isset($_FILES) ? $_FILES : $GLOBALS['HTTP_POST_FILES'];
+	$post = $_FILES ?? $GLOBALS['HTTP_POST_FILES'];
 	$files = [];
 	if (is_array($post)) {
 		foreach ($post as $input_name => $file) {
@@ -159,7 +159,7 @@ function joindre_trouver_http_post_files($name = null) {
 				continue;
 			}
 			if (is_array($file['name'])) {
-				while (count($file['name'])) {
+				while (is_countable($file['name']) ? count($file['name']) : 0) {
 					$test = [
 						'input_name' => $input_name,
 						'error' => array_shift($file['error']),
@@ -200,6 +200,7 @@ function joindre_trouver_http_post_files($name = null) {
 // pour les autres erreurs renvoie le message d'erreur
 function joindre_upload_error($error) {
 
+	$msg = null;
 	if (!$error) {
 		return false;
 	}

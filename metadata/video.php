@@ -25,6 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *    Le tableau comprenant les différentes metas à mettre en base
  */
 function metadata_video($file) {
+	$id3 = [];
 	$meta = [];
 
 	include_spip('lib/getid3/getid3');

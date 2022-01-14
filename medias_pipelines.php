@@ -65,7 +65,7 @@ function medias_post_insertion($flux) {
 
 	$objet = objet_type($flux['args']['table']);
 	$id_objet = $flux['args']['id_objet'];
-	$id_auteur = isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : 0;
+	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'] ?? 0;
 
 	include_spip('inc/autoriser');
 
@@ -132,7 +132,7 @@ function medias_configurer_liste_metas($config) {
  **/
 function medias_post_edition($flux) {
 	// le serveur n'est pas toujours la
-	$serveur = (isset($flux['args']['serveur']) ? $flux['args']['serveur'] : '');
+	$serveur = ($flux['args']['serveur'] ?? '');
 	// si on ajoute un document, mettre son statut a jour
 	if (isset($flux['args']['action']) and $flux['args']['action'] == 'ajouter_document') {
 		include_spip('action/editer_document');
@@ -140,12 +140,11 @@ function medias_post_edition($flux) {
 		document_instituer($flux['args']['id_objet']);
 	} // si on institue un objet, mettre ses documents lies a jour
 	elseif (isset($flux['args']['table']) and $flux['args']['table'] !== 'spip_documents') {
-		$type = isset($flux['args']['type']) ? $flux['args']['type'] : objet_type($flux['args']['table']);
+		$type = $flux['args']['type'] ?? objet_type($flux['args']['table']);
 		// verifier d'abord les doublons !
 		include_spip('inc/autoriser');
 		if (autoriser('autoassocierdocument', $type, $flux['args']['id_objet'])) {
-			$table_objet = isset($flux['args']['table_objet']) ?
-				$flux['args']['table_objet'] : table_objet($flux['args']['table'], $serveur);
+			$table_objet = $flux['args']['table_objet'] ?? table_objet($flux['args']['table'], $serveur);
 			$marquer_doublons_doc = charger_fonction('marquer_doublons_doc', 'inc');
 			$marquer_doublons_doc(
 				$flux['data'],

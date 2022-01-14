@@ -163,6 +163,7 @@ function formulaires_editer_document_traiter_dist(
 	$row = [],
 	$hidden = ''
 ) {
+	$rename = null;
 	if (is_null(_request('parents'))) {
 		set_request('parents', []);
 	}

@@ -179,8 +179,8 @@ function document_modifier($id_document, $set = null) {
  */
 function document_instituer($id_document, $champs = []) {
 
-	$statut = isset($champs['statut']) ? $champs['statut'] : null;
-	$date_publication = isset($champs['date_publication']) ? $champs['date_publication'] : null;
+	$statut = $champs['statut'] ?? null;
+	$date_publication = $champs['date_publication'] ?? null;
 	if (isset($champs['parents'])) {
 		medias_revision_document_parents($id_document, $champs['parents']);
 	}
@@ -233,7 +233,7 @@ function document_instituer($id_document, $champs = []) {
 		]
 	);
 
-	if (!count($champs)) {
+	if (!(is_countable($champs) ? count($champs) : 0)) {
 		return false;
 	}
 
@@ -244,7 +244,7 @@ function document_instituer($id_document, $champs = []) {
 			'spip_documents_liens',
 			"objet='rubrique' AND id_document=" . intval($id_document)
 		);
-		if (count($publier_rubriques)) {
+		if (is_countable($publier_rubriques) ? count($publier_rubriques) : 0) {
 			include_spip('inc/rubriques');
 			foreach ($publier_rubriques as $r) {
 				calculer_rubriques_if($r['id_objet'], ['statut' => $champs['statut']], $statut_ancien, false);

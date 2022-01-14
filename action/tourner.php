@@ -36,7 +36,7 @@ function action_tourner_dist($id_document = null, $angle = null) {
 			spip_log("action_tourner_dist $arg pas compris");
 		} else {
 			array_shift($r);
-			list($id_document, $angle) = $r;
+			[$id_document, $angle] = $r;
 		}
 	}
 	if ($id_document and autoriser('modifier', 'document', $id_document)) {
@@ -90,7 +90,7 @@ function action_tourner_post($id_document, $angle) {
 			$res = filtrer('image_format', $res, $row['extension']);
 		}
 
-		list($hauteur, $largeur) = taille_image($res);
+		[$hauteur, $largeur] = taille_image($res);
 		$res = extraire_attribut($res, 'src');
 
 		include_spip('inc/getdocument');

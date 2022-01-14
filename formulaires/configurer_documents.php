@@ -34,7 +34,7 @@ function formulaires_configurer_documents_charger_dist() {
 			'documents_date',
 		] as $m
 	) {
-		$valeurs[$m] = isset($GLOBALS['meta'][$m]) ? $GLOBALS['meta'][$m] : '';
+		$valeurs[$m] = $GLOBALS['meta'][$m] ?? '';
 	}
 	$valeurs['documents_objets'] = explode(',', $valeurs['documents_objets']);
 

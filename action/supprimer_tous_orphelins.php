@@ -22,7 +22,7 @@ function action_supprimer_tous_orphelins() {
 	$arg = $securiser_action();
 
 	//on recupere le contexte pour ne supprimer les orphelins que de ce dernier
-	list($media, $distant, $statut, $sanstitre) = explode('/', $arg);
+	[$media, $distant, $statut, $sanstitre] = explode('/', $arg);
 
 	$where = [];
 	//critere sur le media

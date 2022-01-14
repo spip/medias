@@ -100,7 +100,7 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 		define('_TITRER_DOCUMENTS', false);
 	}
 
-	$titrer = isset($file['titrer']) ? $file['titrer'] : _TITRER_DOCUMENTS;
+	$titrer = $file['titrer'] ?? _TITRER_DOCUMENTS;
 	$mode = ((isset($file['mode']) and $file['mode']) ? $file['mode'] : $mode);
 
 	include_spip('inc/modifier');
