@@ -76,6 +76,11 @@ parameters:
 			path: action/ajouter_documents.php
 
 		-
+			message: "#^Function corriger_extension not found\\.$#"
+			count: 1
+			path: action/ajouter_documents.php
+
+		-
 			message: "#^Function deplacer_fichier_upload not found\\.$#"
 			count: 1
 			path: action/ajouter_documents.php
@@ -207,6 +212,11 @@ parameters:
 
 		-
 			message: "#^Function tester_url_absolue not found\\.$#"
+			count: 1
+			path: action/copier_local.php
+
+		-
+			message: "#^Function valider_url_distante not found\\.$#"
 			count: 2
 			path: action/copier_local.php
 
@@ -996,6 +1006,11 @@ parameters:
 			path: formulaires/joindre_document.php
 
 		-
+			message: "#^Function corriger_extension not found\\.$#"
+			count: 1
+			path: formulaires/joindre_document.php
+
+		-
 			message: "#^Function date_interface not found\\.$#"
 			count: 1
 			path: formulaires/joindre_document.php
@@ -1272,7 +1287,7 @@ parameters:
 
 		-
 			message: "#^Function _T not found\\.$#"
-			count: 16
+			count: 15
 			path: inc/joindre_document.php
 
 		-
@@ -1288,6 +1303,11 @@ parameters:
 		-
 			message: "#^Function copier_document not found\\.$#"
 			count: 1
+			path: inc/joindre_document.php
+
+		-
+			message: "#^Function corriger_extension not found\\.$#"
+			count: 2
 			path: inc/joindre_document.php
 
 		-
@@ -1353,11 +1373,6 @@ parameters:
 		-
 			message: "#^Instantiated class Spip\\\\Archives\\\\SpipArchives not found\\.$#"
 			count: 2
-			path: inc/joindre_document.php
-
-		-
-			message: "#^Undefined variable\\: \\$msg$#"
-			count: 1
 			path: inc/joindre_document.php
 
 		-
@@ -1613,11 +1628,6 @@ parameters:
 		-
 			message: "#^Function autoriser not found\\.$#"
 			count: 11
-			path: medias_autoriser.php
-
-		-
-			message: "#^Function autoriser_document_tailler_dist\\(\\) should return bool but return statement is missing\\.$#"
-			count: 1
 			path: medias_autoriser.php
 
 		-
