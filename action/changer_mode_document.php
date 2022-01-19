@@ -18,8 +18,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Cette action permet de basculer du mode image au mode document et vice versa
  *
- * https://code.spip.net/@action_changer_mode_document_dist
- *
  * @param int $id_document
  * @param string $mode
  * @return void
@@ -46,7 +44,6 @@ function action_changer_mode_document_dist($id_document = null, $mode = null) {
 	}
 }
 
-// https://code.spip.net/@action_changer_mode_document_post
 function action_changer_mode_document_post($id_document, $mode) {
 	// - id_document le doc a modifier
 	// - mode le mode a lui donner

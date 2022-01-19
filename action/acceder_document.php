@@ -21,7 +21,6 @@ include_spip('inc/headers');
 // soit que le document est publie, c'est-a-dire
 // joint a au moins 1 article ou rubrique publie
 
-// https://code.spip.net/@action_acceder_document_dist
 function action_acceder_document_dist() {
 	$doc = [];
 	include_spip('inc/documents');

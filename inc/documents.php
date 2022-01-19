@@ -28,7 +28,6 @@ if (!defined('CHARSET_JOINT')) {
 // Filtre pour #FICHIER permettant d'incruster le contenu d'un document
 // Si 2e arg fourni, conversion dans le charset du site si possible
 
-// https://code.spip.net/@contenu_document
 function contenu_document($arg, $charset = '') {
 	include_spip('inc/distant');
 	if (is_numeric($arg)) {
@@ -61,7 +60,6 @@ function contenu_document($arg, $charset = '') {
 	return $r;
 }
 
-// https://code.spip.net/@generer_url_document_dist
 function generer_url_document_dist($id_document, $args = '', $ancre = '') {
 
 	include_spip('inc/autoriser');

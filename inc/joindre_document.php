@@ -336,7 +336,6 @@ function joindre_decrire_contenu_zip($infos) {
 }
 
 
-// https://code.spip.net/@joindre_deballes
 function joindre_deballer_lister_zip($path, $tmp_dir) {
 	include_spip('inc/archives');
 	$archive = new Spip\Archives\SpipArchives($path);
@@ -374,7 +373,6 @@ if (!function_exists('fixer_extension_document')) {
 	 * @param array $doc
 	 * @return array
 	 */
-// https://code.spip.net/@fixer_extension_document
 	function fixer_extension_document($doc) {
 		$extension = '';
 		$name = $doc['name'];
@@ -401,7 +399,6 @@ if (!function_exists('fixer_extension_document')) {
 
 /**
  * Gestion des fichiers ZIP
- * https://code.spip.net/@accepte_fichier_upload
  *
  * @param sring $f
  * @return bool|int

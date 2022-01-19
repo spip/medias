@@ -20,8 +20,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * Il s'agit de la partie logique, c'est a dire que cette fonction
  * realise la copie.
  *
- * https://code.spip.net/@action_copier_local_dist
- *
  * @param null $id_document
  * @return bool|mixed|string
  */
@@ -46,7 +44,6 @@ function action_copier_local_dist($id_document = null) {
 }
 
 /**
- * https://code.spip.net/@action_copier_local_post
  *
  * @param  $id_document
  * @return bool|mixed|string
