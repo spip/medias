@@ -60,8 +60,10 @@ function action_copier_local_post($id_document) {
 	// si la source est bien un fichier distant
 	// sinon c'est une donnee moisie, on ne fait rien
 	include_spip('inc/distant');
-	if (tester_url_absolue($source)
-		and valider_url_distante($source)) {
+	if (
+		tester_url_absolue($source)
+		and valider_url_distante($source)
+	) {
 		$fichier = copie_locale($source);
 		if (
 			$fichier
