@@ -117,7 +117,7 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
 	if (is_null($class)) {
 		$class = 'spip_logo spip_logos';
 	}
-	$e = $doc['extension'];
+	$e = $doc['extension'] ?? null;
 	if (!$img) {
 		if ($img = image_du_document($doc, $connect)) {
 			if (!$x and !$y) {
@@ -179,7 +179,7 @@ function vignette_automatique($img, $doc, $lien, $x = 0, $y = 0, $align = '', $c
  */
 function image_du_document($document, $connect = null) {
 	if (
-		$e = $document['extension']
+		$e = $document['extension'] ?? null
 		and in_array($e, formats_image_acceptables())
 		and (!test_espace_prive() or $GLOBALS['meta']['creer_preview'] == 'oui')
 		and $document['fichier']
