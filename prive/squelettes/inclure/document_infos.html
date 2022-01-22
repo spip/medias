@@ -6,7 +6,7 @@
 [(#BOITE_OUVRIR{[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})], 'document utilisations simple'})]
 	<ul class='liste_items'>
 		<BOUCLE_liens(documents_liens){id_document}>
-		<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ][(#ID_OBJET|generer_lien_entite{#OBJET})]
+		<li class='item #OBJET'>[(#CHEMIN_IMAGE{#OBJET|objet_info{icone_objet}|concat{-16.png}}|balise_img) ][(#ID_OBJET|generer_objet_lien{#OBJET})]
 		[(#VU|=={oui}|oui)
 			[<span class='vu'>(#CHEMIN_IMAGE{document-vu-24.png}|balise_img|inserer_attribut{title,<:medias:document_vu:>}|inserer_attribut{alt,<:medias:document_vu:>})</span>]
 		][(#VU|=={non}|et{#AUTORISER{dissocierdocuments,#OBJET,#ID_OBJET}})

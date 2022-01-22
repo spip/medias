@@ -112,7 +112,7 @@
 				<ul class="utilisations"[ (#TOTAL_BOUCLE|>{1}|oui)style="display:none"]>
 					<BOUCLE_utilisations(documents_liens) {id_document} {fusion objet} {fusion id_objet}>
 					[<li class="utilisations__item">
-						<a class="" href="(#ID_OBJET|generer_url_entite{#OBJET})">[(#CHEMIN_IMAGE{vu-16.png}|balise_img{'',sp-icone}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|couper{50})]</a>
+						<a class="" href="(#ID_OBJET|generer_objet_url{#OBJET})">[(#CHEMIN_IMAGE{vu-16.png}|balise_img{'',sp-icone}) ][(#INFO_TITRE{#OBJET,#ID_OBJET}|couper{50})]</a>
 					</li>]
 					</BOUCLE_utilisations>
 				</ul>

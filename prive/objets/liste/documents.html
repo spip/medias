@@ -23,7 +23,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{document,#ID_DOCUMENT,#ID_RUBRIQUE})]</td>
 			<td class='titre principale'>[(#LOGO_DOCUMENT|image_reduire{20,26})]
-				<a href="[(#ID_DOCUMENT|generer_url_entite{document})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DOCUMENT">
+				<a href="[(#ID_DOCUMENT|generer_objet_url{document})]" title="<:info_numero_abbreviation|attribut_html:> #ID_DOCUMENT">
 					[(#RANG). ][(#TITRE|sinon{[(#FICHIER|basename)]})]
 				</a>
 			</td>
