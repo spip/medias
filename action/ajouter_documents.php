@@ -95,6 +95,19 @@ function action_ajouter_un_document_dist($id_document, $file, $objet, $id_objet,
 	// et on aura une collision en cas de changement de file system
 	$file['name'] = strtolower(translitteration($file['name']));
 
+
+	// Sécurité : si jamais il existe deja une entrée dans la BDD avec ce chemin de document, remettre le document dans tmp, ce qui permettra ensuite qu'il soit dupliqué, et qu'il n'y ait pas deux entrées en base avec la même ligne 'fichier'.
+	// Cela n'arrive que si $file indique un document qui se trouve déjà dans IMG.
+	while (sql_getfetsel('fichier', 'spip_documents', 'fichier='.sql_quote(set_spip_doc($file['tmp_name'])))) {
+		$tmp = tempnam(_DIR_TRANSFERT, $file['tmp_name']);
+		if (deplacer_fichier_upload($file['tmp_name'], $tmp)) {
+			$file['tmp_name'] = $tmp;
+		} else {
+			spip_log('Erreur lors de la tenative de copie de '.$file['tmp_name'].' en '.$tmp, 'medias' . _LOG_ERREUR);
+			break;
+		}
+	}
+
 	// Pouvoir definir dans mes_options.php que l'on veut titrer tous les documents par d?faut
 	if (!defined('_TITRER_DOCUMENTS')) {
 		define('_TITRER_DOCUMENTS', false);
