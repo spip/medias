@@ -213,5 +213,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'verifier_documents_brises' => 'Fehlende Dateien prüfen',
 	'verifier_documents_inutilises' => 'Links der Dokumente prüfen',
-	'vignette_supprimee' => 'Das MIniaturbild wurde gelöscht.'
+	'vignette_supprimee' => 'Das Miniaturbild wurde gelöscht.'
 );
