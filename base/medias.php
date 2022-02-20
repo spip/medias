@@ -307,7 +307,7 @@ function creer_base_types_doc($serveur = '', $champ_media = 'media_defaut') {
 	}
 
 	if ($insertions) {
-		sql_insertq_multi('spip_types_documents', $insertions, '', $serveur);
+		sql_insertq_multi('spip_types_documents', $insertions, [], $serveur);
 	}
 }
 
