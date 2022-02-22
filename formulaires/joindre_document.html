@@ -18,6 +18,7 @@
 		
 	</div></form>
 </div>]
-[(#ENV{_galerie,''}|oui)
-		[(#INCLURE{fond=#ENV{_galerie}|spip_sanitize_from_request{_galerie,vide}, env, ajax})]
+[(#REM) @deprecated 4.0 - SPIP 4.1 ]
+[(#ENV{_galerie,''}|joindre_document_galerie_valide|oui)
+		[(#INCLURE{fond=#ENV{_galerie}, env, ajax})]
 ]

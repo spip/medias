@@ -49,6 +49,21 @@ function joindre_determiner_mode($mode, $id_document, $objet) {
 }
 
 /**
+ * Indique si une galerie demandée est valide
+ * 
+ * @deprecated 4.0 (SPIP 4.1) L’inclusion de galerie est déprécié (non utilisé depuis SPIP 3.0). Préferez ajax_reload() après upload.
+ * @global array medias_deprecated_liste_galeries Liste de chemins de fichiers depuis la racine SPIP autorisés.
+ * @param string|null $galerie Le fichier de galerie désiré
+ */
+function joindre_document_galerie_valide(?string $galerie): bool {
+	$galeries = [];
+	if (isset($GLOBALS['medias_deprecated_liste_galeries']) and is_array($GLOBALS['medias_deprecated_liste_galeries'])) {
+		$galeries = $GLOBALS['medias_deprecated_liste_galeries'];
+	}
+	return in_array($galerie, $galeries);
+}
+
+/**
  * Chargement du formulaire
  *
  * @param int|string $id_document
@@ -60,6 +75,7 @@ function joindre_determiner_mode($mode, $id_document, $objet) {
  * @param string $mode
  *    Le mode du document (auto,choix,document,image,vignette...), par défaut auto
  * @param string $galerie
+ *    Deprecated 4.0 (SPIP 4.1)
  *    Passer optionnellement une galerie jointe au form, plus utilise nativement,
  *    on prefere la mise a jour apres upload par ajaxReload('documents')
  * @param bool|string $proposer_media
@@ -128,7 +144,8 @@ function formulaires_joindre_document_charger_dist(
 	// On ne propose le FTP que si on a des choses a afficher
 	$valeurs['proposer_ftp'] = ($valeurs['_options_upload_ftp'] or $valeurs['_dir_upload_ftp']);
 
-	if ($galerie) {
+	/** @deprecated 4.0 (SPIP 4.1). Utiliser ajaxReload('documents') après upload */
+	if ($galerie and joindre_document_galerie_valide($galerie)) {
 		# passer optionnellement une galerie jointe au form
 		# plus utilise nativement, on prefere la mise a jour
 		# apres upload par ajaxReload('documents')
@@ -159,6 +176,7 @@ function formulaires_joindre_document_charger_dist(
  * @param string $mode
  *    Le mode du document (auto,choix,document,image,vignette...), par défaut auto
  * @param string $galerie
+ *    Deprecated 4.0 (SPIP 4.1)
  *    Passer optionnellement une galerie jointe au form, plus utilise nativement,
  *    on prefere la mise a jour apres upload par ajaxReload('documents')
  * @param bool|string $proposer_media
@@ -257,6 +275,7 @@ function formulaires_joindre_document_verifier_dist(
  * @param string $mode
  *    Le mode du document (auto,choix,document,image,vignette...), par défaut auto
  * @param string $galerie
+ *    Deprecated 4.0 (SPIP 4.1)
  *    Passer optionnellement une galerie jointe au form, plus utilise nativement,
  *    on prefere la mise a jour apres upload par ajaxReload('documents')
  * @param bool|string $proposer_media
