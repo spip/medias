@@ -50,12 +50,12 @@ function joindre_determiner_mode($mode, $id_document, $objet) {
 
 /**
  * Indique si une galerie demandée est valide
- * 
+ *
  * @deprecated 4.0 (SPIP 4.1) L’inclusion de galerie est déprécié (non utilisé depuis SPIP 3.0). Préferez ajax_reload() après upload.
  * @global array medias_deprecated_liste_galeries Liste de chemins de fichiers depuis la racine SPIP autorisés.
  * @param string|null $galerie Le fichier de galerie désiré
  */
-function joindre_document_galerie_valide(?string $galerie): bool {
+function joindre_document_galerie_valide($galerie) {
 	$galeries = [];
 	if (isset($GLOBALS['medias_deprecated_liste_galeries']) and is_array($GLOBALS['medias_deprecated_liste_galeries'])) {
 		$galeries = $GLOBALS['medias_deprecated_liste_galeries'];
@@ -107,7 +107,7 @@ function formulaires_joindre_document_charger_dist(
 	$valeurs['fichier_upload'] = $valeurs['_options_upload_ftp'] = $valeurs['_dir_upload_ftp'] = '';
 	$valeurs['joindre_upload'] = $valeurs['joindre_distant'] =
 	$valeurs['joindre_ftp'] = $valeurs['joindre_mediatheque'] = '';
-	
+
 	// gérer le focus de la méthode d'upload lorsque le formulaire est envoyé
 	$valeurs['methode_focus'] = _request('methode_focus');
 
