@@ -412,6 +412,29 @@ function medias_trouver_modele_emb($extension, $mime_type, $modele_base = 'file'
 	return $modele_base;
 }
 
+/**
+ * Determiner si un media doit etre mis en autolien dans les modeles document
+ * Par defaut utilisé uniquement sur les media image, mais le filtre peut être surchargé pour étendre son fonctionnement
+ *
+ * @param string $media
+ * @param string $extension
+ * @param int $largeur
+ * @param int $hauteur
+ * @param int|null $id_document
+ * @return bool
+ */
+function media_determine_autolien(string $media, string $extension, int $largeur, int $hauteur, ?int $id_document=0): bool {
+	if ($media !== 'image') {
+		return false;
+	}
+	if (!defined('_IMAGE_TAILLE_MINI_AUTOLIEN')) {
+		define('_IMAGE_TAILLE_AUTOLIEN', 800);
+	}
+	if ($largeur >= _IMAGE_TAILLE_AUTOLIEN or $hauteur >=_IMAGE_TAILLE_AUTOLIEN) {
+		return true;
+	}
+	return false;
+}
 
 /**
  * Liste les classes standards des modèles de documents SPIP.

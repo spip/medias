@@ -4,7 +4,7 @@
 
 ]
 <BOUCLE_image (DOCUMENTS) {media=image} {id_document=#ENV{id,#ENV{id_document}}} {inclus=image} {mode?} {tout}>
-[(#SET{autolien,#LARGEUR|>={800}|ou{#HAUTEUR|>={800}}|oui})]
+[(#SET{autolien,#MEDIA|media_determine_autolien{#EXTENSION,#LARGEUR,#HAUTEUR,#ID_DOCUMENT}|oui})]
 [(#SET{image,[(#ENV{largeur}|ou{#ENV{hauteur}}|?{
 		[(#FICHIER|image_reduire{#ENV{largeur,10000},#ENV{hauteur,10000}})],
 		[<img src='(#URL_DOCUMENT)'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"]/>]})]})]
