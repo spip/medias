@@ -428,9 +428,9 @@ function media_determine_autolien(string $media, string $extension, int $largeur
 		return false;
 	}
 	if (!defined('_IMAGE_TAILLE_MINI_AUTOLIEN')) {
-		define('_IMAGE_TAILLE_AUTOLIEN', 800);
+		define('_IMAGE_TAILLE_MINI_AUTOLIEN', 800);
 	}
-	if ($largeur >= _IMAGE_TAILLE_AUTOLIEN or $hauteur >=_IMAGE_TAILLE_AUTOLIEN) {
+	if ($largeur >= _IMAGE_TAILLE_MINI_AUTOLIEN or $hauteur >=_IMAGE_TAILLE_MINI_AUTOLIEN) {
 		return true;
 	}
 	return false;
