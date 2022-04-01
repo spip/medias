@@ -443,10 +443,9 @@ function media_determine_autolien(string $media, string $extension, int $largeur
  *     le nomage au pluriel est historique.
  *     préférer au singulier pour toute nouvelle classe.
  *
+ * @param array $Pile
  * @param int $id_document
  * @param string $media
- * @param array $env
- * @param array $get
  * @return string
  */
 function filtre_medias_modele_document_standard_classes_dist($Pile, $id_document, $media) {
@@ -478,10 +477,9 @@ function filtre_medias_modele_document_standard_classes_dist($Pile, $id_document
 /**
  * Liste les attributs data standards des modèles de documents SPIP.
  *
+ * @param array $Pile
  * @param int $id_document
  * @param string $media
- * @param array $env
- * @param array $get
  * @return string
  */
 function filtre_medias_modele_document_standard_attributs_dist($Pile, $id_document, $media) {
