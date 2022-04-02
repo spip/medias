@@ -52,7 +52,7 @@ function joindre_determiner_mode($mode, $id_document, $objet) {
 
 /**
  * Indique si une galerie demandée est valide
- * 
+ *
  * @deprecated 4.0 (SPIP 4.1) L’inclusion de galerie est déprécié (non utilisé depuis SPIP 3.0). Préferez ajax_reload() après upload.
  * @global array medias_deprecated_liste_galeries Liste de chemins de fichiers depuis la racine SPIP autorisés.
  * @param string|null $galerie Le fichier de galerie désiré
@@ -130,7 +130,7 @@ function formulaires_joindre_document_charger_dist(
 		and ($mode != 'image') and ($mode != 'vignette') # si c'est pour un document
 		//AND !$vignette_de_doc
 		// pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
-		and $GLOBALS['flag_upload']
+		and (get_cfg_var('error_reporting') == '' || get_cfg_var('upload_max_filesize') > 0)
 	) {
 		include_spip('inc/documents');
 		if ($dir = determine_upload('documents')) {
