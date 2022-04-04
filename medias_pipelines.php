@@ -206,13 +206,14 @@ function medias_afficher_complement_objet($flux) {
 		and $id = intval($flux['args']['id'])
 	) {
 		include_spip('inc/config');
-		// document autorisé en upload sur cet objet ?
-		if ($type == 'article' or in_array(table_objet_sql($type), explode(',', lire_config('documents_objets', '')))) {
+		include_spip('action/editer_liens');
+		// document autorisé en upload sur cet objet ? ou, y a t'il déja des docs attachés ?
+		$existe_docs = count(objet_trouver_liens(['document' => '*'], [$type => $id]));
+		if ($existe_docs or $type == 'article' or in_array(table_objet_sql($type), explode(',', lire_config('documents_objets', '')))) {
 			$documenter_objet = charger_fonction('documenter_objet', 'inc');
 			$flux['data'] .= $documenter_objet($id, $type);
 		}
 	}
-
 	return $flux;
 }
 
@@ -324,7 +325,6 @@ function medias_objet_compte_enfants($flux) {
 	if (
 		$objet = $flux['args']['objet']
 		and $id = intval($flux['args']['id_objet'])
-		and substr_count(lire_config('documents_objets'), '_'.$objet)
 	) {
 		// juste les publies ?
 		if (array_key_exists('statut', $flux['args']) and ($flux['args']['statut'] == 'publie')) {
@@ -355,8 +355,7 @@ function medias_boite_infos($flux) {
 		$flux['args']['type'] == 'rubrique'
 		and $id_rubrique = $flux['args']['id']
 	) {
-		if ($nb = sql_countsel('spip_documents_liens', "objet='rubrique' AND id_objet=" . intval($id_rubrique))
-			and substr_count(lire_config('documents_objets'), '_rubriques')) {
+		if ($nb = sql_countsel('spip_documents_liens', "objet='rubrique' AND id_objet=" . intval($id_rubrique))) {
 			$nb = '<div>' . singulier_ou_pluriel($nb, 'medias:un_document', 'medias:des_documents') . '</div>';
 			if ($p = strpos($flux['data'], '<!--nb_elements-->')) {
 				$flux['data'] = substr_replace($flux['data'], $nb, $p, 0);
