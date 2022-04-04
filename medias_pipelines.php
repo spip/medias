@@ -206,13 +206,14 @@ function medias_afficher_complement_objet($flux) {
 		and $id = intval($flux['args']['id'])
 	) {
 		include_spip('inc/config');
-		// document autorisé en upload sur cet objet ?
-		if ($type == 'article' or in_array(table_objet_sql($type), explode(',', lire_config('documents_objets', '')))) {
+		include_spip('action/editer_liens');
+		// document autorisé en upload sur cet objet ? ou, y a t'il déja des docs attachés ?
+		$existe_docs = count(objet_trouver_liens(['document' => '*'], [$type => $id]));
+		if ($existe_docs or $type == 'article' or in_array(table_objet_sql($type), explode(',', lire_config('documents_objets', '')))) {
 			$documenter_objet = charger_fonction('documenter_objet', 'inc');
 			$flux['data'] .= $documenter_objet($id, $type);
 		}
 	}
-
 	return $flux;
 }
 
