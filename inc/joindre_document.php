@@ -61,7 +61,7 @@ function joindre_trouver_fichier_envoye() {
 			return _T('medias:erreur_upload_type_interdit', ['nom' => $path]);
 		}
 		include_spip('action/ajouter_documents');
-		$infos = renseigner_source_distante($path);
+		$infos = renseigner_source_distante($path, 'valider_url_distante');
 		if (!is_array($infos)) {
 			return $infos;
 		} // message d'erreur
