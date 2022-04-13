@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * Renvoie une liste de fichier ou un message en cas d'erreur
  *
- * @return string/array
+ * @return string|array
  */
 function joindre_trouver_fichier_envoye() {
 	static $files = [];
