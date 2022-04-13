@@ -44,7 +44,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     - mode : Mode d'inclusion
  *     - fichier : Chemin local du fichier s'il a été recopié
  */
-function renseigner_source_distante($source) {
+function renseigner_source_distante($source, $callback_valider_url = '') {
 	static $infos = [];
 	if (isset($infos[$source])) {
 		return $infos[$source];
@@ -60,7 +60,7 @@ function renseigner_source_distante($source) {
 	// si la source est encore la, en revenir a la
 	// methode traditionnelle : chargement de l'url puis analyse
 	if (!isset($a['fichier']) or !isset($a['mode'])) {
-		if (!$a = recuperer_infos_distantes($a['source'])) {
+		if (!$a = recuperer_infos_distantes($a['source'], ['callback_valider_url' => $callback_valider_url])) {
 			return _T('medias:erreur_chemin_distant', ['nom' => $source]);
 		}
 		# NB: dans les bonnes conditions (fichier autorise et pas trop gros)
