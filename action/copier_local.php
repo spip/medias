@@ -61,7 +61,9 @@ function action_copier_local_post($id_document) {
 		tester_url_absolue($source)
 		and valider_url_distante($source)
 	) {
-		$fichier = copie_locale($source);
+		// on fait une copie locale en verifiant aussi l'URL finale qui a été récupérée
+		$fichier = copie_locale($source, 'auto', null, null, 'valider_url_distante');
+		// on revalide la source *apres* copie car si elle est controlee par un serveur dns malicieux elle peut etre changeante
 		if (
 			$fichier
 			and valider_url_distante($source)
