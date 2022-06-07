@@ -215,7 +215,9 @@ function medias_upgrade($nom_meta_base_version, $version_cible) {
 
 
 	// upgrade des logos
-	$maj['1.6.0'] = [];
+	$maj['1.6.0'] = [
+		['sql_alter', "TABLE spip_documents CHANGE mode mode varchar(10) DEFAULT 'document' NOT NULL"]
+	];
 	$tables_objets_sql = lister_tables_objets_sql();
 	foreach (array_keys($tables_objets_sql) as $table) {
 		$maj['1.6.0'][] = ['medias_upgrade_logo_objet', objet_type($table)];

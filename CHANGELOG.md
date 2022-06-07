@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- #4889 Refaire un alter sur la champ mode avant la migration des logos, par précaution
+
+
 ## [4.0.5] - 2022-05-20
 
 ### Security
