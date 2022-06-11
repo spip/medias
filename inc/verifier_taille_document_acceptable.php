@@ -117,8 +117,8 @@ function medias_verifier_largeur_hauteur_image(&$infos, $max_width = null, $max_
 						_T(
 							'info_largeur_vignette',
 							[
-								'largeur_vignette' => $max_width,
-								'hauteur_vignette' => $max_height
+								'largeur_vignette' => $max_width ?? '∞',
+								'hauteur_vignette' => $max_height ?? '∞'
 							]
 						),
 					'actuel' =>
@@ -152,8 +152,8 @@ function medias_verifier_largeur_hauteur_image(&$infos, $max_width = null, $max_
 					_T(
 						'info_largeur_vignette',
 						[
-							'largeur_vignette' => $min_width,
-							'hauteur_vignette' => $min_height
+							'largeur_vignette' => $min_width ?? '0',
+							'hauteur_vignette' => $min_height ?? '0'
 						]
 					),
 				'actuel' =>
