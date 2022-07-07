@@ -44,7 +44,7 @@ function inc_documenter_objet_dist($id, $type) {
 	$marquer_doublons_doc = charger_fonction('marquer_doublons_doc', 'inc');
 	$marquer_doublons_doc($champs, $id, $type, $id_table_objet, $table_objet, $spip_table_objet, '', $serveur);
 
-	$contexte = ['objet' => $type, 'id_objet' => $id];
+	$contexte = ['objet' => $type, 'id_objet' => $id, 'espace_prive' => test_espace_prive()];
 
 	return recuperer_fond('prive/objets/contenu/portfolio_document', array_merge($_GET, $contexte));
 }
