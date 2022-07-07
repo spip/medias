@@ -40,7 +40,7 @@ function medias_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_date']['types_documents'] = 'date';
 
 	$interfaces['table_des_traitements']['FICHIER'][] = 'get_spip_doc(%s)';
-
+	$interfaces['table_des_traitements']['CREDITS']['spip_documents'] = _TRAITEMENT_TYPO;
 	return $interfaces;
 }
 

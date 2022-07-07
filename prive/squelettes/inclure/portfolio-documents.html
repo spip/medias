@@ -16,7 +16,7 @@
 [<p class="pagination">(#PAGINATION{prive})</p>]
 <div class="sortable">
 <BOUCLE_illustrations(DOCUMENTS documents_liens types_documents){inclus=image}{mode=image}{id_objet}{objet}{par rang_lien, num titre, date,id_document}{pagination 50}{statut?}>
-	#MODELE{document_desc,id_document,id_objet,objet}
+	#MODELE{document_desc,id_document,id_objet,objet,espace_prive}
 </BOUCLE_illustrations>
 </div>
 [<p class="pagination">(#PAGINATION{prive})</p>]
@@ -58,7 +58,7 @@
 [<p class="pagination">(#PAGINATION{prive})</p>]
 <div class="sortable">
 <BOUCLE_documents(DOCUMENTS documents_liens types_documents){inclus!=image}{mode!=vignette}{id_objet}{objet}{par rang_lien, num titre, date,id_document}{pagination 50}{statut?}>
-	#MODELE{document_desc,id_document,id_objet,objet}
+	#MODELE{document_desc,id_document,id_objet,objet,espace_prive}
 </BOUCLE_documents>
 </div>
 [<p class="pagination">(#PAGINATION{prive})</p>]
