@@ -39,22 +39,25 @@ function inc_verifier_taille_document_acceptable_dist(&$infos, $is_logo = false)
 		}
 	} // si c'est une image
 	else {
-		if ($is_logo) {
-			$max_width = (defined('_LOGO_MAX_WIDTH') and _LOGO_MAX_WIDTH) ? _LOGO_MAX_WIDTH : null;
-			$max_height = (defined('_LOGO_MAX_HEIGHT') and _LOGO_MAX_HEIGHT) ? _LOGO_MAX_HEIGHT : null;
-			$min_width = (defined('_LOGO_MIN_WIDTH') and _LOGO_MIN_WIDTH) ? _LOGO_MIN_WIDTH : null;
-			$min_height = (defined('_LOGO_MIN_HEIGHT') and _LOGO_MIN_HEIGHT) ? _LOGO_MIN_HEIGHT : null;
-		}
-		else {
-			$max_width = (defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH) ? _IMG_MAX_WIDTH : null;
-			$max_height = (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT) ? _IMG_MAX_HEIGHT : null;
-			$min_width = (defined('_IMG_MIN_WIDTH') and _IMG_MIN_WIDTH) ? _IMG_MIN_WIDTH : null;
-			$min_height = (defined('_IMG_MIN_HEIGHT') and _IMG_MIN_HEIGHT) ? _IMG_MIN_HEIGHT : null;
-		}
+		// Ne pas contraindre les dimensions des images vectorielles, ça n'a pas de sens
+		if ($infos['type_image'] !== 'svg') {
+			if ($is_logo) {
+				$max_width = (defined('_LOGO_MAX_WIDTH') and _LOGO_MAX_WIDTH) ? _LOGO_MAX_WIDTH : null;
+				$max_height = (defined('_LOGO_MAX_HEIGHT') and _LOGO_MAX_HEIGHT) ? _LOGO_MAX_HEIGHT : null;
+				$min_width = (defined('_LOGO_MIN_WIDTH') and _LOGO_MIN_WIDTH) ? _LOGO_MIN_WIDTH : null;
+				$min_height = (defined('_LOGO_MIN_HEIGHT') and _LOGO_MIN_HEIGHT) ? _LOGO_MIN_HEIGHT : null;
+			}
+			else {
+				$max_width = (defined('_IMG_MAX_WIDTH') and _IMG_MAX_WIDTH) ? _IMG_MAX_WIDTH : null;
+				$max_height = (defined('_IMG_MAX_HEIGHT') and _IMG_MAX_HEIGHT) ? _IMG_MAX_HEIGHT : null;
+				$min_width = (defined('_IMG_MIN_WIDTH') and _IMG_MIN_WIDTH) ? _IMG_MIN_WIDTH : null;
+				$min_height = (defined('_IMG_MIN_HEIGHT') and _IMG_MIN_HEIGHT) ? _IMG_MIN_HEIGHT : null;
+			}
 
-		$res = medias_verifier_largeur_hauteur_image($infos, $max_width, $max_height, $min_width, $min_height);
-		if ($res !== true) {
-			return $res;
+			$res = medias_verifier_largeur_hauteur_image($infos, $max_width, $max_height, $min_width, $min_height);
+			if ($res !== true) {
+				return $res;
+			}
 		}
 
 		if ($is_logo) {
