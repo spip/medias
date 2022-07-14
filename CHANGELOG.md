@@ -14,6 +14,10 @@
 
 - Compatible SPIP 4.2.0-dev
 
+### Removed
+
+- Suppression du formulaire `FORMULAIRE_CHANGER_FICHIER_DOCUMENT` qui n'est plus utilisé par SPIP (la fonctionnalité se trouve directement dans `FORMULAIRE_EDITER_DOCUMENT`)
+
 ### Fixed
 
 - #4893 Il ne faut pas contraindre la taille des SVG
