@@ -23,8 +23,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 /**
  * Vignette pour une extension de document
  *
- * Recherche les fichiers d'icones au format png pour l'extension demandée.
- * On cherche prive/vignettes/ext.png dans le path.
+ * Recherche les fichiers d'icones au format SVG pour l'extension demandée.
+ * On cherche prive/vignettes/ext.svg dans le path.
  *
  * @param string $ext
  *     Extension du fichier. Exemple : png
