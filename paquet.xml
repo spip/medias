@@ -16,6 +16,7 @@
 	<credit lien="http://www.getid3.org/">getID3()</credit>
 	<credit lien="http://mediaelementjs.com/">MediaElement.js</credit>
 	<credit lien="https://github.com/darylldoyle/svg-sanitizer/releases">SVG Sanitizer v0.14.0</credit>
+	<credit lien="https://github.com/numixproject/numix-icon-theme">Numix icon theme</credit>
 
 	<traduire module="medias" reference="fr" gestionnaire="salvatore" />
 
