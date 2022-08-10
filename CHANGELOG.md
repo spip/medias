@@ -20,6 +20,7 @@
 
 ### Fixed
 
+- #4902 Suppression des boutons excédentaires de sens de tri sur certaines listes de documents
 - #4893 Il ne faut pas contraindre la taille des SVG
 - #4891 Amélioration du message d’erreur de taille de document
 - #4889 Refaire un alter sur la champ mode avant la migration des logos, par précaution
